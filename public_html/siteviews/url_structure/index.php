@@ -36,7 +36,7 @@
               <?php echo $I18N->msg( 'url-structure-projects', [ 'variables' => [ $sitematrixLink, '<code>de.wikipedia.org|fr.wikipedia.org</code>' ], 'parsemag' => true ] ); ?>
             </dd>
             <?php $defaultRange = 'latest'; ?>
-            <?php include "../../url_parts/date_ranges.php"; ?>
+            <?php include "../../url_parts/_date_ranges.php"; ?>
             <dt>source</dt>
             <dd>
               <?php echo $I18N->msg( 'url-structure-source', [ 'variables' => [ '<code>pageviews</code>', '<code>unique-devices</code>' ], 'parsemag' => true ] ); ?>
@@ -66,7 +66,7 @@
               <br>
               <?php echo $I18N->msg( 'url-structure-agent', [ 'variables' => [ '<code>user</code>', '<code>spider</code>', '<code>bot</code>', '<code>all-agents</code>' ], 'parsemag' => true ] ); ?>
             </dd>
-            <?php include "../../url_parts/autolog.php"; ?>
+            <?php include "../../url_parts/_autolog.php"; ?>
           </dl>
         </div>
         <div class="col-lg-12 text-center tm">

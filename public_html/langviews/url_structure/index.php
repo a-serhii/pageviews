@@ -48,9 +48,9 @@
               <?php echo $I18N->msg( 'url-structure-onwiki-link', array( 'variables' => array( $fullpageNamee ), 'parsemag' => true ) ); ?>
             </dd>
             <?php $defaultRange = 'latest'; ?>
-            <?php include "../../url_parts/date_ranges.php"; ?>
-            <?php include "../../url_parts/platform.php"; ?>
-            <?php include "../../url_parts/agent.php"; ?>
+            <?php include "../../url_parts/_date_ranges.php"; ?>
+            <?php include "../../url_parts/_platform.php"; ?>
+            <?php include "../../url_parts/_agent.php"; ?>
             <dt>sort</dt>
             <dd>
               <?php $values = [ '<code>lang</code>', '<code>title</code>', '<code>badges</code>', '<code>views</code>' ]; ?>
@@ -60,7 +60,7 @@
             <dd>
               <?php echo $I18N->msg( 'url-structure-sort-direction', array( 'variables' => array( '<code>1</code>', '<code>-1</code>' ), 'parsemag' => true ) ); ?>
             </dd>
-            <?php include "../../url_parts/autolog.php"; ?>
+            <?php include "../../url_parts/_autolog.php"; ?>
           </dl>
         </div>
         <div class="col-lg-12 text-center tm">

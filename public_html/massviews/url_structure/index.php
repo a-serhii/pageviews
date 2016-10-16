@@ -45,9 +45,9 @@
               <?php echo $I18N->msg( 'url-structure-massviews-target-example', array( 'variables' => array( '<pre>https://en.wikipedia.org/w/index.php?title=Category:Folk_musicians_from_New_York</pre>', '<pre>https%3A%2F%2Fen.wikipedia.org%2Fw%2Findex.php%3Ftitle%3DCategory%3AFolk_musicians_from_New_York</pre>', '<pre>//en.wikipedia.org/wiki/Category:Folk_musicians_from_New_York</pre>' ) ) ); ?>
             </dd>
             <?php $defaultRange = 'latest'; ?>
-            <?php include "../../url_parts/date_ranges.php"; ?>
-            <?php include "../../url_parts/platform.php"; ?>
-            <?php include "../../url_parts/agent.php"; ?>
+            <?php include "../../url_parts/_date_ranges.php"; ?>
+            <?php include "../../url_parts/_platform.php"; ?>
+            <?php include "../../url_parts/_agent.php"; ?>
             <dt>sort</dt>
             <dd>
               <?php $values = [ '<code>title</code>', '<code>views</code>' ]; ?>

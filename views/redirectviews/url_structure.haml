@@ -40,9 +40,9 @@
               = $I18N->msg( 'url-structure-page' )
               = $I18N->msg( 'url-structure-onwiki-link', array( 'variables' => array( $fullpageNamee ), 'parsemag' => true ) )
             - $defaultRange = 'latest'
-            - include "../../url_parts/date_ranges.php"
-            - include "../../url_parts/platform.php"
-            - include "../../url_parts/agent.php"
+            - include "../../url_parts/_date_ranges.php"
+            - include "../../url_parts/_platform.php"
+            - include "../../url_parts/_agent.php"
             %dt sort
             %dd
               - $values = [ '<code>title</code>', '<code>section</code>', '<code>views</code>' ]

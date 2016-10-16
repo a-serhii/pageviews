@@ -48,9 +48,9 @@
               <?php echo $I18N->msg( 'url-structure-onwiki-link', array( 'variables' => array( $fullpageNamee ), 'parsemag' => true ) ); ?>
             </dd>
             <?php $defaultRange = 'latest'; ?>
-            <?php include "../../url_parts/date_ranges.php"; ?>
-            <?php include "../../url_parts/platform.php"; ?>
-            <?php include "../../url_parts/agent.php"; ?>
+            <?php include "../../url_parts/_date_ranges.php"; ?>
+            <?php include "../../url_parts/_platform.php"; ?>
+            <?php include "../../url_parts/_agent.php"; ?>
             <dt>sort</dt>
             <dd>
               <?php $values = [ '<code>title</code>', '<code>section</code>', '<code>views</code>' ]; ?>

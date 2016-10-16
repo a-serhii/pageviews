@@ -33,7 +33,7 @@
           </h3>
           <hr>
           <dl class="dl-horizontal">
-            <?php include "../../url_parts/project.php"; ?>
+            <?php include "../../url_parts/_project.php"; ?>
             <dt>excludes</dt>
             <dd>
               <?php echo $I18N->msg( 'url-structure-excludes' ); ?>
@@ -57,7 +57,7 @@
                 </li>
               </ul>
             </dd>
-            <?php include "../../url_parts/platform.php"; ?>
+            <?php include "../../url_parts/_platform.php"; ?>
           </dl>
         </div>
         <div class="col-lg-12 text-center tm">

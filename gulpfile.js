@@ -171,7 +171,8 @@ apps.forEach(app => {
         .concat([`public_html/${path}application.js`])
       )
       .pipe(plugins.concat('application.js'))
-      .pipe(gulp.dest(`public_html/${path}`));
+      .pipe(gulp.dest(`public_html/${path}`))
+      .pipe(plugins.notify('Scripts task complete'));
   });
   gulp.task(`scripts-${app}-help`, [`scripts-${app}-faq`, `scripts-${app}-url_structure`]);
   ['faq', 'url_structure'].forEach(helpPage => {
@@ -200,7 +201,8 @@ apps.forEach(app => {
           },
           name: path => fileName(path)
         }
-      }));
+      }))
+      .pipe(plugins.notify('Views task complete'));
   });
 
   /** COMPRESSION */

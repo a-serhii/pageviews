@@ -20,8 +20,8 @@
       </header>
       <main class="col-lg-10 col-lg-offset-1">
         <ul class="list-group">
-          <?php include "../../faq_parts/old_data.php"; ?>
-          <?php include "../../faq_parts/todays_data.php"; ?>
+          <?php include "../../faq_parts/_old_data.php"; ?>
+          <?php include "../../faq_parts/_todays_data.php"; ?>
           <li class="list-group-item">
             <p>
               <strong><?php echo $I18N->msg( 'faq-source-title' ); ?></strong>
@@ -37,8 +37,8 @@
               </li>
             </ul>
           </li>
-          <?php include "../../faq_parts/agents.php"; ?>
-          <?php include "../../faq_parts/chart_type.php"; ?>
+          <?php include "../../faq_parts/_agents.php"; ?>
+          <?php include "../../faq_parts/_chart_type.php"; ?>
           <li class="list-group-item">
             <p>
               <strong><?php echo $I18N->msg( 'faq-top-viewed-title' ); ?></strong>
@@ -47,7 +47,7 @@
               <?php echo $I18N->msg( 'faq-try-tool', array( 'variables' => array( "<a href='/topviews'>" . $I18N->msg( 'topviews-title' ) . "</a>" ), 'parsemag' => true ) ); ?>
             </p>
           </li>
-          <?php include "../../faq_parts/feedback.php"; ?>
+          <?php include "../../faq_parts/_feedback.php"; ?>
         </ul>
         <div class="col-lg-12 text-center tm">
           <a href="/siteviews">
