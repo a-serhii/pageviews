@@ -3109,6 +3109,8 @@ var ChartHelpers = function ChartHelpers(superclass) {
         } finally {
           this.stopSpinny();
           $('.data-links').addClass('invisible');
+          $('.output-list').html('');
+          $('.table-view').hide();
           $(this.config.chart).hide();
           this.clearMessages();
         }
@@ -4671,7 +4673,7 @@ var Pv = function (_PvConfig) {
       if (metaRoot) {
         $.ajax({
           url: '//' + metaRoot + '/usage/' + this.app + '/' + (this.project || i18nLang),
-          method: 'PATCH'
+          method: 'POST'
         });
       }
     }

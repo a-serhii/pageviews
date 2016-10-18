@@ -441,6 +441,8 @@ const ChartHelpers = superclass => class extends superclass {
     } finally {
       this.stopSpinny();
       $('.data-links').addClass('invisible');
+      $('.output-list').html('');
+      $('.table-view').hide();
       $(this.config.chart).hide();
       this.clearMessages();
     }

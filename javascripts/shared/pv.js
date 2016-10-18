@@ -929,7 +929,7 @@ class Pv extends PvConfig {
     if (metaRoot) {
       $.ajax({
         url: `//${metaRoot}/usage/${this.app}/${this.project || i18nLang}`,
-        method: 'PATCH'
+        method: 'POST'
       });
     }
   }
