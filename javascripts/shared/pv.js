@@ -90,7 +90,7 @@ class Pv extends PvConfig {
     this.debug = location.search.includes('debug=true') || location.host === 'localhost';
 
     /** show notice if on staging environment */
-    if (true) { ///-test/.test(location.pathname)) {
+    if (/-test/.test(location.pathname)) {
       const actualPathName = location.pathname.replace(/-test\/?/, '');
       this.addSiteNotice('warning',
         `This is a staging environment. For the actual ${document.title},

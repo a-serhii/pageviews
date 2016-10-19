@@ -11,6 +11,11 @@ const del = require('del');
 const pump = require('pump');
 const plugins = require('gulp-load-plugins')();
 
+let shouldNotify = true;
+const notify = message => {
+  return shouldNotify ? plugins.notify(message) : plugins.notify(() => false);
+};
+
 const appDependencies = {
   'pageviews': {
     css: [
@@ -110,7 +115,7 @@ apps.forEach(app => {
       )
       .pipe(plugins.concat('application.css'))
       .pipe(gulp.dest(`public_html/${path}`))
-      .pipe(plugins.notify('Styles task complete'));
+      .pipe(notify('Styles task complete'));
   });
   gulp.task(`styles-${app}-help`, [`styles-${app}-faq`, `styles-${app}-url_structure`]);
   ['faq', 'url_structure'].forEach(helpPage => {
@@ -152,7 +157,7 @@ apps.forEach(app => {
       presets: ['es2015']
     }));
     const rebundle = () => {
-      bundler.bundle()
+      return bundler.bundle()
         .on('error', err => {
           console.error(err);
           this.emit('end');
@@ -162,7 +167,7 @@ apps.forEach(app => {
         .pipe(plugins.rename('application.js'))
         .pipe(gulp.dest(`public_html/${path}`));
     };
-    rebundle();
+    return rebundle();
   });
   gulp.task(`js-concat-${app}`, () => {
     return gulp.src(coreJSDependencies
@@ -171,7 +176,7 @@ apps.forEach(app => {
       )
       .pipe(plugins.concat('application.js'))
       .pipe(gulp.dest(`public_html/${path}`))
-      .pipe(plugins.notify('Scripts task complete'));
+      .pipe(notify('Scripts task complete'));
   });
   gulp.task(`scripts-${app}-help`, [`scripts-${app}-faq`, `scripts-${app}-url_structure`]);
   ['faq', 'url_structure'].forEach(helpPage => {
@@ -201,7 +206,10 @@ apps.forEach(app => {
           name: path => fileName(path)
         }
       }))
-      .pipe(plugins.notify('Views task complete'));
+      .pipe(notify({
+        message: 'Views task complete',
+        onLast: true
+      }));
   });
 
   /** COMPRESSION */
@@ -213,7 +221,7 @@ apps.forEach(app => {
       gulp.dest(`public_html/${path}`)
     ], cb);
   });
-  gulp.task(`compress-styles-${app}`, cb => {
+  gulp.task(`compress-styles-${app}`, () => {
     return gulp.src(`public_html/${path}application.css`)
       .pipe(plugins.cssnano())
       .pipe(gulp.dest(`public_html/${path}`));
@@ -287,7 +295,12 @@ gulp.task('watch', () => {
 });
 
 gulp.task('production', () => {
-  runSequence('lint', ['styles', 'scripts', 'views'], ['compress', 'jsdoc']);
+  shouldNotify = false;
+  runSequence('lint', ['styles', 'scripts', 'views'], ['compress', 'jsdoc'], () => {
+    shouldNotify = true;
+    gulp.src('')
+      .pipe(notify('Production build complete'));
+  });
 });
 
 gulp.task('default', ['watch']);
