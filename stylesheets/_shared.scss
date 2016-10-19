@@ -322,9 +322,7 @@ footer {
   }
 
   .glyphicon-sort-by-alphabet,
-  .glyphicon-sort-by-alphabet-alt,
-  .glyphicon-sort-by-order,
-  .glyphicon-sort-by-order-alt {
+  .glyphicon-sort-by-alphabet-alt {
     visibility: visible;
   }
 
@@ -333,4 +331,11 @@ footer {
       visibility: visible;
     }
   }
+}
+
+@font-face {
+  font-family: 'Glyphter';
+  src: url('/pageviews/fonts/Glyphter.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }

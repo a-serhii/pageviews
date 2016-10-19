@@ -2367,12 +2367,6 @@ var Pv = function (_PvConfig) {
 
     _this.debug = location.search.includes('debug=true') || location.host === 'localhost';
 
-    /** show notice if on staging environment */
-    if (/-test/.test(location.pathname)) {
-      var actualPathName = location.pathname.replace(/-test\/?/, '');
-      _this.addSiteNotice('warning', 'This is a staging environment. For the actual ' + document.title + ',\n         see <a href=\'' + actualPathName + '\'>' + location.hostname + actualPathName + '</a>');
-    }
-
     /**
      * Load translations then initialize the app.
      * Each app has it's own initialize method.
@@ -3315,7 +3309,7 @@ var Pv = function (_PvConfig) {
       if (metaRoot) {
         $.ajax({
           url: '//' + metaRoot + '/usage/' + this.app + '/' + (this.project || i18nLang),
-          method: 'PATCH'
+          method: 'POST'
         });
       }
     }

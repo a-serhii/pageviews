@@ -91,8 +91,7 @@ apps.forEach(app => {
   /** STYLES */
   const coreCSSDependencies = [
     'vendor/stylesheets/bootstrap.min.css',
-    'vendor/stylesheets/toastr.css',
-    'vendor/stylesheets/font-awesome.min.css'
+    'vendor/stylesheets/toastr.css'
   ];
   gulp.task(`styles-${app}`, () => {
     runSequence(`css-sass-${app}`, `css-concat-${app}`);

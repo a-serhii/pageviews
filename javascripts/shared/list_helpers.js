@@ -156,8 +156,8 @@ const ListHelpers = superclass => class extends superclass {
       }
     });
 
-    $('.sort-link span').removeClass('glyphicon-sort-by-alphabet-alt glyphicon-sort-by-alphabet').addClass('glyphicon-sort');
-    const newSortClassName = parseInt(this.direction, 10) === 1 ? 'glyphicon-sort-by-alphabet-alt' : 'glyphicon-sort-by-alphabet';
+    $('.sort-link span').removeClass('glyphicon-sort-by-attributes-alt glyphicon-sort-by-attributes').addClass('glyphicon-sort');
+    const newSortClassName = parseInt(this.direction, 10) === 1 ? 'glyphicon-sort-by-attributes-alt' : 'glyphicon-sort-by-attributes';
     $(`.sort-link--${this.sort} span`).addClass(newSortClassName).removeClass('glyphicon-sort');
 
     try {
