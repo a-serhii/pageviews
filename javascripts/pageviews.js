@@ -412,7 +412,7 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
       // store pageData from API, removing underscores from the page name
       const entry = data.items[0].articles.find(tv => tv.article === page.label.score());
       if (entry) {
-        const monthName = app.daterangepicker.locale.monthNames[topviewsMonth.month()];
+        const monthName = this.daterangepicker.locale.monthNames[topviewsMonth.month()];
         $('.single-page-ranking').html(`
           Ranked ${entry.rank} in
           <a target='_blank' href='${this.getTopviewsURL(this.project + '.org')}'>most-viewed pages</a>
@@ -425,7 +425,7 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
         ${this.getPageLink(page.label)}
         &middot;
         <span class='text-muted'>
-          ${$(app.config.dateRangeSelector).val()}
+          ${$(this.config.dateRangeSelector).val()}
         </span>
         &middot;
         ${$.i18n('num-pageviews', this.formatNumber(page.sum))}
