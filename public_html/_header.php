@@ -86,7 +86,7 @@
       <?php } else { ?>
         <?php echo $I18N->msg( $currentApp . '-title' ); ?>
       <?php } ?>
-      <sup>BETA</sup>
+      <sup>BETA!</sup>
     </strong>
     <small class="app-description">
       <?php echo $I18N->msg( $currentApp. '-description' ); ?>

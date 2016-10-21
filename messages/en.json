@@ -287,5 +287,6 @@
 	"watchers": "Watchers",
 	"none": "None",
 	"unknown": "Unknown",
-	"help": "Help"
+	"help": "Help",
+	"num-pages-info": "Enter up to $1 pages"
 }

@@ -56,6 +56,8 @@
       %div
         %label(for="article-input")
           = $I18N->msg( 'pages' )
+          %small.text-muted.num-pages-info
+            = $I18N->msg( 'num-pages-info', [ 'variables' => [ 10 ] ] )
         %select.aqs-select2-selector.col-lg-12.invisible#article-input(multiple="multiple")
 
       - include "_data_links.php"
@@ -72,7 +74,8 @@
       %div.summary-column--container
         %div.chart-legend.col-lg-12.clearfix
 
-    %output.table-view.col-lg-10.col-lg-offset-1
+    %output.col-lg-10.col-lg-offset-1
+      %h4.single-page-stats.text-center
       :php
         $columns = array(
           'title' => 'page-title',
@@ -84,7 +87,7 @@
           'protection' => 'protection',
           'watchers' => 'watchers'
         );
-      %table.table.table-hover
+      %table.table.table-hover.table-view
         %thead.table-view--header
           %tr
             %th

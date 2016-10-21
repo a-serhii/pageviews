@@ -18,9 +18,7 @@ const templates = {
       if (multiEntity) {
         editsLink = scope.formatNumber(entity.num_edits);
       } else {
-        editsLink = `<a href="${scope.getExpandedPageURL(entity.label)}&action=history" target="_blank" class="pull-right">
-            ${scope.formatNumber(entity.num_edits)}
-          </a>`;
+        editsLink = scope.getHistoryLink(entity.label, scope.formatNumber(entity.num_edits));
       }
 
       let infoHash = {

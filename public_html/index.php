@@ -78,6 +78,9 @@
       <div>
         <label for="article-input">
           <?php echo $I18N->msg( 'pages' ); ?>
+          <small class="text-muted num-pages-info">
+            <?php echo $I18N->msg( 'num-pages-info', [ 'variables' => [ 10 ] ] ); ?>
+          </small>
         </label>
         <select class="aqs-select2-selector col-lg-12 invisible" id="article-input" multiple="multiple"></select>
       </div>
@@ -96,7 +99,8 @@
         <div class="chart-legend col-lg-12 clearfix"></div>
       </div>
     </aside>
-    <output class="table-view col-lg-10 col-lg-offset-1">
+    <output class="col-lg-10 col-lg-offset-1">
+      <h4 class="single-page-stats text-center"></h4>
       <?php
         $columns = array(
           'title' => 'page-title',
@@ -109,7 +113,7 @@
           'watchers' => 'watchers'
         );
       ?>
-      <table class="table table-hover">
+      <table class="table table-hover table-view">
         <thead class="table-view--header">
           <tr>
             <th></th>

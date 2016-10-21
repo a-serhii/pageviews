@@ -274,6 +274,11 @@ gulp.task('styles', apps.map(app => `styles-${app}`));
 gulp.task('scripts', apps.map(app => `scripts-${app}`));
 gulp.task('views', apps.concat(['faq_parts', 'url_parts']).map(app => `views-${app}`));
 gulp.task('compress', apps.map(app => `compress-${app}`));
+gulp.task('help', apps.map(app => `styles-${app}-help`).concat(
+  apps.map(app => `scripts-${app}-help`)
+), () => {
+  gulp.src('').pipe(notify('Help task complete'));
+});
 
 apps.forEach(app => {
   gulp.task(app, [
@@ -285,10 +290,15 @@ gulp.task('watch', () => {
   // compile all apps if shared files are altered
   gulp.watch('stylesheets/_*.scss', ['styles']);
   gulp.watch('javascripts/shared/*.js', ['scripts']);
+  gulp.watch(['stylesheets/**/faq.scss', 'stylesheets/**/url_structure.scss'], ['help']);
 
   apps.concat(['faq_parts', 'url_parts']).forEach(app => {
     const path = app === 'pageviews' ? '' : `${app}/`;
-    gulp.watch(`stylesheets/${path}*.scss`, [`styles-${app}`]);
+    gulp.watch(
+      // ignore FAQ and URL structure files
+      [`stylesheets/${path}*.scss`, '!stylesheets/**/faq.scss', '!stylesheets/**/url_structure.scss'],
+      [`styles-${app}`]
+    );
     gulp.watch(`javascripts/${path}*.js`, [`scripts-${app}`]);
     gulp.watch(`views/${path}*.haml`, [`views-${app}`]);
   });
@@ -296,7 +306,7 @@ gulp.task('watch', () => {
 
 gulp.task('production', () => {
   shouldNotify = false;
-  runSequence('lint', ['styles', 'scripts', 'views'], ['compress', 'jsdoc'], () => {
+  runSequence('lint', ['styles', 'scripts', 'views', 'help'], ['compress', 'jsdoc'], () => {
     shouldNotify = true;
     gulp.src('')
       .pipe(notify('Production build complete'));

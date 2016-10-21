@@ -400,7 +400,22 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
   }
 
   updateTable() {
-    if (this.outputData.length === 1) return $('.table-view').hide();
+    if (this.outputData.length === 1) {
+      $('.table-view').hide();
+      const page = this.outputData[0];
+      $('.single-page-stats').html(`
+        ${this.getPageLink(page.label)}
+        &middot;
+        <span class='text-muted'>
+          ${$(app.config.dateRangeSelector).val()}
+        </span>
+        &middot;
+        ${$.i18n('num-pageviews', this.formatNumber(page.sum))}
+      `);
+      return;
+    } else {
+      $('.single-page-stats').html('');
+    }
 
     $('.output-list').html('');
 
@@ -434,11 +449,11 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
          <td>${this.getPageLink(item.label)}</td>
          <td>${this.formatNumber(item.sum)}</td>
          <td>${this.formatNumber(item.average)}</td>
-         <td>${this.formatNumber(item.num_edits)}</td>
+         <td>${this.getHistoryLink(item.label, this.formatNumber(item.num_edits))}</td>
          <td>${this.formatNumber(item.num_users)}</td>
          <td>${this.formatNumber(item.length)}</td>
          <td>${item.protection}</td>
-         <td>${this.formatNumber(item.watchers)}</td>
+         <td>${item.watchers ? this.formatNumber(item.watchers) : $.i18n('unknown')}</td>
          <td>
           <a href="${this.getLangviewsURL(item.label)}" target="_blank">${$.i18n('all-languages')}</a>
           &bull;

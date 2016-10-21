@@ -328,6 +328,18 @@ class Pv extends PvConfig {
   }
 
   /**
+   * Get full link to page history for given page and project
+   * @param  {string} page - page to link to
+   * @param  {string} content - what to put as the link text
+   * @return {string} HTML markup
+   */
+  getHistoryLink(page, content) {
+    return `<a href="${this.getExpandedPageURL(page)}&action=history" target="_blank">
+        ${content}
+      </a>`;
+  }
+
+  /**
    * Get informative filename without extension to be used for export options
    * @return {string} filename without an extension
    */

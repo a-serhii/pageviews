@@ -76,7 +76,7 @@ Each page has it's own `.scss` file that imports dependencies. Shared files are 
 The views within `/views` are written in [MtHaml](https://github.com/arnaud-lb/MtHaml) and compiled to PHP files in `/public_html`.
 
 ### Local
-Run `gulp` to simply watch for changes and automatically compile as needed. You can also run tasks by app and function, such as `gulp massviews` for all Massviews-related files, or `gulp scripts` to compile only the JavaScripts.
+Run `gulp` to simply watch for changes and automatically compile as needed. You can also run tasks by app and function, such as `gulp massviews` for all Massviews-related files, or `gulp scripts` to compile only the JavaScripts, but `gulp` by itself should be all you need.
 
 ### Production
 Before making a pull request or pushing to master, remember to run `gulp production` so the assets are minified and concatenated. JSDocs are also generated, and placed in a dedicated sub-repo (not submodule) in `jsdocs/gen`. These can optionally be pull requested to the [JSDocs repo](https://github.com/MusikAnimal/pageviews-jsdocs).
