@@ -91,7 +91,7 @@
       </div>
       <div class="message-container col-lg-12"></div>
     </main>
-    <aside class="col-lg-2 col-md-12 summary-column">
+    <aside class="col-lg-2 col-md-12 visible-lg-block summary-column">
       <header class="text-center">
         <h4>Totals</h4>
       </header>

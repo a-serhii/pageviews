@@ -463,6 +463,39 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
       );
     });
 
+    // add summations to show up as the bottom row in the table
+    const sum = datasets.reduce((a,b) => a + b.sum, 0);
+    const totals = {
+      label: $.i18n('num-pages', datasets.length),
+      sum,
+      average: Math.round(sum / datasets.length),
+      num_edits: datasets.reduce((a, b) => a + b.num_edits, 0),
+      num_users: datasets.reduce((a, b) => a + b.num_users, 0),
+      length: datasets.reduce((a, b) => a + b.length, 0),
+      protections: datasets.filter(page => page.protection !== 'none').length,
+      watchers: datasets.reduce((a, b) => a + b.watchers || 0, 0)
+    };
+    $('.output-list').append(
+      `<tr class='table-view--summary-row'>
+       <th class='table-view--color-col'>
+        <span class='table-view--color-block' style="background:${totals.color}"></span>
+       </th>
+       <th>${this.getPageLink(totals.label)}</th>
+       <th>${this.formatNumber(totals.sum)}</th>
+       <th>${this.formatNumber(totals.average)}</th>
+       <th>${this.getHistoryLink(totals.label, this.formatNumber(totals.num_edits))}</th>
+       <th>${this.formatNumber(totals.num_users)}</th>
+       <th>${this.formatNumber(totals.length)}</th>
+       <th>${$.i18n('num-protections', totals.protections)}</th>
+       <th>${totals.watchers ? this.formatNumber(totals.watchers) : $.i18n('unknown')}</th>
+       <th>
+        <a href="${this.getLangviewsURL(totals.label)}" target="_blank">${$.i18n('all-languages')}</a>
+        &bull;
+        <a href="${this.getRedirectviewsURL(totals.label)}" target="_blank">${$.i18n('redirects')}</a>
+       </th>
+       </tr>`
+    );
+
     // hide protection column if no pages are protected
     $('.table-view--protection').toggle(hasProtection);
 
