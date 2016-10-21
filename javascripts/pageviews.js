@@ -399,10 +399,28 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
     }
   }
 
-  updateTable() {
-    if (this.outputData.length === 1) {
+  showSinglePageLegend() {
+    const page = this.outputData[0];
+    const topviewsMonth = moment().subtract(1, 'month').subtract(2, 'days');
+    const topviewsDate = `${this.daterangepicker.endDate.format('YYYY')}/${topviewsMonth.format('MM')}/all-days`;
+
+    $.ajax({
+      url: `https://wikimedia.org/api/rest_v1/metrics/pageviews/top/${this.project}/` +
+        `${$(this.config.platformSelector).val()}/${topviewsDate}`,
+      dataType: 'json'
+    }).done(data => {
+      // store pageData from API, removing underscores from the page name
+      const entry = data.items[0].articles.find(tv => tv.article === page.label.score());
+      if (entry) {
+        const monthName = app.daterangepicker.locale.monthNames[topviewsMonth.month()];
+        $('.single-page-ranking').html(`
+          Ranked ${entry.rank} in
+          <a target='_blank' href='${this.getTopviewsURL(this.project + '.org')}'>most-viewed pages</a>
+          for ${monthName} ${topviewsMonth.year()}
+        `);
+      }
+    }).always(() => {
       $('.table-view').hide();
-      const page = this.outputData[0];
       $('.single-page-stats').html(`
         ${this.getPageLink(page.label)}
         &middot;
@@ -412,9 +430,15 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
         &middot;
         ${$.i18n('num-pageviews', this.formatNumber(page.sum))}
       `);
-      return;
+    });
+  }
+
+  updateTable() {
+    if (this.outputData.length === 1) {
+      return this.showSinglePageLegend();
     } else {
       $('.single-page-stats').html('');
+      $('.single-page-ranking').html('');
     }
 
     $('.output-list').html('');
@@ -480,7 +504,7 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
        <th class='table-view--color-col'>
         <span class='table-view--color-block' style="background:${totals.color}"></span>
        </th>
-       <th>${this.getPageLink(totals.label)}</th>
+       <th>${totals.label}</th>
        <th>${this.formatNumber(totals.sum)}</th>
        <th>${this.formatNumber(totals.average)}</th>
        <th>${this.formatNumber(totals.num_edits)}</th>

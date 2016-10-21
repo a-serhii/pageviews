@@ -44,28 +44,6 @@ class SiteViews extends mix(Pv).with(ChartHelpers) {
   }
 
   /**
-   * Link to /topviews for given project and chosen options
-   * @param {String} project - project to link to
-   * @returns {String} URL
-   */
-  getTopviewsURL(project) {
-    let params = {
-      project,
-      platform: 'all-access'
-    };
-
-    // Use the month of the start date as the date value for Topviews.
-    // If we are on the cusp of a new month, use the previous month as last month's data may not be available yet.
-    let startDate = moment(this.daterangepicker.startDate);
-    if (startDate.month() === moment().month() || startDate.month() === moment().subtract(2, 'days').month()) {
-      startDate.subtract(1, 'month');
-    }
-    params.date = startDate.startOf('month').format('YYYY-MM');
-
-    return `/topviews?${$.param(params)}&project=${project}`;
-  }
-
-  /**
    * Parses the URL query string and sets all the inputs accordingly
    * Should only be called on initial page load, until we decide to support pop states (probably never)
    * @returns {null} nothing

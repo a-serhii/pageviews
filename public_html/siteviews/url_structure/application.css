@@ -605,6 +605,10 @@ footer {
 .interapp-links {
   font-size: 15px; }
 
+.interapp-link:hover {
+  background: transparent !important;
+  border-color: transparent !important; }
+
 .list-group-item {
   background: rgba(255, 255, 255, 0.5); }
 

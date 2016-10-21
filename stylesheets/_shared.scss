@@ -266,6 +266,13 @@ footer {
   font-size: 15px;
 }
 
+.interapp-link {
+  &:hover {
+    background: transparent !important;
+    border-color: transparent !important;
+  }
+}
+
 .list-group-item {
   background: $faq-entry-bg;
 }

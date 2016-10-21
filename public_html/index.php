@@ -101,6 +101,7 @@
     </aside>
     <output class="col-lg-10 col-lg-offset-1">
       <h4 class="single-page-stats text-center"></h4>
+      <h5 class="single-page-ranking text-center"></h5>
       <?php
         $columns = array(
           'title' => 'page-title',

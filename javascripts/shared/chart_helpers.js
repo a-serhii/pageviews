@@ -443,6 +443,8 @@ const ChartHelpers = superclass => class extends superclass {
       $('.data-links').addClass('invisible');
       $('.output-list').html('');
       $('.table-view').hide();
+      $('.single-page-stats').html('');
+      $('.single-page-ranking').html('');
       $(this.config.chart).hide();
       this.clearMessages();
     }
