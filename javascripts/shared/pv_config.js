@@ -213,6 +213,9 @@ class PvConfig {
         'last-week': [moment().subtract(1, 'week').startOf('week'), moment().subtract(1, 'week').endOf('week')],
         'this-month': [moment().startOf('month'), moment().subtract(1, 'days').startOf('day')],
         'last-month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+        'this-year': [moment().startOf('year'), moment().subtract(1, 'days').startOf('day')],
+        'last-year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
+        'all-time': [moment('2015-07-01').startOf('day'), moment().subtract(1, 'days').startOf('day')],
         latest(offset = self.config.daysAgo) {
           return [moment().subtract(offset, 'days').startOf('day'), self.config.maxDate];
         }

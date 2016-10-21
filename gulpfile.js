@@ -176,7 +176,10 @@ apps.forEach(app => {
       )
       .pipe(plugins.concat('application.js'))
       .pipe(gulp.dest(`public_html/${path}`))
-      .pipe(notify('Scripts task complete'));
+      .pipe(notify({
+        message: 'Scripts task complete',
+        onLast: true
+      }));
   });
   gulp.task(`scripts-${app}-help`, [`scripts-${app}-faq`, `scripts-${app}-url_structure`]);
   ['faq', 'url_structure'].forEach(helpPage => {
