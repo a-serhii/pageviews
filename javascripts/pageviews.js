@@ -483,16 +483,12 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
        <th>${this.getPageLink(totals.label)}</th>
        <th>${this.formatNumber(totals.sum)}</th>
        <th>${this.formatNumber(totals.average)}</th>
-       <th>${this.getHistoryLink(totals.label, this.formatNumber(totals.num_edits))}</th>
+       <th>${this.formatNumber(totals.num_edits)}</th>
        <th>${this.formatNumber(totals.num_users)}</th>
        <th>${this.formatNumber(totals.length)}</th>
        <th>${$.i18n('num-protections', totals.protections)}</th>
        <th>${totals.watchers ? this.formatNumber(totals.watchers) : $.i18n('unknown')}</th>
-       <th>
-        <a href="${this.getLangviewsURL(totals.label)}" target="_blank">${$.i18n('all-languages')}</a>
-        &bull;
-        <a href="${this.getRedirectviewsURL(totals.label)}" target="_blank">${$.i18n('redirects')}</a>
-       </th>
+       <th></th>
        </tr>`
     );
 
