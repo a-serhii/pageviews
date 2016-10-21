@@ -93,6 +93,34 @@ const templates = {
     };
 
     return dataList(totals, true);
+  },
+
+  tableRow(scope, item, last = false) {
+    const tag = last ? 'th' : 'td';
+    const historyRow = last ? scope.formatNumber(item.num_edits) :
+      scope.getHistoryLink(item.label, scope.formatNumber(item.num_edits));
+    const linksRow = last ? '' : `
+        <a href="${scope.getLangviewsURL(item.label)}" target="_blank">${$.i18n('all-languages')}</a>
+        &bull;
+        <a href="${scope.getRedirectviewsURL(item.label)}" target="_blank">${$.i18n('redirects')}</a>
+      `;
+
+    return `
+      <tr>
+        <${tag} class='table-view--color-col'>
+          <span class='table-view--color-block' style="background:${item.color}"></span>
+        </${tag}>
+        <${tag}>${last ? item.label : scope.getPageLink(item.label)}</${tag}>
+        <${tag}>${scope.formatNumber(item.sum)}</${tag}>
+        <${tag}>${scope.formatNumber(item.average)}</${tag}>
+        <${tag}>${historyRow}</${tag}>
+        <${tag}>${scope.formatNumber(item.num_users)}</${tag}>
+        <${tag}>${scope.formatNumber(item.length)}</${tag}>
+        <${tag}>${item.protection}</${tag}>
+        <${tag}>${item.watchers ? scope.formatNumber(item.watchers) : $.i18n('unknown')}</${tag}>
+        <${tag}>${linksRow}</${tag}>
+      </tr>
+    `;
   }
 };
 

@@ -82,6 +82,9 @@
             <?php echo $I18N->msg( 'num-pages-info', [ 'variables' => [ 10 ] ] ); ?>
           </small>
         </label>
+        <span class="clear-pages pull-right">
+          &times; Clear
+        </span>
         <select class="aqs-select2-selector col-lg-12 invisible" id="article-input" multiple="multiple"></select>
       </div>
       <?php include "_data_links.php"; ?>

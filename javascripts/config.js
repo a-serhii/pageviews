@@ -23,6 +23,7 @@ const config = {
   platformSelector: '#platform-select',
   projectInput: '.aqs-project-input',
   select2Input: '.aqs-select2-selector',
+  templates,
   validateParams: ['project', 'platform', 'agent']
 };
 

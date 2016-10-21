@@ -288,6 +288,12 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
 
     $select2Input.select2(params);
     $select2Input.on('change', this.processInput.bind(this));
+    // FIXME: don't re-query everything when removing a page, just remove that page from the data
+    // FIXME: this is getting called twice for some reason
+    $select2Input.on('select2:unselect', e => {
+      alert('removing');
+      e.stopPropagation();
+    });
     $select2Input.on('select2:open', e => {
       if ($(e.target).val() && $(e.target).val().length === 10) {
         $('.select2-search__field').one('keyup', () => {
@@ -414,7 +420,7 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
       if (entry) {
         const monthName = this.daterangepicker.locale.monthNames[topviewsMonth.month()];
         $('.single-page-ranking').html(`
-          Ranked ${entry.rank} in
+          Ranked ${entry.rank} of the
           <a target='_blank' href='${this.getTopviewsURL(this.project + '.org')}'>most-viewed pages</a>
           for ${monthName} ${topviewsMonth.year()}
         `);
@@ -465,26 +471,7 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
     datasets.forEach((item, index) => {
       if (item.protection !== $.i18n('none')) hasProtection = true;
 
-      $('.output-list').append(
-        `<tr>
-         <td class='table-view--color-col'>
-          <span class='table-view--color-block' style="background:${item.color}"></span>
-         </td>
-         <td>${this.getPageLink(item.label)}</td>
-         <td>${this.formatNumber(item.sum)}</td>
-         <td>${this.formatNumber(item.average)}</td>
-         <td>${this.getHistoryLink(item.label, this.formatNumber(item.num_edits))}</td>
-         <td>${this.formatNumber(item.num_users)}</td>
-         <td>${this.formatNumber(item.length)}</td>
-         <td>${item.protection}</td>
-         <td>${item.watchers ? this.formatNumber(item.watchers) : $.i18n('unknown')}</td>
-         <td>
-          <a href="${this.getLangviewsURL(item.label)}" target="_blank">${$.i18n('all-languages')}</a>
-          &bull;
-          <a href="${this.getRedirectviewsURL(item.label)}" target="_blank">${$.i18n('redirects')}</a>
-         </td>
-         </tr>`
-      );
+      $('.output-list').append(this.config.templates.tableRow(this, item));
     });
 
     // add summations to show up as the bottom row in the table
@@ -496,25 +483,10 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
       num_edits: datasets.reduce((a, b) => a + b.num_edits, 0),
       num_users: datasets.reduce((a, b) => a + b.num_users, 0),
       length: datasets.reduce((a, b) => a + b.length, 0),
-      protections: datasets.filter(page => page.protection !== 'none').length,
+      protection: $.i18n('num-protections', datasets.filter(page => page.protection !== 'none').length),
       watchers: datasets.reduce((a, b) => a + b.watchers || 0, 0)
     };
-    $('.output-list').append(
-      `<tr class='table-view--summary-row'>
-       <th class='table-view--color-col'>
-        <span class='table-view--color-block' style="background:${totals.color}"></span>
-       </th>
-       <th>${totals.label}</th>
-       <th>${this.formatNumber(totals.sum)}</th>
-       <th>${this.formatNumber(totals.average)}</th>
-       <th>${this.formatNumber(totals.num_edits)}</th>
-       <th>${this.formatNumber(totals.num_users)}</th>
-       <th>${this.formatNumber(totals.length)}</th>
-       <th>${$.i18n('num-protections', totals.protections)}</th>
-       <th>${totals.watchers ? this.formatNumber(totals.watchers) : $.i18n('unknown')}</th>
-       <th></th>
-       </tr>`
-    );
+    $('.output-list').append(this.config.templates.tableRow(this, totals, true));
 
     // hide protection column if no pages are protected
     $('.table-view--protection').toggle(hasProtection);
