@@ -83,7 +83,7 @@
           </small>
         </label>
         <span class="clear-pages pull-right">
-          &times; Clear
+          &#x2715; Clear
         </span>
         <select class="aqs-select2-selector col-lg-12 invisible" id="article-input" multiple="multiple"></select>
       </div>

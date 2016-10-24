@@ -84,7 +84,6 @@ const ChartHelpers = superclass => class extends superclass {
   /**
    * Set the default chart type or the one from localStorage, based on settings
    * @param {Number} [numDatasets] - number of datasets
-   * @returns {null} nothing
    */
   setInitialChartType(numDatasets = 1) {
     if (this.rememberChart === 'true') {
@@ -96,7 +95,6 @@ const ChartHelpers = superclass => class extends superclass {
 
   /**
    * Destroy previous chart, if needed.
-   * @returns {null} nothing
    */
   destroyChart() {
     if (this.chartObj) {
@@ -108,7 +106,6 @@ const ChartHelpers = superclass => class extends superclass {
   /**
    * Exports current chart data to CSV format and loads it in a new tab
    * With the prepended data:text/csv this should cause the browser to download the data
-   * @returns {null} Nothing
    */
   exportCSV() {
     let csvContent = 'data:text/csv;charset=utf-8,Date,';
@@ -145,7 +142,6 @@ const ChartHelpers = superclass => class extends superclass {
 
   /**
    * Exports current chart data to JSON format and loads it in a new tab
-   * @returns {null} Nothing
    */
   exportJSON() {
     let data = [];
@@ -171,7 +167,6 @@ const ChartHelpers = superclass => class extends superclass {
 
   /**
    * Exports current data as PNG image, opening it in a new tab
-   * @returns {null} nothing
    */
   exportPNG() {
     this.downloadData(this.chartObj.toBase64Image(), 'png');
@@ -214,11 +209,10 @@ const ChartHelpers = superclass => class extends superclass {
   /**
    * Get data formatted for Chart.js and the legend templates
    * @param {Array} datasets - as retrieved by getPageViewsData
+   * @param {Array} labels - corresponding labels for the datasets
    * @returns {object} - ready for chart rendering
    */
-  buildChartData(datasets) {
-    const labels = $(this.config.select2Input).val();
-
+  buildChartData(datasets, labels) {
     /** preserve order of datasets due to async calls */
     return datasets.map((dataset, index) => {
       /** Build the article's dataset. */
@@ -243,6 +237,7 @@ const ChartHelpers = superclass => class extends superclass {
         color
       }, this.config.chartConfig[this.chartType].dataset(color), entityInfo);
 
+      // don't try to plot zeros on a logarithmic chart
       if (this.isLogarithmic()) {
         dataset.data = dataset.data.map(view => view || null);
       }
@@ -297,6 +292,8 @@ const ChartHelpers = superclass => class extends superclass {
       fatalErrors: [], // Unrecoverable JavaScript errors
       promises: []
     };
+
+    console.log(`getPageViewsData: ${entities}`);
 
     const makeRequest = (entity, index) => {
       const startDate = this.daterangepicker.startDate.startOf('day'),
@@ -416,7 +413,6 @@ const ChartHelpers = superclass => class extends superclass {
 
   /**
    * Print the chart!
-   * @returns {null} Nothing
    */
   printChart() {
     let tab = window.open();
@@ -430,7 +426,6 @@ const ChartHelpers = superclass => class extends superclass {
   /**
    * Removes chart, messages, and resets site selections
    * @param {boolean} [select2] whether or not to clear the Select2 input
-   * @returns {null} nothing
    */
   resetView(select2 = false) {
     try {
@@ -509,7 +504,6 @@ const ChartHelpers = superclass => class extends superclass {
 
   /**
    * sets up the daterange selector and adds listeners
-   * @returns {null} - nothing
    */
   setupDateRangeSelector() {
     super.setupDateRangeSelector();
@@ -537,24 +531,30 @@ const ChartHelpers = superclass => class extends superclass {
 
   /**
    * Update the chart with data provided by processInput()
-   * @param {Object} xhrData - data as constructed by processInput()
-   * @returns {null} - nothin
+   * @param {Object} [xhrData] - data as constructed by processInput()
+   *   data is ommitted if we already have everything we need in this.outputData
    */
   updateChart(xhrData) {
     $('.chart-legend').html(''); // clear old chart legend
+    const entityNames = xhrData ? xhrData.entities : $(this.config.select2Input).val();
+    console.log(`updateChart: ${entityNames}`);
 
     // show pending error messages if present, exiting if fatal
-    if (this.showErrors(xhrData)) return;
+    if (xhrData && this.showErrors(xhrData)) return;
 
-    if (!xhrData.entities.length) {
+    if (!entityNames.length) {
       return this.stopSpinny();
-    } else if (xhrData.entities.length === 1) {
+    } else if (entityNames.length === 1) {
       $('.multi-page-chart-node').hide();
+      $('.clear-pages').hide();
     } else {
       $('.multi-page-chart-node').show();
+      $('.clear-pages').show();
     }
 
-    this.outputData = this.buildChartData(xhrData.datasets, xhrData.entities);
+    if (xhrData) {
+      this.outputData = this.buildChartData(xhrData.datasets, entityNames);
+    }
 
     if (this.autoLogDetection === 'true') {
       const shouldBeLogarithmic = this.shouldBeLogarithmic(this.outputData.map(set => set.data));
@@ -595,7 +595,7 @@ const ChartHelpers = superclass => class extends superclass {
       const context = $(this.config.chart)[0].getContext('2d');
 
       if (this.config.linearCharts.includes(this.chartType)) {
-        const linearData = {labels: xhrData.labels, datasets: this.outputData};
+        const linearData = {labels: this.getDateHeadings(), datasets: this.outputData};
 
         if (this.chartType === 'radar') {
           options.scale.ticks.beginAtZero = $('.begin-at-zero-option').is(':checked');

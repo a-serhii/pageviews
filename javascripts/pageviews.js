@@ -19,8 +19,8 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
     this.entityInfo = false; /** let's us know if we've gotten the page info from API yet */
     this.specialRange = null;
     this.initialQuery = false;
-    this.sort = 'title';
-    this.direction = '-1';
+    this.sort = 'views';
+    this.direction = '1';
 
     /**
      * Select2 library prints "Uncaught TypeError: XYZ is not a function" errors
@@ -33,7 +33,6 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
   /**
    * Initialize the application.
    * Called in `pv.js` after translations have loaded
-   * @return {null} Nothing
    */
   initialize() {
     this.setupDateRangeSelector();
@@ -120,7 +119,6 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
   /**
    * Parses the URL query string and sets all the inputs accordingly
    * Should only be called on initial page load, until we decide to support pop states (probably never)
-   * @returns {null} nothing
    */
   popParams() {
     /** show loading indicator and add error handling for timeouts */
@@ -129,6 +127,8 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
     let params = this.validateParams(
       this.parseQueryString('pages')
     );
+
+    console.log(`popParams: ${params.pages}`);
 
     $(this.config.projectInput).val(params.project);
     $(this.config.platformSelector).val(params.platform);
@@ -142,7 +142,6 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
     /**
      * Sets the Select2 defaults, which triggers the Select2 listener and calls this.processInput
      * @param {Array} pages - pages to query
-     * @return {null} nothing
      */
     const getPageInfoAndSetDefaults = pages => {
       this.getPageAndEditInfo(pages).then(pageInfo => {
@@ -256,11 +255,11 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
   /**
    * Replaces history state with new URL query string representing current user input
    * Called whenever we go to update the chart
-   * @returns {null} nothing
    */
   pushParams() {
     const pages = $(this.config.select2Input).select2('val') || [],
       escapedPages = pages.join('|').replace(/[&%]/g, escape);
+    console.log(`pushParams: ${pages}`);
 
     if (window.history && window.history.replaceState) {
       window.history.replaceState({}, document.title,
@@ -273,7 +272,6 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
 
   /**
    * Sets up the article selector and adds listener to update chart
-   * @returns {null} - nothing
    */
   setupSelect2() {
     const $select2Input = $(this.config.select2Input);
@@ -287,14 +285,13 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
     };
 
     $select2Input.select2(params);
-    $select2Input.on('change', this.processInput.bind(this));
+    $select2Input.off('select2:select').on('select2:select', this.processInput.bind(this));
     // FIXME: don't re-query everything when removing a page, just remove that page from the data
     // FIXME: this is getting called twice for some reason
-    $select2Input.on('select2:unselect', e => {
-      alert('removing');
-      e.stopPropagation();
+    $select2Input.off('select2:unselect').on('select2:unselect', e => {
+      this.processInput(false, e.params.data.text);
     });
-    $select2Input.on('select2:open', e => {
+    $select2Input.off('select2:open').on('select2:open', e => {
       if ($(e.target).val() && $(e.target).val().length === 10) {
         $('.select2-search__field').one('keyup', () => {
           const message = $.i18n(
@@ -336,7 +333,6 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
   /**
    * Calls parent setupProjectInput and updates the view if validations passed
    *   reverting to the old value if the new one is invalid
-   * @returns {null} nothing
    * @override
    */
   validateProject() {
@@ -349,7 +345,6 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
   /**
    * General place to add page-wide listeners
    * @override
-   * @returns {null} - nothing
    */
   setupListeners() {
     super.setupListeners();
@@ -360,14 +355,18 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
       this.sort = sortType;
       this.updateTable();
     });
+    $('.clear-pages').on('click', () => {
+      $('.clear-pages').hide();
+      this.resetView(true);
+      this.focusSelect2();
+    });
   }
 
   /**
    * Query the API for each page, building up the datasets and then calling renderData
    * @param {boolean} force - whether to force the chart to re-render, even if no params have changed
-   * @returns {null} - nothin
    */
-  processInput(force) {
+  processInput(force, removedPage) {
     this.pushParams();
 
     /** prevent duplicate querying due to conflicting listeners */
@@ -378,6 +377,7 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
     this.params = location.search;
 
     const entities = $(config.select2Input).select2('val') || [];
+    console.log(`processInput: ${entities}`);
 
     if (!entities.length) {
       return this.resetView();
@@ -392,16 +392,26 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
     this.destroyChart();
     this.startSpinny(); // show spinny and capture against fatal errors
 
-    // We've already gotten data about the intial set of pages
-    // This is because we need any page names given to be normalized when the app first loads
-    if (this.initialQuery) {
-      this.getPageViewsData(entities).done(xhrData => this.updateChart(xhrData));
-      // set back to false so we get page and edit info for any newly entered pages
-      this.initialQuery = false;
-    } else {
-      this.getPageAndEditInfo(entities).then(() => {
-        this.getPageViewsData(entities).done(xhrData => this.updateChart(xhrData));
+    if (removedPage) {
+      // we've got the data already, just removed a single page so we'll remove that data
+      // and re-render the chart
+      this.outputData = this.outputData.filter(entry => entry.label !== removedPage.descore());
+      this.outputData = this.outputData.map(entity => {
+        return Object.assign({}, entity, this.config.chartConfig[this.chartType].dataset(entity.color));
       });
+      this.updateChart();
+    } else {
+      // We've already gotten data about the intial set of pages
+      // This is because we need any page names given to be normalized when the app first loads
+      if (this.initialQuery) {
+        this.getPageViewsData(entities).done(xhrData => this.updateChart(xhrData));
+        // set back to false so we get page and edit info for any newly entered pages
+        this.initialQuery = false;
+      } else {
+        this.getPageAndEditInfo(entities).then(() => {
+          this.getPageViewsData(entities).done(xhrData => this.updateChart(xhrData));
+        });
+      }
     }
   }
 
@@ -420,7 +430,7 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
       if (entry) {
         const monthName = this.daterangepicker.locale.monthNames[topviewsMonth.month()];
         $('.single-page-ranking').html(`
-          Ranked ${entry.rank} of the
+          Ranked ${entry.rank} in the
           <a target='_blank' href='${this.getTopviewsURL(this.project + '.org')}'>most-viewed pages</a>
           for ${monthName} ${topviewsMonth.year()}
         `);
@@ -527,13 +537,19 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
    */
   getPageAndEditInfo(pages) {
     const dfd = $.Deferred();
+    console.log(`getPageAndEditInfo: ${pages}`);
 
     this.getPageInfo(pages).done(data => {
       this.entityInfo = data;
       // use Object.keys(data) to get normalized page names
       this.getEditData(Object.keys(data)).done(editData => {
         for (let page in editData.pages) {
-          Object.assign(this.entityInfo[page.descore()], editData.pages[page]);
+          let pageData = editData.pages[page];
+
+          const protection = (this.entityInfo[page].protection || []).find(prot => prot.type === 'edit');
+          pageData.protection = protection ? protection.level : $.i18n('none').toLowerCase();
+
+          Object.assign(this.entityInfo[page], editData.pages[page]);
         }
         dfd.resolve(this.entityInfo);
       }).fail(() => {

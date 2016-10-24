@@ -17,7 +17,6 @@ const ListHelpers = superclass => class extends superclass {
 
   /**
    * Prepare chart options before showing chart view, based on current chart type
-   * @return {null} Nothing
    */
   assignOutputDataChartOpts() {
     const color = this.config.colors[0];
@@ -30,7 +29,6 @@ const ListHelpers = superclass => class extends superclass {
 
   /**
    * Exports current lang data to JSON format and loads it in a new tab
-   * @returns {null} Nothing
    */
   exportJSON() {
     const jsonContent = 'data:text/json;charset=utf-8,' + JSON.stringify(this.outputData.listData);
@@ -137,7 +135,6 @@ const ListHelpers = superclass => class extends superclass {
   /**
    * Render list of output data into view
    * @param {function} cb - block to call between initial setup and showing the output
-   * @returns {null} nothing
    */
   renderData(cb) {
     const articleDatasets = this.outputData.listData;
@@ -180,7 +177,6 @@ const ListHelpers = superclass => class extends superclass {
   /**
    * Toggle or set chart vs list view. All of the normal chart logic lives here
    * @param  {String} view - which view to set, either chart or list
-   * @return {null} Nothing
    */
   toggleView(view) {
     $('.view-btn').removeClass('active');
@@ -254,7 +250,6 @@ const ListHelpers = superclass => class extends superclass {
    * Set value of progress bar
    * @param  {Number} value - current iteration
    * @param  {Number} total - total number of iterations
-   * @return {null} nothing
    */
   updateProgressBar(value, total) {
     if (!total) {

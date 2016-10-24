@@ -2007,8 +2007,8 @@ var PageViews = function (_mix$with) {
     _this.entityInfo = false; /** let's us know if we've gotten the page info from API yet */
     _this.specialRange = null;
     _this.initialQuery = false;
-    _this.sort = 'title';
-    _this.direction = '-1';
+    _this.sort = 'views';
+    _this.direction = '1';
 
     /**
      * Select2 library prints "Uncaught TypeError: XYZ is not a function" errors
@@ -2022,7 +2022,6 @@ var PageViews = function (_mix$with) {
   /**
    * Initialize the application.
    * Called in `pv.js` after translations have loaded
-   * @return {null} Nothing
    */
 
 
@@ -2127,7 +2126,6 @@ var PageViews = function (_mix$with) {
     /**
      * Parses the URL query string and sets all the inputs accordingly
      * Should only be called on initial page load, until we decide to support pop states (probably never)
-     * @returns {null} nothing
      */
 
   }, {
@@ -2139,6 +2137,8 @@ var PageViews = function (_mix$with) {
       setTimeout(this.startSpinny.bind(this)); // use setTimeout to force rendering threads to catch up
 
       var params = this.validateParams(this.parseQueryString('pages'));
+
+      console.log('popParams: ' + params.pages);
 
       $(this.config.projectInput).val(params.project);
       $(this.config.platformSelector).val(params.platform);
@@ -2152,7 +2152,6 @@ var PageViews = function (_mix$with) {
       /**
        * Sets the Select2 defaults, which triggers the Select2 listener and calls this.processInput
        * @param {Array} pages - pages to query
-       * @return {null} nothing
        */
       var getPageInfoAndSetDefaults = function getPageInfoAndSetDefaults(pages) {
         _this2.getPageAndEditInfo(pages).then(function (pageInfo) {
@@ -2272,7 +2271,6 @@ var PageViews = function (_mix$with) {
     /**
      * Replaces history state with new URL query string representing current user input
      * Called whenever we go to update the chart
-     * @returns {null} nothing
      */
 
   }, {
@@ -2280,6 +2278,7 @@ var PageViews = function (_mix$with) {
     value: function pushParams() {
       var pages = $(this.config.select2Input).select2('val') || [],
           escapedPages = pages.join('|').replace(/[&%]/g, escape);
+      console.log('pushParams: ' + pages);
 
       if (window.history && window.history.replaceState) {
         window.history.replaceState({}, document.title, '?' + $.param(this.getParams()) + '&pages=' + escapedPages);
@@ -2290,7 +2289,6 @@ var PageViews = function (_mix$with) {
 
     /**
      * Sets up the article selector and adds listener to update chart
-     * @returns {null} - nothing
      */
 
   }, {
@@ -2309,14 +2307,13 @@ var PageViews = function (_mix$with) {
       };
 
       $select2Input.select2(params);
-      $select2Input.on('change', this.processInput.bind(this));
+      $select2Input.off('select2:select').on('select2:select', this.processInput.bind(this));
       // FIXME: don't re-query everything when removing a page, just remove that page from the data
       // FIXME: this is getting called twice for some reason
-      $select2Input.on('select2:unselect', function (e) {
-        alert('removing');
-        e.stopPropagation();
+      $select2Input.off('select2:unselect').on('select2:unselect', function (e) {
+        _this3.processInput(false, e.params.data.text);
       });
-      $select2Input.on('select2:open', function (e) {
+      $select2Input.off('select2:open').on('select2:open', function (e) {
         if ($(e.target).val() && $(e.target).val().length === 10) {
           $('.select2-search__field').one('keyup', function () {
             var message = $.i18n('massviews-notice', 10, '<strong><a href=\'/massviews/\'>' + $.i18n('massviews') + '</a></strong>');
@@ -2361,7 +2358,6 @@ var PageViews = function (_mix$with) {
     /**
      * Calls parent setupProjectInput and updates the view if validations passed
      *   reverting to the old value if the new one is invalid
-     * @returns {null} nothing
      * @override
      */
 
@@ -2377,7 +2373,6 @@ var PageViews = function (_mix$with) {
     /**
      * General place to add page-wide listeners
      * @override
-     * @returns {null} - nothing
      */
 
   }, {
@@ -2393,17 +2388,21 @@ var PageViews = function (_mix$with) {
         _this5.sort = sortType;
         _this5.updateTable();
       });
+      $('.clear-pages').on('click', function () {
+        $('.clear-pages').hide();
+        _this5.resetView(true);
+        _this5.focusSelect2();
+      });
     }
 
     /**
      * Query the API for each page, building up the datasets and then calling renderData
      * @param {boolean} force - whether to force the chart to re-render, even if no params have changed
-     * @returns {null} - nothin
      */
 
   }, {
     key: 'processInput',
-    value: function processInput(force) {
+    value: function processInput(force, removedPage) {
       var _this6 = this;
 
       this.pushParams();
@@ -2416,6 +2415,7 @@ var PageViews = function (_mix$with) {
       this.params = location.search;
 
       var entities = $(config.select2Input).select2('val') || [];
+      console.log('processInput: ' + entities);
 
       if (!entities.length) {
         return this.resetView();
@@ -2430,20 +2430,32 @@ var PageViews = function (_mix$with) {
       this.destroyChart();
       this.startSpinny(); // show spinny and capture against fatal errors
 
-      // We've already gotten data about the intial set of pages
-      // This is because we need any page names given to be normalized when the app first loads
-      if (this.initialQuery) {
-        this.getPageViewsData(entities).done(function (xhrData) {
-          return _this6.updateChart(xhrData);
+      if (removedPage) {
+        // we've got the data already, just removed a single page so we'll remove that data
+        // and re-render the chart
+        this.outputData = this.outputData.filter(function (entry) {
+          return entry.label !== removedPage.descore();
         });
-        // set back to false so we get page and edit info for any newly entered pages
-        this.initialQuery = false;
+        this.outputData = this.outputData.map(function (entity) {
+          return Object.assign({}, entity, _this6.config.chartConfig[_this6.chartType].dataset(entity.color));
+        });
+        this.updateChart();
       } else {
-        this.getPageAndEditInfo(entities).then(function () {
-          _this6.getPageViewsData(entities).done(function (xhrData) {
+        // We've already gotten data about the intial set of pages
+        // This is because we need any page names given to be normalized when the app first loads
+        if (this.initialQuery) {
+          this.getPageViewsData(entities).done(function (xhrData) {
             return _this6.updateChart(xhrData);
           });
-        });
+          // set back to false so we get page and edit info for any newly entered pages
+          this.initialQuery = false;
+        } else {
+          this.getPageAndEditInfo(entities).then(function () {
+            _this6.getPageViewsData(entities).done(function (xhrData) {
+              return _this6.updateChart(xhrData);
+            });
+          });
+        }
       }
     }
   }, {
@@ -2465,7 +2477,7 @@ var PageViews = function (_mix$with) {
         });
         if (entry) {
           var monthName = _this7.daterangepicker.locale.monthNames[topviewsMonth.month()];
-          $('.single-page-ranking').html('\n          Ranked ' + entry.rank + ' of the\n          <a target=\'_blank\' href=\'' + _this7.getTopviewsURL(_this7.project + '.org') + '\'>most-viewed pages</a>\n          for ' + monthName + ' ' + topviewsMonth.year() + '\n        ');
+          $('.single-page-ranking').html('\n          Ranked ' + entry.rank + ' in the\n          <a target=\'_blank\' href=\'' + _this7.getTopviewsURL(_this7.project + '.org') + '\'>most-viewed pages</a>\n          for ' + monthName + ' ' + topviewsMonth.year() + '\n        ');
         }
       }).always(function () {
         $('.table-view').hide();
@@ -2584,13 +2596,21 @@ var PageViews = function (_mix$with) {
       var _this9 = this;
 
       var dfd = $.Deferred();
+      console.log('getPageAndEditInfo: ' + pages);
 
       this.getPageInfo(pages).done(function (data) {
         _this9.entityInfo = data;
         // use Object.keys(data) to get normalized page names
         _this9.getEditData(Object.keys(data)).done(function (editData) {
           for (var page in editData.pages) {
-            Object.assign(_this9.entityInfo[page.descore()], editData.pages[page]);
+            var pageData = editData.pages[page];
+
+            var protection = (_this9.entityInfo[page].protection || []).find(function (prot) {
+              return prot.type === 'edit';
+            });
+            pageData.protection = protection ? protection.level : $.i18n('none').toLowerCase();
+
+            Object.assign(_this9.entityInfo[page], editData.pages[page]);
           }
           dfd.resolve(_this9.entityInfo);
         }).fail(function () {
@@ -2761,7 +2781,6 @@ var ChartHelpers = function ChartHelpers(superclass) {
     /**
      * Set the default chart type or the one from localStorage, based on settings
      * @param {Number} [numDatasets] - number of datasets
-     * @returns {null} nothing
      */
 
 
@@ -2779,7 +2798,6 @@ var ChartHelpers = function ChartHelpers(superclass) {
 
       /**
        * Destroy previous chart, if needed.
-       * @returns {null} nothing
        */
 
     }, {
@@ -2794,7 +2812,6 @@ var ChartHelpers = function ChartHelpers(superclass) {
       /**
        * Exports current chart data to CSV format and loads it in a new tab
        * With the prepended data:text/csv this should cause the browser to download the data
-       * @returns {null} Nothing
        */
 
     }, {
@@ -2834,7 +2851,6 @@ var ChartHelpers = function ChartHelpers(superclass) {
 
       /**
        * Exports current chart data to JSON format and loads it in a new tab
-       * @returns {null} Nothing
        */
 
     }, {
@@ -2865,7 +2881,6 @@ var ChartHelpers = function ChartHelpers(superclass) {
 
       /**
        * Exports current data as PNG image, opening it in a new tab
-       * @returns {null} nothing
        */
 
     }, {
@@ -2915,15 +2930,14 @@ var ChartHelpers = function ChartHelpers(superclass) {
       /**
        * Get data formatted for Chart.js and the legend templates
        * @param {Array} datasets - as retrieved by getPageViewsData
+       * @param {Array} labels - corresponding labels for the datasets
        * @returns {object} - ready for chart rendering
        */
 
     }, {
       key: 'buildChartData',
-      value: function buildChartData(datasets) {
+      value: function buildChartData(datasets, labels) {
         var _this4 = this;
-
-        var labels = $(this.config.select2Input).val();
 
         /** preserve order of datasets due to async calls */
         return datasets.map(function (dataset, index) {
@@ -2953,6 +2967,7 @@ var ChartHelpers = function ChartHelpers(superclass) {
             color: color
           }, _this4.config.chartConfig[_this4.chartType].dataset(color), entityInfo);
 
+          // don't try to plot zeros on a logarithmic chart
           if (_this4.isLogarithmic()) {
             dataset.data = dataset.data.map(function (view) {
               return view || null;
@@ -3009,6 +3024,8 @@ var ChartHelpers = function ChartHelpers(superclass) {
           fatalErrors: [], // Unrecoverable JavaScript errors
           promises: []
         };
+
+        console.log('getPageViewsData: ' + entities);
 
         var makeRequest = function makeRequest(entity, index) {
           var startDate = _this5.daterangepicker.startDate.startOf('day'),
@@ -3142,7 +3159,6 @@ var ChartHelpers = function ChartHelpers(superclass) {
 
       /**
        * Print the chart!
-       * @returns {null} Nothing
        */
 
     }, {
@@ -3157,7 +3173,6 @@ var ChartHelpers = function ChartHelpers(superclass) {
       /**
        * Removes chart, messages, and resets site selections
        * @param {boolean} [select2] whether or not to clear the Select2 input
-       * @returns {null} nothing
        */
 
     }, {
@@ -3255,7 +3270,6 @@ var ChartHelpers = function ChartHelpers(superclass) {
 
       /**
        * sets up the daterange selector and adds listeners
-       * @returns {null} - nothing
        */
 
     }, {
@@ -3288,8 +3302,8 @@ var ChartHelpers = function ChartHelpers(superclass) {
 
       /**
        * Update the chart with data provided by processInput()
-       * @param {Object} xhrData - data as constructed by processInput()
-       * @returns {null} - nothin
+       * @param {Object} [xhrData] - data as constructed by processInput()
+       *   data is ommitted if we already have everything we need in this.outputData
        */
 
     }, {
@@ -3298,19 +3312,25 @@ var ChartHelpers = function ChartHelpers(superclass) {
         var _this7 = this;
 
         $('.chart-legend').html(''); // clear old chart legend
+        var entityNames = xhrData ? xhrData.entities : $(this.config.select2Input).val();
+        console.log('updateChart: ' + entityNames);
 
         // show pending error messages if present, exiting if fatal
-        if (this.showErrors(xhrData)) return;
+        if (xhrData && this.showErrors(xhrData)) return;
 
-        if (!xhrData.entities.length) {
+        if (!entityNames.length) {
           return this.stopSpinny();
-        } else if (xhrData.entities.length === 1) {
+        } else if (entityNames.length === 1) {
           $('.multi-page-chart-node').hide();
+          $('.clear-pages').hide();
         } else {
           $('.multi-page-chart-node').show();
+          $('.clear-pages').show();
         }
 
-        this.outputData = this.buildChartData(xhrData.datasets, xhrData.entities);
+        if (xhrData) {
+          this.outputData = this.buildChartData(xhrData.datasets, entityNames);
+        }
 
         if (this.autoLogDetection === 'true') {
           var shouldBeLogarithmic = this.shouldBeLogarithmic(this.outputData.map(function (set) {
@@ -3349,7 +3369,7 @@ var ChartHelpers = function ChartHelpers(superclass) {
           var context = $(this.config.chart)[0].getContext('2d');
 
           if (this.config.linearCharts.includes(this.chartType)) {
-            var linearData = { labels: xhrData.labels, datasets: this.outputData };
+            var linearData = { labels: this.getDateHeadings(), datasets: this.outputData };
 
             if (this.chartType === 'radar') {
               options.scale.ticks.beginAtZero = $('.begin-at-zero-option').is(':checked');
@@ -3845,7 +3865,6 @@ var Pv = function (_PvConfig) {
    * @param {String} [title] - will appear in bold and in front of the message
    * @param {Boolean} [dismissable] - whether or not to add a X
    *   that allows the user to dismiss the notice
-   * @returns {null} nothing
    */
 
 
@@ -3862,7 +3881,6 @@ var Pv = function (_PvConfig) {
     /**
      * Add site notice for invalid parameter
      * @param {String} param - name of parameter
-     * @returns {null} nothing
      */
 
   }, {
@@ -3961,7 +3979,6 @@ var Pv = function (_PvConfig) {
      * Force download of given data, or open in a new tab if HTML5 <a> download attribute is not supported
      * @param {String} data - Raw data prepended with data type, e.g. "data:text/csv;charset=utf-8,my data..."
      * @param {String} extension - the file extension to use
-     * @returns {null} Nothing
      */
 
   }, {
@@ -3987,7 +4004,6 @@ var Pv = function (_PvConfig) {
 
     /**
      * Fill in values within settings modal with what's in the session object
-     * @returns {null} nothing
      */
 
   }, {
@@ -4006,7 +4022,6 @@ var Pv = function (_PvConfig) {
 
     /**
      * Add focus to Select2 input field
-     * @returns {null} nothing
      */
 
   }, {
@@ -4050,7 +4065,9 @@ var Pv = function (_PvConfig) {
 
   }, {
     key: 'getDateHeadings',
-    value: function getDateHeadings(localized) {
+    value: function getDateHeadings() {
+      var localized = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
       var dateHeadings = [],
           endDate = moment(this.daterangepicker.endDate).add(1, 'd');
 
@@ -4712,15 +4729,26 @@ var Pv = function (_PvConfig) {
   }, {
     key: 'getPageInfo',
     value: function getPageInfo(pages) {
+      console.log('getPageInfo: ' + pages);
       var dfd = $.Deferred();
 
       return $.ajax({
         url: 'https://' + this.project + '.org/w/api.php?action=query&prop=info&inprop=protection|watchers' + ('&formatversion=2&format=json&titles=' + pages.join('|')),
         dataType: 'jsonp'
       }).then(function (data) {
+        // restore original order of pages, taking into account out any page names that were normalized
         var pageData = {};
-        data.query.pages.forEach(function (page) {
-          pageData[page.title] = page;
+        if (data.query.normalized) {
+          data.query.normalized.forEach(function (n) {
+            pages[pages.indexOf(n.from)] = n.to;
+          });
+        }
+        // http://localhost/pageviews/?project=pt.wikipedia.org&platform=all-access&agent=user&range=latest-20&pages=A|B|C|D|E|F|G|H|I|User:MusikBot
+        // FIXME: order is right but the colours in the line chart are still off
+        pages.forEach(function (page) {
+          pageData[page] = data.query.pages.find(function (p) {
+            return p.title === page;
+          });
         });
         return dfd.resolve(pageData);
       });
@@ -4768,7 +4796,6 @@ var Pv = function (_PvConfig) {
     /**
      * Simple metric to see how many use it (pageviews of the pageview, a meta-pageview, if you will :)
      * @param {string} app - one of: pv, lv, tv, sv, ms
-     * @return {null} nothing
      */
 
   }, {
@@ -4856,7 +4883,6 @@ var Pv = function (_PvConfig) {
     /**
      * Removes all Select2 related stuff then adds it back
      * Also might result in the chart being re-rendered
-     * @returns {null} nothing
      */
 
   }, {
@@ -4889,7 +4915,6 @@ var Pv = function (_PvConfig) {
      *
      * @param {string} key - settings key
      * @param {string|boolean} value - value to save
-     * @returns {null} nothing
      */
 
   }, {
@@ -4902,7 +4927,6 @@ var Pv = function (_PvConfig) {
     /**
      * Save the selected settings within the settings modal
      * Prefer this implementation over a large library like serializeObject or serializeJSON
-     * @returns {null} nothing
      */
 
   }, {
@@ -4957,12 +4981,13 @@ var Pv = function (_PvConfig) {
     value: function setSelect2Defaults(items) {
       var _this5 = this;
 
+      console.log('setSelect2Defaults: ' + items);
       items.forEach(function (item) {
         var escapedText = $('<div>').text(item).html();
         $('<option>' + escapedText + '</option>').appendTo(_this5.config.select2Input);
       });
       $(this.config.select2Input).select2('val', items);
-      $(this.config.select2Input).select2('close');
+      $(this.config.select2Input).trigger('select2:select');
 
       return items;
     }
@@ -5050,7 +5075,6 @@ var Pv = function (_PvConfig) {
     /**
      * Cross-application listeners
      * Each app has it's own setupListeners() that should call super.setupListeners()
-     * @return {null} nothing
      */
 
   }, {
@@ -5078,7 +5102,6 @@ var Pv = function (_PvConfig) {
 
     /**
      * Set values of form based on localStorage or defaults, add listeners
-     * @returns {null} nothing
      */
 
   }, {
@@ -5094,7 +5117,6 @@ var Pv = function (_PvConfig) {
 
     /**
      * sets up the daterange selector and adds listeners
-     * @returns {null} - nothing
      */
 
   }, {
@@ -5223,7 +5245,6 @@ var Pv = function (_PvConfig) {
 
     /**
      * Add the loading indicator class and set the safeguard timeout
-     * @returns {null} nothing
      */
 
   }, {
@@ -5242,7 +5263,6 @@ var Pv = function (_PvConfig) {
 
     /**
      * Remove loading indicator class and clear the safeguard timeout
-     * @returns {null} nothing
      */
 
   }, {
@@ -5262,6 +5282,7 @@ var Pv = function (_PvConfig) {
   }, {
     key: 'underscorePageNames',
     value: function underscorePageNames(pages) {
+      console.log('underscorePageNames: ' + pages);
       return pages.map(function (page) {
         return decodeURIComponent(page).score();
       });
@@ -5269,7 +5290,6 @@ var Pv = function (_PvConfig) {
 
     /**
      * Update hrefs of inter-app links to load currently selected project
-     * @return {null} nuttin'
      */
 
   }, {
@@ -6718,31 +6738,29 @@ var templates = {
     };
 
     // map out edit protection level for each entity
-    var entities = scope.outputData.map(function (entity) {
-      var protection = (entity.protection || []).find(function (prot) {
-        return prot.type === 'edit';
-      });
-      entity.protection = protection ? protection.level : $.i18n('none').toLowerCase();
-      return entity;
-    });
+    // const entities = scope.outputData.map(entity => {
+    //   const protection = (entity.protection || []).find(prot => prot.type === 'edit');
+    //   entity.protection = protection ? protection.level : $.i18n('none').toLowerCase();
+    //   return entity;
+    // });
 
     if (scope.outputData.length === 1) {
-      return dataList(entities[0]);
+      return dataList(scope.outputData[0]);
     }
 
-    var sum = entities.reduce(function (a, b) {
+    var sum = scope.outputData.reduce(function (a, b) {
       return a + b.sum;
     }, 0);
     var totals = {
       sum: sum,
-      average: Math.round(sum / entities.length),
-      num_edits: entities.reduce(function (a, b) {
+      average: Math.round(sum / scope.outputData.length),
+      num_edits: scope.outputData.reduce(function (a, b) {
         return a + b.num_edits;
       }, 0),
-      num_users: entities.reduce(function (a, b) {
+      num_users: scope.outputData.reduce(function (a, b) {
         return a + b.num_users;
       }, 0),
-      watchers: entities.reduce(function (a, b) {
+      watchers: scope.outputData.reduce(function (a, b) {
         return a + b.watchers || 0;
       }, 0)
     };

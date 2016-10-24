@@ -21,7 +21,6 @@ class MetaViews extends mix(Pv).with(ChartHelpers) {
   /**
    * Initialize the application.
    * Called in `pv.js` after translations have loaded
-   * @return {null} Nothing
    */
   initialize() {
     this.setupDateRangeSelector();
@@ -84,7 +83,6 @@ class MetaViews extends mix(Pv).with(ChartHelpers) {
   /**
    * Parses the URL query string and sets all the inputs accordingly
    * Should only be called on initial page load, until we decide to support pop states (probably never)
-   * @returns {null} nothing
    */
   popParams() {
     this.startSpinny();
@@ -128,7 +126,6 @@ class MetaViews extends mix(Pv).with(ChartHelpers) {
   /**
    * Push relevant class properties to the query string
    * Called whenever we go to update the chart
-   * @returns {null} nothing
    */
   pushParams() {
     const tools = $(this.config.select2Input).select2('val') || [];
@@ -144,7 +141,6 @@ class MetaViews extends mix(Pv).with(ChartHelpers) {
 
   /**
    * Sets up the tool selector and adds listener to update chart
-   * @returns {null} - nothing
    */
   setupSelect2() {
     const select2Input = $(this.config.select2Input);
@@ -183,7 +179,6 @@ class MetaViews extends mix(Pv).with(ChartHelpers) {
   /**
    * General place to add page-wide listeners
    * @override
-   * @returns {null} - nothing
    */
   setupListeners() {
     super.setupListeners();
@@ -192,7 +187,6 @@ class MetaViews extends mix(Pv).with(ChartHelpers) {
   /**
    * Query the API for each tool, building up the datasets and then calling renderData
    * @param {boolean} force - whether to force the chart to re-render, even if no params have changed
-   * @returns {null} - nothin
    */
   processInput(force) {
     this.pushParams();

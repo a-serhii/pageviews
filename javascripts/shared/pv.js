@@ -106,7 +106,6 @@ class Pv extends PvConfig {
    * @param {String} [title] - will appear in bold and in front of the message
    * @param {Boolean} [dismissable] - whether or not to add a X
    *   that allows the user to dismiss the notice
-   * @returns {null} nothing
    */
   addSiteNotice(level, message, title, dismissable) {
     title = title ? `<strong>${title}</strong> ` : '';
@@ -123,7 +122,6 @@ class Pv extends PvConfig {
   /**
    * Add site notice for invalid parameter
    * @param {String} param - name of parameter
-   * @returns {null} nothing
    */
   addInvalidParamNotice(param) {
     const docLink = `<a href='/${this.app}/url_structure'>${$.i18n('documentation')}</a>`;
@@ -231,7 +229,6 @@ class Pv extends PvConfig {
    * Force download of given data, or open in a new tab if HTML5 <a> download attribute is not supported
    * @param {String} data - Raw data prepended with data type, e.g. "data:text/csv;charset=utf-8,my data..."
    * @param {String} extension - the file extension to use
-   * @returns {null} Nothing
    */
   downloadData(data, extension) {
     const encodedUri = encodeURI(data);
@@ -254,7 +251,6 @@ class Pv extends PvConfig {
 
   /**
    * Fill in values within settings modal with what's in the session object
-   * @returns {null} nothing
    */
   fillInSettings() {
     $.each($('#settings-modal input'), (index, el) => {
@@ -268,7 +264,6 @@ class Pv extends PvConfig {
 
   /**
    * Add focus to Select2 input field
-   * @returns {null} nothing
    */
   focusSelect2() {
     $('.select2-selection').trigger('click');
@@ -302,7 +297,7 @@ class Pv extends PvConfig {
    * @param {boolean} localized - whether the dates should be localized per browser language
    * @returns {Array} the date headings as strings
    */
-  getDateHeadings(localized) {
+  getDateHeadings(localized = true) {
     const dateHeadings = [],
       endDate = moment(this.daterangepicker.endDate).add(1, 'd');
 
@@ -908,6 +903,7 @@ class Pv extends PvConfig {
    * @returns {Deferred} promise with data fetched from API
    */
   getPageInfo(pages) {
+    console.log(`getPageInfo: ${pages}`);
     let dfd = $.Deferred();
 
     return $.ajax({
@@ -915,9 +911,17 @@ class Pv extends PvConfig {
         `&formatversion=2&format=json&titles=${pages.join('|')}`,
       dataType: 'jsonp'
     }).then(data => {
+      // restore original order of pages, taking into account out any page names that were normalized
       let pageData = {};
-      data.query.pages.forEach(page => {
-        pageData[page.title] = page;
+      if (data.query.normalized) {
+        data.query.normalized.forEach(n => {
+          pages[pages.indexOf(n.from)] = n.to;
+        });
+      }
+      // http://localhost/pageviews/?project=pt.wikipedia.org&platform=all-access&agent=user&range=latest-20&pages=A|B|C|D|E|F|G|H|I|User:MusikBot
+      // FIXME: order is right but the colours in the line chart are still off
+      pages.forEach(page => {
+        pageData[page] = data.query.pages.find(p => p.title === page);
       });
       return dfd.resolve(pageData);
     });
@@ -957,7 +961,6 @@ class Pv extends PvConfig {
   /**
    * Simple metric to see how many use it (pageviews of the pageview, a meta-pageview, if you will :)
    * @param {string} app - one of: pv, lv, tv, sv, ms
-   * @return {null} nothing
    */
   patchUsage(app) {
     if (metaRoot) {
@@ -1033,7 +1036,6 @@ class Pv extends PvConfig {
   /**
    * Removes all Select2 related stuff then adds it back
    * Also might result in the chart being re-rendered
-   * @returns {null} nothing
    */
   resetSelect2() {
     const select2Input = $(this.config.select2Input);
@@ -1060,7 +1062,6 @@ class Pv extends PvConfig {
    *
    * @param {string} key - settings key
    * @param {string|boolean} value - value to save
-   * @returns {null} nothing
    */
   saveSetting(key, value) {
     this[key] = value;
@@ -1070,7 +1071,6 @@ class Pv extends PvConfig {
   /**
    * Save the selected settings within the settings modal
    * Prefer this implementation over a large library like serializeObject or serializeJSON
-   * @returns {null} nothing
    */
   saveSettings() {
     /** track if we're changing to no_autocomplete mode */
@@ -1115,12 +1115,13 @@ class Pv extends PvConfig {
    * @returns {array} - untouched array of items
    */
   setSelect2Defaults(items) {
+    console.log(`setSelect2Defaults: ${items}`);
     items.forEach(item => {
       const escapedText = $('<div>').text(item).html();
       $('<option>' + escapedText + '</option>').appendTo(this.config.select2Input);
     });
     $(this.config.select2Input).select2('val', items);
-    $(this.config.select2Input).select2('close');
+    $(this.config.select2Input).trigger('select2:select');
 
     return items;
   }
@@ -1186,7 +1187,6 @@ class Pv extends PvConfig {
   /**
    * Cross-application listeners
    * Each app has it's own setupListeners() that should call super.setupListeners()
-   * @return {null} nothing
    */
   setupListeners() {
     /** prevent browser's default behaviour for any link with href="#" */
@@ -1205,7 +1205,6 @@ class Pv extends PvConfig {
 
   /**
    * Set values of form based on localStorage or defaults, add listeners
-   * @returns {null} nothing
    */
   setupSettingsModal() {
     /** fill in values, everything is either a checkbox or radio */
@@ -1218,7 +1217,6 @@ class Pv extends PvConfig {
 
   /**
    * sets up the daterange selector and adds listeners
-   * @returns {null} - nothing
    */
   setupDateRangeSelector() {
     const dateRangeSelector = $(this.config.dateRangeSelector);
@@ -1383,7 +1381,6 @@ class Pv extends PvConfig {
 
   /**
    * Add the loading indicator class and set the safeguard timeout
-   * @returns {null} nothing
    */
   startSpinny() {
     $('.chart-container').addClass('loading');
@@ -1400,7 +1397,6 @@ class Pv extends PvConfig {
 
   /**
    * Remove loading indicator class and clear the safeguard timeout
-   * @returns {null} nothing
    */
   stopSpinny() {
     $('.chart-container').removeClass('loading');
@@ -1414,6 +1410,7 @@ class Pv extends PvConfig {
    * @returns {array} page names with underscores
    */
   underscorePageNames(pages) {
+    console.log(`underscorePageNames: ${pages}`);
     return pages.map(page => {
       return decodeURIComponent(page).score();
     });
@@ -1421,7 +1418,6 @@ class Pv extends PvConfig {
 
   /**
    * Update hrefs of inter-app links to load currently selected project
-   * @return {null} nuttin'
    */
   updateInterAppLinks() {
     $('.interapp-link').each((i, link) => {

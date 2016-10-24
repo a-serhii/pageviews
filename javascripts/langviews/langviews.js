@@ -26,7 +26,6 @@ class LangViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
   /**
    * Initialize the application.
    * Called in `pv.js` after translations have loaded
-   * @return {null} Nothing
    */
   initialize() {
     this.assignDefaults();
@@ -42,7 +41,6 @@ class LangViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
   /**
    * Add general event listeners
    * @override
-   * @returns {null} nothing
    */
   setupListeners() {
     super.setupListeners();
@@ -74,7 +72,6 @@ class LangViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
   /**
    * Copy necessary default values to class instance.
    * Called when the view is reset.
-   * @return {null} Nothing
    */
   assignDefaults() {
     ['sort', 'direction', 'outputData', 'hadFailure', 'total', 'view'].forEach(defaultKey => {
@@ -274,7 +271,6 @@ class LangViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
   /**
    * Push relevant class properties to the query string
    * @param  {Boolean} clear - wheter to clear the query string entirely
-   * @return {null} nothing
    */
   pushParams(clear = false) {
     if (!window.history || !window.history.replaceState) return;
@@ -303,7 +299,6 @@ class LangViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
   /**
    * Render list of langviews into view
    * @override
-   * @returns {null} nothing
    */
   renderData() {
     super.renderData(sortedDatasets => {
@@ -507,7 +502,6 @@ class LangViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
   /**
    * Parses the URL query string and sets all the inputs accordingly
    * Should only be called on initial page load, until we decide to support pop states (probably never)
-   * @returns {null} nothing
    */
   popParams() {
     let params = this.validateParams(
@@ -554,7 +548,6 @@ class LangViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
    *   styling the document based on a 'state'
    * @param {String} state - class to be added;
    *   should be one of ['initial', 'processing', 'complete']
-   * @returns {null} nothing
    */
   setState(state) {
     $('main').removeClass(this.config.formStates.join(' ')).addClass(state);
@@ -590,7 +583,6 @@ class LangViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
   /**
    * Process the langviews for the article and options entered
    * Called when submitting the form
-   * @return {null} nothing
    */
   processInput() {
     const page = $(this.config.sourceInput).val();
@@ -640,7 +632,6 @@ class LangViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
 
   /**
    * Setup typeahead on the article input, killing the prevous instance if present
-   * @return {null} Nothing
    */
   setupSourceInput() {
     if (this.typeahead) this.typeahead.destroy();
@@ -670,7 +661,6 @@ class LangViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
   /**
    * Calls parent setupProjectInput and updates the view if validations passed
    *   reverting to the old value if the new one is invalid
-   * @returns {null} nothing
    * @override
    */
   validateProject() {
@@ -687,7 +677,6 @@ class LangViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
    * Exports current lang data to CSV format and loads it in a new tab
    * With the prepended data:text/csv this should cause the browser to download the data
    * @override
-   * @returns {null} nothing
    */
   exportCSV() {
     let csvContent = `data:text/csv;charset=utf-8,Language,Title,Badges,${this.getDateHeadings(false).join(',')}\n`;

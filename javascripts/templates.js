@@ -73,23 +73,23 @@ const templates = {
     };
 
     // map out edit protection level for each entity
-    const entities = scope.outputData.map(entity => {
-      const protection = (entity.protection || []).find(prot => prot.type === 'edit');
-      entity.protection = protection ? protection.level : $.i18n('none').toLowerCase();
-      return entity;
-    });
+    // const entities = scope.outputData.map(entity => {
+    //   const protection = (entity.protection || []).find(prot => prot.type === 'edit');
+    //   entity.protection = protection ? protection.level : $.i18n('none').toLowerCase();
+    //   return entity;
+    // });
 
     if (scope.outputData.length === 1) {
-      return dataList(entities[0]);
+      return dataList(scope.outputData[0]);
     }
 
-    const sum = entities.reduce((a,b) => a + b.sum, 0);
+    const sum = scope.outputData.reduce((a,b) => a + b.sum, 0);
     const totals = {
       sum,
-      average: Math.round(sum / entities.length),
-      num_edits: entities.reduce((a, b) => a + b.num_edits, 0),
-      num_users: entities.reduce((a, b) => a + b.num_users, 0),
-      watchers: entities.reduce((a, b) => a + b.watchers || 0, 0)
+      average: Math.round(sum / scope.outputData.length),
+      num_edits: scope.outputData.reduce((a, b) => a + b.num_edits, 0),
+      num_users: scope.outputData.reduce((a, b) => a + b.num_users, 0),
+      watchers: scope.outputData.reduce((a, b) => a + b.watchers || 0, 0)
     };
 
     return dataList(totals, true);

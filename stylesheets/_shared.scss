@@ -270,6 +270,15 @@ footer {
   &:hover {
     background: transparent !important;
     border-color: transparent !important;
+
+    &::after {
+      border: solid 2px $gray;
+      bottom: 0;
+      content: '';
+      left: 0;
+      position: absolute;
+      width: 100%;
+    }
   }
 }
 
