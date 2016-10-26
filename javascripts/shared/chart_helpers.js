@@ -218,7 +218,6 @@ const ChartHelpers = superclass => class extends superclass {
    * @returns {object} - ready for chart rendering
    */
   buildChartData(datasets, labels) {
-    /** preserve order of datasets due to async calls */
     return datasets.map((dataset, index) => {
       /** Build the article's dataset. */
       const values = dataset.map(elem => this.isPageviews() ? elem.views : elem.devices),
