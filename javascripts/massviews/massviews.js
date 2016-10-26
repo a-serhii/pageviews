@@ -18,6 +18,10 @@ const ListHelpers = require('../shared/list_helpers');
 
 /** Main MassViews class */
 class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
+  /**
+   * set instance variables and boot the app via pv.constructor
+   * @override
+   */
   constructor() {
     super(config);
     this.app = 'massviews';
@@ -116,7 +120,7 @@ class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
 
   /**
    * Get the base project name (without language and the .org)
-   * @returns {boolean} projectname
+   * @returns {string} project name
    */
   get baseProject() {
     return this.project.split('.')[1];
@@ -168,7 +172,8 @@ class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
 
   /**
    * Push relevant class properties to the query string
-   * @param  {Boolean} clear - wheter to clear the query string entirely
+   * @param {Boolean} clear - wheter to clear the query string entirely
+   * @returns {null}
    */
   pushParams(clear = false) {
     if (!window.history || !window.history.replaceState) return;
@@ -450,10 +455,20 @@ class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
     return this.outputData;
   }
 
+  /**
+   * Get a URL for the page pile with given ID
+   * @param  {String|Number} id - ID of the PagePile
+   * @return {String} - the URL
+   */
   getPileURL(id) {
     return `http://tools.wmflabs.org/pagepile/api.php?action=get_data&id=${id}`;
   }
 
+  /**
+   * Get a link to the page pile with given ID
+   * @param  {String|Number} id - ID of the PagePile
+   * @return {String} - markup
+   */
   getPileLink(id) {
     return `<a href='${this.getPileURL(id)}' target='_blank'>Page Pile ${id}</a>`;
   }
@@ -618,7 +633,7 @@ class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
    * @param {String} [errorMessage] - optional error message to show retrieved from API
    */
   apiErrorReset(apiName, errorMessage) {
-    return this.setState('initial', () => {
+    this.setState('initial', () => {
       let message;
       if (errorMessage) {
         message = `${$.i18n('api-error', apiName)}: ${errorMessage}`;
@@ -629,6 +644,11 @@ class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
     });
   }
 
+  /**
+   * Process the input as the ID of a page pile
+   * @param  {Function} cb - called after processing is complete,
+   *   given the label and link for the PagePile and the pageviews data
+   */
   processPagePile(cb) {
     const pileId = $(this.config.sourceInput).val();
 
@@ -681,6 +701,13 @@ class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
     });
   }
 
+  /**
+   * Get pageviews data of given category in given project
+   * @param {String} project - project name
+   * @param {String} category - category name
+   * @param {Function} cb - called after processing is complete,
+   *   given the label and link for the category and the pageviews data
+   */
   processCategory(project, category, cb) {
     let requestData = {
       list: 'categorymembers',
@@ -745,6 +772,11 @@ class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
     });
   }
 
+  /**
+   * Process the input as a hashtag
+   * @param {Function} cb - called after processing is complete,
+   *   given the label and link for the hashtag and the pageviews data
+   */
   processHashtag(cb) {
     const hashtag = $(this.config.sourceInput).val().replace(/^#/, ''),
       hashTagLink = `<a target="_blank" href="http://tools.wmflabs.org/hashtags/search/${hashtag}">#${hashtag.escape()}</a>`;
@@ -880,6 +912,13 @@ class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
     return dfd;
   }
 
+  /**
+   * Get pageviews for subpages of given page and project
+   * @param {String} project - project name
+   * @param {String} targetPage - name of parent wiki page
+   * @param {Function} cb - called after processing is complete,
+   *   given the label and link for the page and the pageviews data
+   */
   processSubpages(project, targetPage, cb) {
     // determine what namespace the targetPage is in
     const descoredTargetPage = targetPage.descore();
@@ -914,7 +953,7 @@ class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
 
     const pageLink = this.getPageLink(targetPage, project);
 
-    $.when(...promises).done((data, data2) => {
+    $.whenAll(...promises).done((data, data2) => {
       // show errors, if any
       const errors = [data, data2].filter(resp => !!resp.error);
       if (errors.length) {
@@ -964,6 +1003,13 @@ class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
     });
   }
 
+  /**
+   * Get pageviews of pages that transclude the given template for given project
+   * @param {String} project
+   * @param {String} template - template name, can be any wiki page
+   * @param {Function} cb - called after processing is complete,
+   *   given the label and link for the template and the pageviews data
+   */
   processTemplate(project, template, cb) {
     let requestData = {
       prop: 'transcludedin',
@@ -1012,6 +1058,13 @@ class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
     });
   }
 
+  /**
+   * Get pageviews of pages linked on the given page on given project
+   * @param {String} project
+   * @param {String} page - page name
+   * @param {Function} cb - called after processing is complete,
+   *   given the label and link for the page and the pageviews data
+   */
   processWikiPage(project, page, cb) {
     let requestData = {
       pllimit: 500,
@@ -1059,6 +1112,11 @@ class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
     });
   }
 
+  /**
+   * Process the input as the ID of a Quarry dataset, getting the pageviews of results in the 'page_title' column
+   * @param {Function} cb - called after processing is complete,
+   *   given the label and link for the Quarry and the pageviews data
+   */
   processQuarry(cb) {
     const project = $('.project-input').val(),
       id = $(this.config.sourceInput).val();
@@ -1095,6 +1153,12 @@ class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
     });
   }
 
+  /**
+   * Process the input as the a URL pattern for an external link,
+   *   getting the pageviews of results from list=exturlusage
+   * @param {Function} cb - called after processing is complete,
+   *   given the label and link for the link pattern at Special:LinkSearch and the pageviews data
+   */
   processExternalLink(cb) {
     const project = $('.project-input').val(),
       link = $(this.config.sourceInput).val();
@@ -1176,6 +1240,12 @@ class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
     return false;
   }
 
+  /**
+   * Get subject pages of given talk pages in given namespace
+   * @param  {Array} pages - page names
+   * @param  {Object} namespaces - as returned by the siteInfo
+   * @return {Array} - mapped page names
+   */
   mapCategoryPageNames(pages, namespaces) {
     let pageNames = [];
 
@@ -1195,6 +1265,7 @@ class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
   /**
    * Process the massviews for the given source and options entered
    * Called when submitting the form
+   * @return {null}
    */
   processInput() {
     this.setState('processing');

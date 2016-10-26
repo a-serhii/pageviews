@@ -40,10 +40,19 @@ Array.prototype.unique = function() {
 // Improve syntax to emulate mixins in ES6
 window.mix = superclass => new MixinBuilder(superclass);
 class MixinBuilder {
+  /**
+   * set super class instance variable
+   * @param  {class} superclass
+   */
   constructor(superclass) {
     this.superclass = superclass;
   }
 
+  /**
+   * blend given classes with current superclass
+   * @param  {...class} mixins
+   * @returns {Array} classes
+   */
   with(...mixins) {
     return mixins.reduce((c, mixin) => mixin(c), this.superclass);
   }

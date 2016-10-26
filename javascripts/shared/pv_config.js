@@ -13,6 +13,7 @@ const siteDomains = Object.keys(siteMap).map(key => siteMap[key]);
  * Some properties may be overriden by app-specific configs
  */
 class PvConfig {
+  /** set instance variable (config), also defining any private methods */
   constructor() {
     let self = this;
     const formatXAxisTick = value => {
@@ -229,6 +230,10 @@ class PvConfig {
     };
   }
 
+  /**
+   * Get config for tooltips shown on linear charts, used by Chart.js
+   * @return {Object}
+   */
   get linearTooltips() {
     return {
       mode: 'label',
@@ -248,6 +253,10 @@ class PvConfig {
     };
   }
 
+  /**
+   * Get config for tooltips shown on circular charts, used by Chart.js
+   * @return {Object}
+   */
   get circularTooltips() {
     return {
       callbacks: {

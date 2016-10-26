@@ -11,6 +11,11 @@
  * @returns {null} class extending superclass
  */
 const ChartHelpers = superclass => class extends superclass {
+  /**
+   * Called from pv.constructor, setting common instance variables and
+   *   initial set up for chart-related apps
+   * @param {Object} appConfig - as defined in the app's config.js
+   */
   constructor(appConfig) {
     super(appConfig);
 
@@ -185,15 +190,15 @@ const ChartHelpers = superclass => class extends superclass {
     /** Extract the dates that are already in the timeseries */
     let alreadyThere = {};
     data.items.forEach(elem => {
-      let date = moment(elem.timestamp, this.config.timestampFormat);
+      let date = moment(elem.timestamp, this.config.timestampFormat).format('YYYYMMDD');
       alreadyThere[date] = elem;
     });
     data.items = [];
 
     /** Reconstruct with zeros instead of nulls */
     for (let date = moment(startDate); date <= endDate; date.add(1, 'd')) {
-      if (alreadyThere[date]) {
-        data.items.push(alreadyThere[date]);
+      if (alreadyThere[date.format('YYYYMMDD')]) {
+        data.items.push(alreadyThere[date.format('YYYYMMDD')]);
       } else {
         const edgeCase = date.isSame(this.config.maxDate) || date.isSame(moment(this.config.maxDate).subtract(1, 'days'));
         data.items.push({
@@ -447,7 +452,6 @@ const ChartHelpers = superclass => class extends superclass {
 
   /**
    * Attempt to fine-tune the pointer detection spacing based on how cluttered the chart is
-   * @returns {Number} radius
    */
   setChartPointDetectionRadius() {
     if (this.chartType !== 'line') return;
@@ -533,6 +537,7 @@ const ChartHelpers = superclass => class extends superclass {
    * Update the chart with data provided by processInput()
    * @param {Object} [xhrData] - data as constructed by processInput()
    *   data is ommitted if we already have everything we need in this.outputData
+   * @returns {null}
    */
   updateChart(xhrData) {
     $('.chart-legend').html(''); // clear old chart legend

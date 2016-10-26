@@ -608,6 +608,13 @@ footer {
 .interapp-link:hover {
   background: transparent !important;
   border-color: transparent !important; }
+  .interapp-link:hover::after {
+    border: solid 2px #ccc;
+    bottom: 0;
+    content: '';
+    left: 0;
+    position: absolute;
+    width: 100%; }
 
 .list-group-item {
   background: rgba(255, 255, 255, 0.5); }

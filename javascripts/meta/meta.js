@@ -12,6 +12,10 @@ const ChartHelpers = require('../shared/chart_helpers');
 
 /** Main MetaViews class */
 class MetaViews extends mix(Pv).with(ChartHelpers) {
+  /**
+   * set instance variables and boot the app via pv.constructor
+   * @override
+   */
   constructor() {
     super(config);
     this.app = 'metaviews';
@@ -187,6 +191,7 @@ class MetaViews extends mix(Pv).with(ChartHelpers) {
   /**
    * Query the API for each tool, building up the datasets and then calling renderData
    * @param {boolean} force - whether to force the chart to re-render, even if no params have changed
+   * @return {null}
    */
   processInput(force) {
     this.pushParams();

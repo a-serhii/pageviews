@@ -18,6 +18,10 @@ const ListHelpers = require('../shared/list_helpers');
 
 /** Main LangViews class */
 class LangViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
+  /**
+   * set instance variables and initial setup in pv.constructor
+   * @override
+   */
   constructor() {
     super(config);
     this.app = 'langviews';
@@ -215,13 +219,14 @@ class LangViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
 
   /**
    * Get the base project name (without language and the .org)
-   * @returns {boolean} projectname
+   * @returns {string} project name
    */
   get baseProject() {
     return this.project.split('.')[1];
   }
 
   /**
+   * Get the instance of the Typeahead plugin
    * @returns {Typeahead} instance
    */
   get typeahead() {
@@ -270,7 +275,8 @@ class LangViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
 
   /**
    * Push relevant class properties to the query string
-   * @param  {Boolean} clear - wheter to clear the query string entirely
+   * @param {Boolean} clear - wheter to clear the query string entirely
+   * @return {null}
    */
   pushParams(clear = false) {
     if (!window.history || !window.history.replaceState) return;
@@ -583,6 +589,7 @@ class LangViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
   /**
    * Process the langviews for the article and options entered
    * Called when submitting the form
+   * @returns {null}
    */
   processInput() {
     const page = $(this.config.sourceInput).val();

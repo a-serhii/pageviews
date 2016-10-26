@@ -12,6 +12,10 @@ const ChartHelpers = require('./shared/chart_helpers');
 
 /** Main PageViews class */
 class PageViews extends mix(Pv).with(ChartHelpers) {
+  /**
+   * Set instance variables and boot the app via pv.constructor
+   * @override
+   */
   constructor() {
     super(config);
     this.app = 'pageviews';
@@ -364,7 +368,9 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
 
   /**
    * Query the API for each page, building up the datasets and then calling renderData
-   * @param {boolean} force - whether to force the chart to re-render, even if no params have changed
+   * @param {boolean} [force] - whether to force the chart to re-render, even if no params have changed
+   * @param {string} [removedPage] - page that was just removed via Select2, supplied by select2:unselect handler
+   * @return {null}
    */
   processInput(force, removedPage) {
     this.pushParams();
@@ -400,21 +406,22 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
         return Object.assign({}, entity, this.config.chartConfig[this.chartType].dataset(entity.color));
       });
       this.updateChart();
-    } else {
+    } else if (this.initialQuery) {
       // We've already gotten data about the intial set of pages
       // This is because we need any page names given to be normalized when the app first loads
-      if (this.initialQuery) {
+      this.getPageViewsData(entities).done(xhrData => this.updateChart(xhrData));
+      // set back to false so we get page and edit info for any newly entered pages
+      this.initialQuery = false;
+    } else {
+      this.getPageAndEditInfo(entities).then(() => {
         this.getPageViewsData(entities).done(xhrData => this.updateChart(xhrData));
-        // set back to false so we get page and edit info for any newly entered pages
-        this.initialQuery = false;
-      } else {
-        this.getPageAndEditInfo(entities).then(() => {
-          this.getPageViewsData(entities).done(xhrData => this.updateChart(xhrData));
-        });
-      }
+      });
     }
   }
 
+  /**
+   * Show info below the chart when there is only one page being queried
+   */
   showSinglePageLegend() {
     const page = this.outputData[0];
     const topviewsMonth = moment().subtract(1, 'month').subtract(2, 'days');
@@ -449,6 +456,10 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
     });
   }
 
+  /**
+   * Update the page comparison table, shown below the chart
+   * @return {null}
+   */
   updateTable() {
     if (this.outputData.length === 1) {
       return this.showSinglePageLegend();

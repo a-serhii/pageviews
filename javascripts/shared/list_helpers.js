@@ -11,6 +11,11 @@
  * @returns {null} class extending superclass
  */
 const ListHelpers = superclass => class extends superclass {
+  /**
+   * Called from pv.constructor, setting common instance variables and
+   *   initial set up for list-related apps
+   * @param {Object} appConfig - as defined in the app's config.js
+   */
   constructor(appConfig) {
     super(appConfig);
   }
@@ -86,8 +91,8 @@ const ListHelpers = superclass => class extends superclass {
    * @param {String} project - base project, e.g. en.wikipedia.org
    * @param {String} page - page name
    * @returns {String} URL
+   * FIXME: should include agent and platform, and use special ranges as currently specified
    */
-  // FIXME: should include agent and platform, and use special ranges as currently specified
   getPageviewsURL(project, page) {
     let startDate = moment(this.daterangepicker.startDate),
       endDate = moment(this.daterangepicker.endDate);
@@ -250,6 +255,7 @@ const ListHelpers = superclass => class extends superclass {
    * Set value of progress bar
    * @param  {Number} value - current iteration
    * @param  {Number} total - total number of iterations
+   * @return {null}
    */
   updateProgressBar(value, total) {
     if (!total) {

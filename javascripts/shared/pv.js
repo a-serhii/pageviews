@@ -15,6 +15,11 @@ const siteDomains = Object.keys(siteMap).map(key => siteMap[key]);
 
 /** Pv class, contains code amongst all apps (Pageviews, Topviews, Langviews, Siteviews, Massviews, Redirect Views) */
 class Pv extends PvConfig {
+  /**
+   * Main constructor for each app, giving way to the parent constructor in list_helpers or chart_helpers
+   * @param {Object} appConfig - as defined in the app's config.js
+   * @override
+   */
   constructor(appConfig) {
     super(appConfig);
 
@@ -188,10 +193,9 @@ class Pv extends PvConfig {
     return true;
   }
 
-  clearSiteNotices() {
-    $('.site-notice').html('');
-  }
-
+  /**
+   * Clear inline messages used to show non-critical errors
+   */
   clearMessages() {
     $('.message-container').html('');
   }
@@ -284,6 +288,11 @@ class Pv extends PvConfig {
     }
   }
 
+  /**
+   * show every other number in the y-axis, called from PvConfig
+   * @param  {Number} num - numerical value
+   * @return {String|null} formatted number or null if an even number
+   */
   formatYAxisNumber(num) {
     if (num % 1 === 0) {
       return this.formatNumber(num);
@@ -356,8 +365,8 @@ class Pv extends PvConfig {
 
   /**
    * Get the wiki URL given the page name
-   *
    * @param {string} page - page name
+   * @param {string} [project] - project, or this.project (for chart-based apps)
    * @returns {string} URL for the page
    */
   getPageURL(page, project = this.project) {
@@ -385,6 +394,10 @@ class Pv extends PvConfig {
     return project ? project.toLowerCase().replace(/.org$/, '') : null;
   }
 
+  /**
+   * get date format for the browser's locale
+   * @return {String} format to be passed to moment.format()
+   */
   getLocaleDateString() {
     if (!navigator.language) {
       return this.config.defaults.dateFormat;
@@ -1309,6 +1322,10 @@ class Pv extends PvConfig {
     });
   }
 
+  /**
+   * Loop through given errors and show them to the user, also creating a paste on phabricator
+   * @param  {Array} errors - list of error messages (strings)
+   */
   showFatalErrors(errors) {
     this.clearMessages();
     errors.forEach(error => {
@@ -1359,7 +1376,6 @@ class Pv extends PvConfig {
 
   /**
    * Splash in console, just for fun
-   * @returns {String} output
    */
   splash() {
     const style = 'background: #eee; color: #555; padding: 4px; font-family:monospace';
@@ -1497,10 +1513,10 @@ class Pv extends PvConfig {
   // and make addSiteNotice do the toastr, and change instances of this.writeMessage
   // accordingly
   /**
-   * Writes message just below the chart
+   * Shows message to the user using toastr
    * @param {string} message - message to write
-   * @param {Number} timeout - num seconds to show
-   * @returns {jQuery} - jQuery object of message container
+   * @param {string} [level] - 'success', 'info', 'warning' or 'error'
+   * @param {Number} [timeout] - num seconds to show
    */
   writeMessage(message, level = 'warning', timeout = 5000) {
     toastr.options.timeOut = timeout;

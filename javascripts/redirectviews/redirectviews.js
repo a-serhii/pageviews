@@ -18,6 +18,10 @@ const ListHelpers = require('../shared/list_helpers');
 
 /** Main RedirectViews class */
 class RedirectViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
+  /**
+   * set instance variables and boot the app via pv.constructor
+   * @override
+   */
   constructor() {
     super(config);
     this.app = 'redirectviews';
@@ -214,6 +218,7 @@ class RedirectViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
   }
 
   /**
+   * Get instance of Typeahead plugin
    * @returns {Typeahead} instance
    */
   get typeahead() {
@@ -272,7 +277,8 @@ class RedirectViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
 
   /**
    * Push relevant class properties to the query string
-   * @param  {Boolean} clear - wheter to clear the query string entirely
+   * @param {Boolean} clear - wheter to clear the query string entirely
+   * @return {null}
    */
   pushParams(clear = false) {
     if (!window.history || !window.history.replaceState) return;
@@ -551,6 +557,7 @@ class RedirectViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
   /**
    * Process the redirectviews for the article and options entered
    * Called when submitting the form
+   * @returns {null}
    */
   processInput() {
     const page = $(this.config.sourceInput).val();
@@ -638,7 +645,6 @@ class RedirectViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
   /**
    * Exports current lang data to CSV format and loads it in a new tab
    * With the prepended data:text/csv this should cause the browser to download the data
-   * @returns {string} CSV content
    */
   exportCSV() {
     let csvContent = `data:text/csv;charset=utf-8,Title,${this.getDateHeadings(false).join(',')}\n`;

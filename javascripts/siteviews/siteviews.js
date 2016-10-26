@@ -16,6 +16,10 @@ const ChartHelpers = require('../shared/chart_helpers');
 
 /** Main SiteViews class */
 class SiteViews extends mix(Pv).with(ChartHelpers) {
+  /**
+   * Set instance variables and boot the app via pv.constructor
+   * @override
+   */
   constructor() {
     super(config);
     this.app = 'siteviews';
@@ -158,12 +162,18 @@ class SiteViews extends mix(Pv).with(ChartHelpers) {
     $select2Input.on('change', this.processInput.bind(this));
   }
 
+  /**
+   * Set options for the Platform dropdown based on whether we're showing pageviews or unique devices
+   */
   setPlatformOptionValues() {
     $(this.config.platformSelector).find('option').each((index, el) => {
       $(el).prop('value', this.isPageviews() ? $(el).data('value') : $(el).data('ud-value'));
     });
   }
 
+  /**
+   * Setup listeners for the data source selector, and initialize values for the platform dropdown
+   */
   setupDataSourceSelector() {
     this.setPlatformOptionValues();
 
@@ -207,6 +217,7 @@ class SiteViews extends mix(Pv).with(ChartHelpers) {
   /**
    * Query the API for each site, building up the datasets and then calling renderData
    * @param {boolean} force - whether to force the chart to re-render, even if no params have changed
+   * @return {null}
    */
   processInput(force) {
     this.pushParams();

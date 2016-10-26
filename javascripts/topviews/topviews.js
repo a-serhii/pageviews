@@ -12,6 +12,10 @@ const Pv = require('../shared/pv');
 
 /** Main TopViews class */
 class TopViews extends Pv {
+  /**
+   * Set instance variables and boot the app via pv.constructor
+   * @override
+   */
   constructor() {
     super(config);
     this.app = 'topviews';
@@ -269,6 +273,7 @@ class TopViews extends Pv {
   /**
    * Set datepicker based on provided date or range
    * @param {String} dateInput - either a range like 'last-month', 'yesterday' or date with format 'YYYY-MM-DD'
+   * @return {null}
    */
   setDate(dateInput) {
     let date;
@@ -419,6 +424,7 @@ class TopViews extends Pv {
 
   /**
    * Removes chart, messages, and resets Select2 selections
+   * @param {Boolean} [clearSelector] - whether to clear the Select2 control
    */
   resetView(clearSelector = true) {
     this.max = null;
@@ -437,6 +443,7 @@ class TopViews extends Pv {
   /**
    * Search the topviews data for the given page title
    * and restrict the view to the matches
+   * @return {null}
    */
   searchTopviews() {
     const query = $('#topviews_search_field').val();
