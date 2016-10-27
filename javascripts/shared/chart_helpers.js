@@ -57,7 +57,7 @@ const ChartHelpers = superclass => class extends superclass {
         this.setLocalStorage('pageviews-chart-preference', this.chartType);
       }
 
-      this.isChartApp() ? this.updateChart() : this.renderData();
+      this.isChartApp() ? this.updateChart(this.pageViewsData) : this.renderData();
     });
 
     $(this.config.logarithmicCheckbox).on('click', () => {
