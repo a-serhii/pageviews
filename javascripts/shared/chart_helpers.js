@@ -290,14 +290,12 @@ const ChartHelpers = superclass => class extends superclass {
     /** @type {Object} everything we need to keep track of for the promises */
     let xhrData = {
       entities,
-      labels: [], // Labels (dates) for the x-axis.
-      datasets: [], // Data for each article timeseries
+      labels: new Array(totalRequestCount), // Labels (dates) for the x-axis.
+      datasets: new Array(totalRequestCount), // Data for each article timeseries
       errors: [], // Queue up errors to show after all requests have been made
       fatalErrors: [], // Unrecoverable JavaScript errors
-      promises: []
+      promises: new Array(totalRequestCount)
     };
-
-    console.log(`getPageViewsData: ${entities}`);
 
     const makeRequest = (entity, index) => {
       const startDate = this.daterangepicker.startDate.startOf('day'),
@@ -305,13 +303,13 @@ const ChartHelpers = superclass => class extends superclass {
         url = this.getApiUrl(entity, startDate, endDate),
         promise = $.ajax({ url, dataType: 'json' });
 
-      xhrData.promises.push(promise);
+      xhrData.promises[index] = promise;
 
       promise.done(successData => {
         try {
           successData = this.fillInZeros(successData, startDate, endDate);
 
-          xhrData.datasets.push(successData.items);
+          xhrData.datasets[index] = successData.items;
 
           /** fetch the labels for the x-axis on success if we haven't already */
           if (successData.items && !xhrData.labels.length) {
@@ -541,7 +539,6 @@ const ChartHelpers = superclass => class extends superclass {
   updateChart(xhrData) {
     $('.chart-legend').html(''); // clear old chart legend
     const entityNames = xhrData ? xhrData.entities : $(this.config.select2Input).val();
-    console.log(`updateChart: ${entityNames}`);
 
     // show pending error messages if present, exiting if fatal
     if (xhrData && this.showErrors(xhrData)) return;

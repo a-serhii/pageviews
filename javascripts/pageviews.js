@@ -132,8 +132,6 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
       this.parseQueryString('pages')
     );
 
-    console.log(`popParams: ${params.pages}`);
-
     $(this.config.projectInput).val(params.project);
     $(this.config.platformSelector).val(params.platform);
     $(this.config.agentSelector).val(params.agent);
@@ -263,7 +261,6 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
   pushParams() {
     const pages = $(this.config.select2Input).select2('val') || [],
       escapedPages = pages.join('|').replace(/[&%]/g, escape);
-    console.log(`pushParams: ${pages}`);
 
     if (window.history && window.history.replaceState) {
       window.history.replaceState({}, document.title,
@@ -383,7 +380,6 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
     this.params = location.search;
 
     const entities = $(config.select2Input).select2('val') || [];
-    console.log(`processInput: ${entities}`);
 
     if (!entities.length) {
       return this.resetView();
@@ -470,8 +466,8 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
 
     $('.output-list').html('');
 
-    /** sort ascending by current sort setting */
-    const datasets = this.outputData.sort((a, b) => {
+    /** sort ascending by current sort setting, using slice() to clone the array */
+    const datasets = this.outputData.slice().sort((a, b) => {
       const before = this.getSortProperty(a, this.sort),
         after = this.getSortProperty(b, this.sort);
 
@@ -548,7 +544,6 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
    */
   getPageAndEditInfo(pages) {
     const dfd = $.Deferred();
-    console.log(`getPageAndEditInfo: ${pages}`);
 
     this.getPageInfo(pages).done(data => {
       this.entityInfo = data;

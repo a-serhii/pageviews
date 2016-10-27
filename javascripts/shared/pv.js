@@ -783,28 +783,6 @@ class Pv extends PvConfig {
   }
 
   /**
-   * Map normalized pages from API into a string of page names
-   * Used in normalizePageNames()
-   *
-   * @param {array} pages - array of page names
-   * @param {array} normalizedPages - array of normalized mappings returned by the API
-   * @returns {array} pages with the new normalized names, if given
-   */
-  mapNormalizedPageNames(pages, normalizedPages) {
-    normalizedPages.forEach(normalPage => {
-      /** do it this way to preserve ordering of pages */
-      pages = pages.map(page => {
-        if (normalPage.from === page) {
-          return normalPage.to;
-        } else {
-          return page;
-        }
-      });
-    });
-    return pages;
-  }
-
-  /**
    * List of valid multilingual projects
    * @return {Array} base projects, without the language
    */
@@ -916,7 +894,6 @@ class Pv extends PvConfig {
    * @returns {Deferred} promise with data fetched from API
    */
   getPageInfo(pages) {
-    console.log(`getPageInfo: ${pages}`);
     let dfd = $.Deferred();
 
     return $.ajax({
@@ -931,8 +908,6 @@ class Pv extends PvConfig {
           pages[pages.indexOf(n.from)] = n.to;
         });
       }
-      // http://localhost/pageviews/?project=pt.wikipedia.org&platform=all-access&agent=user&range=latest-20&pages=A|B|C|D|E|F|G|H|I|User:MusikBot
-      // FIXME: order is right but the colours in the line chart are still off
       pages.forEach(page => {
         pageData[page] = data.query.pages.find(p => p.title === page);
       });
@@ -1128,7 +1103,6 @@ class Pv extends PvConfig {
    * @returns {array} - untouched array of items
    */
   setSelect2Defaults(items) {
-    console.log(`setSelect2Defaults: ${items}`);
     items.forEach(item => {
       const escapedText = $('<div>').text(item).html();
       $('<option>' + escapedText + '</option>').appendTo(this.config.select2Input);
@@ -1426,7 +1400,6 @@ class Pv extends PvConfig {
    * @returns {array} page names with underscores
    */
   underscorePageNames(pages) {
-    console.log(`underscorePageNames: ${pages}`);
     return pages.map(page => {
       return decodeURIComponent(page).score();
     });
