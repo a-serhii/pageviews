@@ -95,33 +95,80 @@ class Pv extends PvConfig {
     this.debug = location.search.includes('debug=true') || location.host === 'localhost';
 
     /** show notice if on staging environment */
-    if (/-test/.test(location.pathname)) {
-      const actualPathName = location.pathname.replace(/-test\/?/, '');
-      this.addSiteNotice('warning',
-        `This is a staging environment. For the actual ${document.title},
-         see <a href='${actualPathName}'>${location.hostname}${actualPathName}</a>`
-      );
+    if (location.pathname.includes('-test') || true) {
+      // show ads for Pageviews Analysis 2.0
+      if (location.pathname.includes('pageviews')) {
+        this.toastSuccess(`
+          Welcome to <strong>Pageviews Analysis 2.0 BETA!</strong>
+          Please provide feedback and bug reports
+          <a href='${this.getBugReportURL(null, 'Feedback on BETA version')}'>here</a>.
+        `);
+      } else {
+        const actualPathName = location.pathname.replace(/-test\/?/, '');
+        this.toastWarn(
+          `This is a staging environment. For the actual ${document.title},
+           see <a href='${actualPathName}'>${location.hostname}${actualPathName}</a>`
+        );
+      }
     }
   }
 
   /**
    * Add a site notice (Bootstrap alert)
-   * @param {String} level - one of 'success', 'info', 'warning' or 'error'
-   * @param {String} message - message to show
-   * @param {String} [title] - will appear in bold and in front of the message
-   * @param {Boolean} [dismissable] - whether or not to add a X
-   *   that allows the user to dismiss the notice
+   * @param {Object} opts - as follows:
+   * {
+   *   message: '',       // {String} message - message to show
+   *   level: 'warning',  // one of 'success', 'info', 'warning', 'error'
+   *   timeout: 10,       // {Number} [timeout] - in seconds. Use 0 to show indefinitely
+   *   title: ''          // {String} [title] - will appear in bold and in front of the message
+   * }
    */
-  addSiteNotice(level, message, title, dismissable) {
-    title = title ? `<strong>${title}</strong> ` : '';
+  toast(opts) {
+    const title = opts.title ? `<strong>${opts.title}</strong> ` : '';
+    opts = Object.assign({
+      message: title + opts.message,
+      level: 'warning',
+      timeout: 10
+    }, opts);
 
-    let markup = title + message;
+    toastr.options.timeOut = opts.timeout * 1000;
+    toastr[opts.level](opts.message);
+  }
 
-    this.writeMessage(
-      markup,
-      level,
-      dismissable ? 10000 : 0
-    );
+  /**
+   * Show success message to user via this.toast
+   * @param {String} message
+   * @param {Number} [timeout] - in seconds
+   */
+  toastSuccess(message, timeout = 10) {
+    this.toast({ message, level: 'success', timeout });
+  }
+
+  /**
+   * Show info message to user via this.toast
+   * @param {String} message
+   * @param {Number} [timeout] - in seconds
+   */
+  toastInfo(message, timeout = 10) {
+    this.toast({ message, level: 'info', timeout });
+  }
+
+  /**
+   * Show warning to user via this.toast
+   * @param {String} message
+   * @param {Number} [timeout] - in seconds
+   */
+  toastWarn(message, timeout = 10) {
+    this.toast({ message, level: 'warning', timeout });
+  }
+
+  /**
+   * Show an error to user via this.toast
+   * @param {String} message
+   * @param {Number} [timeout] - in seconds
+   */
+  toastError(message, timeout = 10) {
+    this.toast({ message, level: 'error', timeout });
   }
 
   /**
@@ -129,13 +176,11 @@ class Pv extends PvConfig {
    * @param {String} param - name of parameter
    */
   addInvalidParamNotice(param) {
-    const docLink = `<a href='/${this.app}/url_structure'>${$.i18n('documentation')}</a>`;
-    this.addSiteNotice(
-      'error',
-      $.i18n('param-error-3', param, docLink),
-      $.i18n('invalid-params'),
-      true
-    );
+    const docLink = `<a href='/${this.app}/url_structure'>${$.i18n('documentation').toLowerCase()}</a>`;
+    this.toastError(`
+      <strong>${$.i18n('invalid-params')}</strong>
+      ${$.i18n('param-error-3', param, docLink)}
+    `);
   }
 
   /**
@@ -172,14 +217,16 @@ class Pv extends PvConfig {
 
       // check if they are outside the valid range or if in the wrong order
       if (startDate < this.config.minDate || endDate < this.config.minDate) {
-        this.addSiteNotice('error',
-          $.i18n('param-error-1', moment(this.config.minDate).format(this.dateFormat)),
-          $.i18n('invalid-params'),
-          true
-        );
+        this.toastError(`
+          <strong>${$.i18n('invalid-params')}</strong>
+          ${$.i18n('param-error-1', moment(this.config.minDate).format(this.dateFormat))}
+        `);
         return false;
       } else if (startDate > endDate) {
-        this.addSiteNotice('error', $.i18n('param-error-2'), $.i18n('invalid-params'), true);
+        this.toastError(`
+          <strong>${$.i18n('param-error-2')}</strong>
+          ${$.i18n('invalid-params')}
+        `);
         return false;
       }
 
@@ -637,11 +684,12 @@ class Pv extends PvConfig {
   /**
    * Get URL to file a report on Meta, preloaded with permalink
    * @param {String} [phabPaste] URL to auto-generated error report on Phabricator
+   * @param {String} [titleOverride] goes in the title input field of the wiki editing interface
    * @return {String} URL
    */
-  getBugReportURL(phabPaste) {
+  getBugReportURL(phabPaste, titleOverride) {
     const reportURL = 'https://meta.wikimedia.org/w/index.php?title=Talk:Pageviews_Analysis&action=edit' +
-      `&section=new&preloadtitle=${this.app.upcase()} bug report`;
+      `&section=new&preloadtitle=${titleOverride || this.app.upcase()} bug report`;
 
     if (phabPaste) {
       return `${reportURL}&preload=Talk:Pageviews_Analysis/Preload&preloadparams[]=${phabPaste}`;
@@ -1304,8 +1352,7 @@ class Pv extends PvConfig {
     this.clearMessages();
     errors.forEach(error => {
       this.writeMessage(
-        `<strong>${$.i18n('fatal-error')}</strong>: <code>${error}</code>`,
-        'error'
+        `<strong>${$.i18n('fatal-error')}</strong>: <code>${error}</code>`
       );
     });
 
@@ -1329,20 +1376,17 @@ class Pv extends PvConfig {
         }
       }).done(data => {
         if (data && data.result && data.result.objectName) {
-          this.writeMessage(
-            $.i18n('error-please-report', this.getBugReportURL(data.result.objectName)),
-            'error'
+          this.toastError(
+            $.i18n('error-please-report', this.getBugReportURL(data.result.objectName))
           );
         } else {
-          this.writeMessage(
-            $.i18n('error-please-report', this.getBugReportURL()),
-            'error'
+          this.toastError(
+            $.i18n('error-please-report', this.getBugReportURL())
           );
         }
       }).fail(() => {
-        this.writeMessage(
-          $.i18n('error-please-report', this.getBugReportURL()),
-          'error'
+        this.toastError(
+          $.i18n('error-please-report', this.getBugReportURL())
         );
       });
     }
@@ -1378,10 +1422,11 @@ class Pv extends PvConfig {
 
     this.timeout = setTimeout(err => {
       this.resetView();
-      this.writeMessage(`<strong>${$.i18n('fatal-error')}</strong>:
+      this.toastError(`
+        <strong>${$.i18n('fatal-error')}</strong>:
         ${$.i18n('error-timed-out')}
         ${$.i18n('error-please-report', this.getBugReportURL())}
-      `, 'error', 0);
+      `);
     }, 20 * 1000);
   }
 
@@ -1460,9 +1505,8 @@ class Pv extends PvConfig {
       valid = false;
 
     if (multilingual && !this.isMultilangProject()) {
-      this.writeMessage(
-        $.i18n('invalid-lang-project', `<a href='//${project.escape()}'>${project.escape()}</a>`),
-        'warning'
+      this.toastWarn(
+        $.i18n('invalid-lang-project', `<a href='//${project.escape()}'>${project.escape()}</a>`)
       );
       project = projectInput.dataset.value;
     } else if (siteDomains.includes(project)) {
@@ -1470,9 +1514,8 @@ class Pv extends PvConfig {
       this.updateInterAppLinks();
       valid = true;
     } else {
-      this.writeMessage(
-        $.i18n('invalid-project', `<a href='//${project.escape()}'>${project.escape()}</a>`),
-        'warning'
+      this.toastWarn(
+        $.i18n('invalid-project', `<a href='//${project.escape()}'>${project.escape()}</a>`)
       );
       project = projectInput.dataset.value;
     }
@@ -1482,18 +1525,17 @@ class Pv extends PvConfig {
     return valid;
   }
 
-  // FIXME: restore writeMessage to the way it used to be,
-  // and make addSiteNotice do the toastr, and change instances of this.writeMessage
-  // accordingly
   /**
-   * Shows message to the user using toastr
+   * Writes message just below the chart or list of data
    * @param {string} message - message to write
-   * @param {string} [level] - 'success', 'info', 'warning' or 'error'
-   * @param {Number} [timeout] - num seconds to show
+   * @param {boolean} [clear] - whether to clear any existing messages
+   * @returns {jQuery} - jQuery object of message container
    */
-  writeMessage(message, level = 'warning', timeout = 5000) {
-    toastr.options.timeOut = timeout;
-    toastr[level](message);
+  writeMessage(message, clear = false) {
+    if (clear) this.clearMessages();
+    return $('.message-container').append(
+      `<div class='error-message'>${message}</div>`
+    );
   }
 }
 

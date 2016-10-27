@@ -300,7 +300,7 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
             10,
             `<strong><a href='/massviews/'>${$.i18n('massviews')}</a></strong>`
           );
-          this.writeMessage(message, 'info', 10000);
+          this.toastInfo(message);
         });
       }
     });
@@ -433,7 +433,7 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
       if (entry) {
         const monthName = this.daterangepicker.locale.monthNames[topviewsMonth.month()];
         $('.single-page-ranking').html(`
-          Ranked ${entry.rank} in the
+          Ranked ${entry.rank} of the
           <a target='_blank' href='${this.getTopviewsURL(this.project + '.org')}'>most-viewed pages</a>
           for ${monthName} ${topviewsMonth.year()}
         `);
@@ -590,9 +590,8 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
       document.location = `/massviews?overflow=1&${$.param(params)}&source=pagepile&target=${pileData.pile.id}`;
     }).fail(() => {
       // just grab first 10 pages and throw an error
-      this.writeMessage(
-        $.i18n('auto-pagepile-error', 'PagePile', 10),
-        'error'
+      this.toastError(
+        $.i18n('auto-pagepile-error', 'PagePile', 10)
       );
       dfd.resolve(pages.slice(0, 10));
     });

@@ -136,6 +136,7 @@
         </thead>
         <tbody class="output-list"></tbody>
       </table>
+      <div class="message-container col-lg-12"></div>
     </output>
     <?php include "_footer.php"; ?>
     <?php include "_modals.php"; ?>

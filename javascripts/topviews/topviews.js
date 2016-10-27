@@ -303,12 +303,11 @@ class TopViews extends Pv {
 
     // if less than min, throw error (since this is a common request)
     if (date < this.config.minDate.toDate()) {
-      this.addSiteNotice('error',
-        // use super.dateFormat since this is for moment, not for our datepicker
-        $.i18n('param-error-1', moment(this.config.minDate).format(super.dateFormat)),
-        $.i18n('invalid-params'),
-        true
-      );
+      // use super.dateFormat since this is for moment, not for our datepicker
+      this.toastError(`
+        <strong>${$.i18n('invalid-params')}</strong>
+        ${$.i18n('param-error-1', moment(this.config.minDate).format(super.dateFormat))}
+      `);
       date = this.config.minDate.toDate();
     }
 
@@ -330,13 +329,12 @@ class TopViews extends Pv {
     // FIXME: remove once all affected wikis/links have been updated
     if (params.range || params.start || params.end) {
       this.fixLegacyDates(params);
-      this.addSiteNotice(
-        'warning',
-        `Custom date ranges are no longer supported. See the official annoucement
-          <a href='//meta.wikimedia.org/wiki/Talk:Pageviews_Analysis#Topviews_revamped'>here</a>.`,
-        'Topviews has been revamped!',
-        true
-      );
+      this.toastWarn(`
+        <strong>Topviews has been revamped!</strong>
+        Custom date ranges are
+        <a href='//meta.wikimedia.org/wiki/Special:Permalink/15931284#Topviews_revamped'>no longer supported</a>.
+        Using defaults instead.
+      `);
     }
 
     this.setDate(params.date); // also performs validations

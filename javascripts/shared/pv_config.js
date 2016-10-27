@@ -177,9 +177,9 @@ class PvConfig {
         localizeDateFormat: 'true',
         numericalFormatting: 'true',
         bezierCurve: 'false',
-        autoLogDetection: 'true',
+        autoLogDetection: 'false',
         beginAtZero: 'false',
-        rememberChart: 'true',
+        rememberChart: 'false',
         agent: 'user',
         platform: 'all-access',
         project: 'en.wikipedia.org'

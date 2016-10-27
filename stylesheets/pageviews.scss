@@ -57,8 +57,12 @@
   margin-left: 10px;
 }
 
-.single-page-stats .text-muted {
-  font-weight: normal;
+.single-page-stats {
+  margin-top: 5px;
+
+  .text-muted {
+    font-weight: normal;
+  }
 }
 
 .single-page-ranking {

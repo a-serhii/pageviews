@@ -557,11 +557,8 @@ class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
        *   they are redirected to Massviews with an auto-generated PagePile.
        *   This shows a message explaining what happened.
        */
-      this.addSiteNotice(
-        'info',
-        $.i18n('massviews-redirect', $.i18n('title'), 10, this.getPileLink(params.target)),
-        '',
-        true
+      this.toastInfo(
+        $.i18n('massviews-redirect', $.i18n('title'), 10, this.getPileLink(params.target))
       );
     }
 
