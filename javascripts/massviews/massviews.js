@@ -950,7 +950,7 @@ class MassViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
 
     const pageLink = this.getPageLink(targetPage, project);
 
-    $.whenAll(...promises).done((data, data2) => {
+    $.when(...promises).done((data, data2) => {
       // show errors, if any
       const errors = [data, data2].filter(resp => !!resp.error);
       if (errors.length) {
