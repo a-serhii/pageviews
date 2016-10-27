@@ -45,7 +45,10 @@ const templates = {
       let markup = '';
 
       for (let block in infoHash) {
-        markup += `<div class='legend-block'><h5>${block}</h5><hr/>`;
+        const blockId = block.toLowerCase().score();
+        markup += `<div class='legend-block legend-block--${blockId}'>
+          <h5>${block}</h5><hr/>
+          <div class='legend-block--body'>`;
         for (let key in infoHash[block]) {
           const value = infoHash[block][key];
           if (!value) continue;
@@ -57,7 +60,7 @@ const templates = {
               </span>
             </div>`;
         }
-        markup += '</div>';
+        markup += '</div></div>';
       }
 
       if (!multiEntity) {
@@ -97,13 +100,19 @@ const templates = {
 
   tableRow(scope, item, last = false) {
     const tag = last ? 'th' : 'td';
-    const historyRow = last ? scope.formatNumber(item.num_edits) :
-      scope.getHistoryLink(item.label, scope.formatNumber(item.num_edits));
     const linksRow = last ? '' : `
         <a href="${scope.getLangviewsURL(item.label)}" target="_blank">${$.i18n('all-languages')}</a>
         &bull;
         <a href="${scope.getRedirectviewsURL(item.label)}" target="_blank">${$.i18n('redirects')}</a>
       `;
+    const numUsers = item.num_users ? scope.formatNumber(item.num_users) : '?';
+    let historyRow;
+    if (item.num_edits) {
+      historyRow = last ? scope.formatNumber(item.num_edits) :
+        scope.getHistoryLink(item.label, scope.formatNumber(item.num_edits));
+    } else {
+      historyRow = '?';
+    }
 
     return `
       <tr>
@@ -113,8 +122,8 @@ const templates = {
         <${tag}>${last ? item.label : scope.getPageLink(item.label)}</${tag}>
         <${tag}>${scope.formatNumber(item.sum)}</${tag}>
         <${tag}>${scope.formatNumber(item.average)}</${tag}>
-        <${tag}>${historyRow}</${tag}>
-        <${tag}>${scope.formatNumber(item.num_users)}</${tag}>
+        <${tag} class='table-view--edit-data'>${historyRow}</${tag}>
+        <${tag} class='table-view--edit-data'>${numUsers}</${tag}>
         <${tag}>${scope.formatNumber(item.length)}</${tag}>
         <${tag}>${item.protection}</${tag}>
         <${tag}>${item.watchers ? scope.formatNumber(item.watchers) : $.i18n('unknown')}</${tag}>

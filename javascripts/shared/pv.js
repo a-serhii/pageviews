@@ -95,13 +95,14 @@ class Pv extends PvConfig {
     this.debug = location.search.includes('debug=true') || location.host === 'localhost';
 
     /** show notice if on staging environment */
-    if (location.pathname.includes('-test') || true) {
+    if (location.pathname.includes('-test')) {
       // show ads for Pageviews Analysis 2.0
+      // FIXME: Pageviews 2.0 BETA code
       if (location.pathname.includes('pageviews')) {
         this.toastSuccess(`
           Welcome to <strong>Pageviews Analysis 2.0 BETA!</strong>
           Please provide feedback and bug reports
-          <a href='${this.getBugReportURL(null, 'Feedback on BETA version')}'>here</a>.
+          <a target='_blank' href='${this.getBugReportURL(null, 'Feedback on BETA version')}'>here</a>.
         `);
       } else {
         const actualPathName = location.pathname.replace(/-test\/?/, '');
@@ -689,7 +690,7 @@ class Pv extends PvConfig {
    */
   getBugReportURL(phabPaste, titleOverride) {
     const reportURL = 'https://meta.wikimedia.org/w/index.php?title=Talk:Pageviews_Analysis&action=edit' +
-      `&section=new&preloadtitle=${titleOverride || this.app.upcase()} bug report`;
+      `&section=new&preloadtitle=${titleOverride || this.app.upcase() + ' bug report'}`;
 
     if (phabPaste) {
       return `${reportURL}&preload=Talk:Pageviews_Analysis/Preload&preloadparams[]=${phabPaste}`;
@@ -999,7 +1000,12 @@ class Pv extends PvConfig {
    * @param {string} app - one of: pv, lv, tv, sv, ms
    */
   patchUsage(app) {
-    if (metaRoot) {
+    if (location.pathname.includes('-test')) {
+      $.ajax({
+        url: `//${metaRoot}/usage/${this.app}-test/${this.project || i18nLang}`,
+        method: 'POST'
+      });
+    } else if (metaRoot) {
       $.ajax({
         url: `//${metaRoot}/usage/${this.app}/${this.project || i18nLang}`,
         method: 'POST'
@@ -1266,6 +1272,16 @@ class Pv extends PvConfig {
       if (key === 'latest') return; // this is a function, not meant to be in the list of special ranges
       ranges[$.i18n(key)] = this.config.specialRanges[key];
     });
+
+    // FIXME: Pageviews 2.0 BETA code
+    if (location.pathname.includes('-test') && location.pathname.includes('pageviews')) {
+      ranges['All time'] = ranges['all-time'];
+      delete ranges['all-time'];
+      ranges['This year'] = ranges['this-year'];
+      delete ranges['this-year'];
+      ranges['Last year'] = ranges['last-year'];
+      delete ranges['last-year'];
+    }
 
     let datepickerOptions = {
       locale: {

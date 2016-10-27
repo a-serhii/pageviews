@@ -64,7 +64,14 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
           start: this.daterangepicker.startDate.format('YYYY-MM-DD'),
           end: this.daterangepicker.endDate.format('YYYY-MM-DD')
         }
-      }).then(data => dfd.resolve(data));
+      })
+      .done(data => dfd.resolve(data))
+      .fail(() => {
+        // stable flag will be used to handle lack of data, so just resolve with empty data
+        let data = {};
+        pages.forEach(page => data[page] = {});
+        dfd.resolve({ pages: data });
+      });
     } else {
       dfd.resolve({
         num_edits: 0,
@@ -492,6 +499,7 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
     });
 
     // add summations to show up as the bottom row in the table
+    // FIXME: add i18n for num-protections
     const sum = datasets.reduce((a,b) => a + b.sum, 0);
     const totals = {
       label: $.i18n('num-pages', datasets.length),
@@ -500,13 +508,19 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
       num_edits: datasets.reduce((a, b) => a + b.num_edits, 0),
       num_users: datasets.reduce((a, b) => a + b.num_users, 0),
       length: datasets.reduce((a, b) => a + b.length, 0),
-      protection: $.i18n('num-protections', datasets.filter(page => page.protection !== 'none').length),
+      protection: `${datasets.filter(page => page.protection !== 'none').length} protections`,
       watchers: datasets.reduce((a, b) => a + b.watchers || 0, 0)
     };
     $('.output-list').append(this.config.templates.tableRow(this, totals, true));
 
     // hide protection column if no pages are protected
     $('.table-view--protection').toggle(hasProtection);
+
+    if (isNaN(totals.num_edits)) {
+      $('.legend-block--revisions .legend-block--body').html(
+        "<span class='text-muted'>Data unavailable</span>" // FIXME: i18n
+      );
+    }
 
     $('.table-view').show();
   }
