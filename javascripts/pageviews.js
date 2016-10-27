@@ -464,6 +464,12 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
    * @return {null}
    */
   updateTable() {
+    if (!this.outputData[0].num_edits) {
+      $('.legend-block--revisions .legend-block--body').html(
+        "<span class='text-muted'>Data unavailable</span>" // FIXME: i18n
+      );
+    }
+
     if (this.outputData.length === 1) {
       return this.showSinglePageLegend();
     } else {
@@ -515,12 +521,6 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
 
     // hide protection column if no pages are protected
     $('.table-view--protection').toggle(hasProtection);
-
-    if (isNaN(totals.num_edits)) {
-      $('.legend-block--revisions .legend-block--body').html(
-        "<span class='text-muted'>Data unavailable</span>" // FIXME: i18n
-      );
-    }
 
     $('.table-view').show();
   }
