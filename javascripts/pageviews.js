@@ -298,6 +298,7 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
     // FIXME: this is getting called twice for some reason
     $select2Input.off('select2:unselect').on('select2:unselect', e => {
       this.processInput(false, e.params.data.text);
+      $select2Input.trigger('select2:close');
     });
     $select2Input.off('select2:open').on('select2:open', e => {
       if ($(e.target).val() && $(e.target).val().length === 10) {
@@ -464,7 +465,7 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
    * @return {null}
    */
   updateTable() {
-    if (!this.outputData[0].num_edits) {
+    if (!$.isNumeric(this.outputData[0].num_edits)) {
       $('.legend-block--revisions .legend-block--body').html(
         "<span class='text-muted'>Data unavailable</span>" // FIXME: i18n
       );

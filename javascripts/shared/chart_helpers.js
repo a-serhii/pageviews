@@ -43,8 +43,6 @@ const ChartHelpers = superclass => class extends superclass {
       this.config.chartConfig[circularChart].opts.legendTemplate = this.config.circularLegend;
     });
 
-    Object.assign(Chart.defaults.global, {animation: false, responsive: true});
-
     /** changing of chart types */
     $('.modal-chart-type a').on('click', e => {
       this.chartType = $(e.currentTarget).data('type');
@@ -57,7 +55,7 @@ const ChartHelpers = superclass => class extends superclass {
         this.setLocalStorage('pageviews-chart-preference', this.chartType);
       }
 
-      this.isChartApp() ? this.updateChart(this.pageViewsData) : this.renderData();
+      this.isChartApp() ? this.updateChart() : this.renderData();
     });
 
     $(this.config.logarithmicCheckbox).on('click', () => {
@@ -225,7 +223,6 @@ const ChartHelpers = superclass => class extends superclass {
         average = Math.round(sum / values.length),
         max = Math.max(...values),
         min = Math.min(...values),
-        color = this.config.colors[index % 10],
         label = labels[index].descore();
 
       const entityInfo = this.entityInfo ? this.entityInfo[label] : {};
@@ -237,16 +234,45 @@ const ChartHelpers = superclass => class extends superclass {
         sum,
         average,
         max,
-        min,
-        color
-      }, this.config.chartConfig[this.chartType].dataset(color), entityInfo);
-
-      // don't try to plot zeros on a logarithmic chart
-      if (this.isLogarithmic()) {
-        dataset.data = dataset.data.map(view => view || null);
-      }
+        min
+      }, entityInfo);
 
       return dataset;
+    });
+  }
+
+  /**
+   * Set colors for each dataset based on the config for that chart type.
+   * This is because when removing entities from Select2, the only thing
+   *   thing that needs doing is to set the colors based on how many entities we have
+   * This function also sets null where there are zeros if we're showing a log chart,
+   *   and otherwise fills in zeros where there are nulls (due to API caveat)
+   * @param {Object} outputData - should be hte same as this.outputData
+   * @returns {Object} transformed data
+   */
+  setColorsAndLogValues(outputData) {
+    return outputData.map((dataset, index) => {
+      // don't try to plot zeros on a logarithmic chart
+      const startDate = moment(this.daterangepicker.startDate);
+      const endDate = moment(this.daterangepicker.endDate);
+
+      // Use zero instead of null for some data due to Gotcha in Pageviews API:
+      //   https://wikitech.wikimedia.org/wiki/Analytics/AQS/Pageview_API#Gotchas
+      // For today or yesterday, do use null as the data may not be available yet
+      let counter = 0;
+      for (let date = startDate; date <= endDate; date.add(1, 'd')) {
+        if (!dataset.data[counter]) {
+          const edgeCase = date.isSame(this.config.maxDate) || date.isSame(moment(this.config.maxDate).subtract(1, 'days'));
+          const zeroValue = this.isLogarithmic() ? null : 0;
+          dataset.data[counter] = edgeCase ? null : zeroValue;
+        }
+        counter++;
+      }
+
+      const color = this.config.colors[index % 10];
+      return Object.assign(dataset, {
+        color
+      }, this.config.chartConfig[this.chartType].dataset(color));
     });
   }
 
@@ -307,7 +333,7 @@ const ChartHelpers = superclass => class extends superclass {
 
       promise.done(successData => {
         try {
-          successData = this.fillInZeros(successData, startDate, endDate);
+          // successData = this.fillInZeros(successData, startDate, endDate);
 
           xhrData.datasets[index] = successData.items;
 
@@ -520,7 +546,7 @@ const ChartHelpers = superclass => class extends superclass {
     });
 
     dateRangeSelector.on('change', e => {
-      this.setChartPointDetectionRadius();
+      this.setChartPointDetectionRadius(); // FIXME: is this needed?
       this.processInput();
 
       /** clear out specialRange if it doesn't match our input */
@@ -557,11 +583,15 @@ const ChartHelpers = superclass => class extends superclass {
       this.outputData = this.buildChartData(xhrData.datasets, entityNames);
     }
 
+    // first figure out if we should use a log chart
     if (this.autoLogDetection === 'true') {
       const shouldBeLogarithmic = this.shouldBeLogarithmic(this.outputData.map(set => set.data));
       $(this.config.logarithmicCheckbox).prop('checked', shouldBeLogarithmic);
       $('.begin-at-zero').toggleClass('disabled', shouldBeLogarithmic);
     }
+
+    // set colors for datasets, and fill in nulls where there are zeros if log chart
+    this.outputData = this.setColorsAndLogValues(this.outputData);
 
     let options = Object.assign(
       {scales: {}},

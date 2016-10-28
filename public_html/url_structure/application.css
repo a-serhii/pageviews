@@ -249,12 +249,12 @@ button.toast-close-button {
   to {
     transform: rotate(360deg); } }
 
-.disabled {
-  cursor: not-allowed;
+.disabled, .loading .select2-container,
+.loading .page-selector {
   opacity: .5;
   pointer-events: none; }
 
-.loading::after {
+.loading .chart-container::after {
   animation-duration: .75s;
   animation-iteration-count: infinite;
   animation-name: spin;
@@ -267,12 +267,18 @@ button.toast-close-button {
   margin: auto;
   position: absolute;
   right: 0;
-  top: 40px;
+  top: 100px;
   width: 60px; }
+
+html {
+  height: 100%; }
 
 body {
   background: url("/pageviews/images/gradient.png");
-  overflow-x: hidden; }
+  min-height: 100%;
+  overflow-x: hidden;
+  padding-bottom: 127px;
+  position: relative; }
 
 .top-nav {
   border-bottom: 1px solid #ddd; }
@@ -329,12 +335,13 @@ select {
   to {
     transform: rotate(360deg); } }
 
-.rtl .disabled {
-  cursor: not-allowed;
+.rtl .disabled, .rtl .loading .select2-container, .loading .rtl .select2-container, .rtl
+.loading .page-selector,
+.loading .rtl .page-selector {
   opacity: .5;
   pointer-events: none; }
 
-.rtl .loading::after {
+.rtl .loading .chart-container::after, .loading .rtl .chart-container::after {
   animation-duration: .75s;
   animation-iteration-count: infinite;
   animation-name: spin;
@@ -347,7 +354,7 @@ select {
   margin: auto;
   position: absolute;
   right: 0;
-  top: 40px;
+  top: 100px;
   width: 60px; }
 
 .rtl .container {
@@ -528,18 +535,17 @@ header {
   margin-top: 10px; }
 
 footer {
-  clear: both;
+  bottom: 0;
   display: block;
   font-family: sans-serif;
-  margin: 6px 0 20px;
-  text-align: center; }
+  left: 0;
+  min-height: 127px;
+  position: absolute;
+  text-align: center;
+  width: 100%; }
 
 .nowrap {
   white-space: nowrap; }
-
-.disabled {
-  opacity: .5;
-  pointer-events: none; }
 
 .heart {
   font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -550,6 +556,16 @@ footer {
 
 .mono {
   font-family: Consolas, Lucida Console, monospace; }
+
+.loading .clear-pages {
+  display: none !important; }
+
+.loading .data-links,
+.loading output {
+  display: none; }
+
+.loading .summary-column {
+  visibility: hidden; }
 
 .error-message {
   color: #fe875e;

@@ -7,7 +7,7 @@
     <?php include '_head.php'; ?>
     <title><?php echo $I18N->msg( 'title' ); ?></title>
   </head>
-  <body class="<?php echo $rtl; ?> <?php echo $currentApp; ?>">
+  <body class="clearfix" class="<?php echo $rtl; ?> <?php echo $currentApp; ?>">
     <div class="text-center site-notice-wrapper">
       <div class="site-notice">
         <?php include "_browser_check.php"; ?>
@@ -136,7 +136,6 @@
         </thead>
         <tbody class="output-list"></tbody>
       </table>
-      <div class="message-container col-lg-12"></div>
     </output>
     <?php include "_footer.php"; ?>
     <?php include "_modals.php"; ?>

@@ -47,7 +47,7 @@ class PvConfig {
               }]
             },
             legendCallback: chart => this.config.chartLegend(self),
-            tooltips: this.linearTooltips
+            tooltips: this.linearTooltips()
           },
           dataset(color) {
             return {
@@ -85,7 +85,7 @@ class PvConfig {
               }]
             },
             legendCallback: chart => this.config.chartLegend(self),
-            tooltips: this.linearTooltips
+            tooltips: this.linearTooltips('label')
           },
           dataset(color) {
             return {
@@ -106,7 +106,7 @@ class PvConfig {
               }
             },
             legendCallback: chart => this.config.chartLegend(self),
-            tooltips: this.linearTooltips
+            tooltips: this.linearTooltips()
           },
           dataset(color) {
             return {
@@ -232,11 +232,12 @@ class PvConfig {
 
   /**
    * Get config for tooltips shown on linear charts, used by Chart.js
+   * @param {String} [mode] - x-axis or label depending on chart type
    * @return {Object}
    */
-  get linearTooltips() {
+  linearTooltips(mode) {
     return {
-      mode: 'label',
+      mode: mode || 'x-axis',
       callbacks: {
         label: tooltipItem => {
           if (Number.isNaN(tooltipItem.yLabel)) {

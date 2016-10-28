@@ -1159,7 +1159,7 @@ class Pv extends PvConfig {
   setSelect2Defaults(items) {
     items.forEach(item => {
       const escapedText = $('<div>').text(item).html();
-      $('<option>' + escapedText + '</option>').appendTo(this.config.select2Input);
+      $(`<option>${escapedText}</option>`).appendTo(this.config.select2Input);
     });
     $(this.config.select2Input).select2('val', items);
     $(this.config.select2Input).trigger('select2:select');
@@ -1433,7 +1433,8 @@ class Pv extends PvConfig {
    * Add the loading indicator class and set the safeguard timeout
    */
   startSpinny() {
-    $('.chart-container').addClass('loading');
+    $('body').addClass('loading');
+    document.activeElement.blur();
     clearTimeout(this.timeout);
 
     this.timeout = setTimeout(err => {
@@ -1450,7 +1451,7 @@ class Pv extends PvConfig {
    * Remove loading indicator class and clear the safeguard timeout
    */
   stopSpinny() {
-    $('.chart-container').removeClass('loading');
+    $('body').removeClass('loading');
     clearTimeout(this.timeout);
   }
 

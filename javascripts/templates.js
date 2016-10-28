@@ -105,9 +105,9 @@ const templates = {
         &bull;
         <a href="${scope.getRedirectviewsURL(item.label)}" target="_blank">${$.i18n('redirects')}</a>
       `;
-    const numUsers = item.num_users >= 0 ? scope.formatNumber(item.num_users) : '?';
+    const numUsers = $.isNumeric(item.num_users) ? scope.formatNumber(item.num_users) : '?';
     let historyRow;
-    if (item.num_edits >= 0) {
+    if ($.isNumeric(item.num_edits)) {
       historyRow = last ? scope.formatNumber(item.num_edits) :
         scope.getHistoryLink(item.label, scope.formatNumber(item.num_edits));
     } else {

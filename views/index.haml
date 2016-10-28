@@ -6,7 +6,7 @@
   %head
     - include '_head.php'
     %title= $I18N->msg( 'title' )
-  %body(class="#{$rtl} #{$currentApp}")
+  %body.clearfix(class="#{$rtl} #{$currentApp}")
     %div.text-center.site-notice-wrapper
       %div.site-notice
         - include "_browser_check.php"
@@ -102,8 +102,6 @@
             %th
               %span Links
         %tbody.output-list
-
-      %div.message-container.col-lg-12
 
     - include "_footer.php"
 

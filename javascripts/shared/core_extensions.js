@@ -63,38 +63,38 @@ class MixinBuilder {
  * https://github.com/chartjs/Chart.js/issues/2299
  * TODO: remove me when this gets implemented into Charts.js core
  */
-if (typeof Chart !== 'undefined') {
-  Chart.Controller.prototype.getElementsAtEvent = function(e) {
-    let helpers = Chart.helpers;
-    let eventPosition = helpers.getRelativePosition(e, this.chart);
-    let elementsArray = [];
+// if (typeof Chart !== 'undefined') {
+//   Chart.Controller.prototype.getElementsAtEvent = function(e) {
+//     let helpers = Chart.helpers;
+//     let eventPosition = helpers.getRelativePosition(e, this.chart);
+//     let elementsArray = [];
 
-    let found = (function() {
-      if (this.data.datasets) {
-        for (let i = 0; i < this.data.datasets.length; i++) {
-          const key = Object.keys(this.data.datasets[i]._meta)[0];
-          for (let j = 0; j < this.data.datasets[i]._meta[key].data.length; j++) {
-            /* eslint-disable max-depth */
-            if (this.data.datasets[i]._meta[key].data[j].inLabelRange(eventPosition.x, eventPosition.y)) {
-              return this.data.datasets[i]._meta[key].data[j];
-            }
-          }
-        }
-      }
-    }).call(this);
+//     let found = (function() {
+//       if (this.data.datasets) {
+//         for (let i = 0; i < this.data.datasets.length; i++) {
+//           const key = Object.keys(this.data.datasets[i]._meta)[0];
+//           for (let j = 0; j < this.data.datasets[i]._meta[key].data.length; j++) {
+//              eslint-disable max-depth
+//             if (this.data.datasets[i]._meta[key].data[j].inLabelRange(eventPosition.x, eventPosition.y)) {
+//               return this.data.datasets[i]._meta[key].data[j];
+//             }
+//           }
+//         }
+//       }
+//     }).call(this);
 
-    if (!found) {
-      return elementsArray;
-    }
+//     if (!found) {
+//       return elementsArray;
+//     }
 
-    helpers.each(this.data.datasets, function(dataset, dsIndex) {
-      const key = Object.keys(dataset._meta)[0];
-      elementsArray.push(dataset._meta[key].data[found._index]);
-    });
+//     helpers.each(this.data.datasets, function(dataset, dsIndex) {
+//       const key = Object.keys(dataset._meta)[0];
+//       elementsArray.push(dataset._meta[key].data[found._index]);
+//     });
 
-    return elementsArray;
-  };
-}
+//     return elementsArray;
+//   };
+// }
 
 $.whenAll = function() {
   let dfd = $.Deferred(),

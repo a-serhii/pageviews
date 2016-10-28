@@ -4,9 +4,18 @@ $select2-dropdown: rgba(0, 0, 0, .075);
 $form-control-bg: rgba(255, 255, 255, .7);
 $faq-entry-bg: rgba(255, 255, 255, .5);
 
+$footer-height: 127px;
+
+html {
+  height: 100%;
+}
+
 body {
   background: url('/pageviews/images/gradient.png');
+  min-height: 100%;
   overflow-x: hidden;
+  padding-bottom: $footer-height;
+  position: relative;
 }
 
 .top-nav {
@@ -151,20 +160,18 @@ header {
 }
 
 footer {
-  clear: both;
+  bottom: 0;
   display: block;
   font-family: sans-serif;
-  margin: 6px 0 20px;
+  left: 0;
+  min-height: $footer-height;
+  position: absolute;
   text-align: center;
+  width: 100%;
 }
 
 .nowrap {
   white-space: nowrap;
-}
-
-%disabled {
-  opacity: .5;
-  pointer-events: none;
 }
 
 .disabled {
@@ -184,8 +191,29 @@ footer {
   font-family: Consolas, Lucida Console, monospace;
 }
 
-.loading::after {
-  @extend %loading;
+.loading {
+  .select2-container,
+  .page-selector {
+    @extend %disabled;
+  }
+
+  .chart-container::after {
+    @extend %loading;
+  }
+
+  .clear-pages {
+    // scss-lint:disable ImportantRule
+    display: none !important;
+  }
+
+  .data-links,
+  output {
+    display: none;
+  }
+
+  .summary-column {
+    visibility: hidden;
+  }
 }
 
 .error-message {
