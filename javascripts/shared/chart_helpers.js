@@ -218,9 +218,18 @@ const ChartHelpers = superclass => class extends superclass {
   buildChartData(datasets, labels) {
     return datasets.map((dataset, index) => {
       /** Build the article's dataset. */
-      const values = dataset.map(elem => this.isPageviews() ? elem.views : elem.devices),
-        sum = values.reduce((a, b) => a + b),
-        average = Math.round(sum / values.length),
+      const dateHeadings = this.getDateHeadings(false); // false to be unlocalized
+      let values = new Array(dateHeadings.length),
+        sum = 0;
+
+      dataset.forEach(elem => {
+        const value = this.isPageviews() ? elem.views : elem.devices;
+        const date = moment(elem.timestamp, this.config.timestampFormat).format('YYYY-MM-DD');
+        values[dateHeadings.indexOf(date)] = value;
+        sum += value || 0;
+      });
+
+      const average = Math.round(sum / values.length),
         max = Math.max(...values),
         min = Math.min(...values),
         label = labels[index].descore();
@@ -333,8 +342,6 @@ const ChartHelpers = superclass => class extends superclass {
 
       promise.done(successData => {
         try {
-          // successData = this.fillInZeros(successData, startDate, endDate);
-
           xhrData.datasets[index] = successData.items;
 
           /** fetch the labels for the x-axis on success if we haven't already */

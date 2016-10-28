@@ -356,9 +356,9 @@ class Pv extends PvConfig {
    */
   getDateHeadings(localized = true) {
     const dateHeadings = [],
-      endDate = moment(this.daterangepicker.endDate).add(1, 'd');
+      endDate = moment(this.daterangepicker.endDate).add(1, 'day');
 
-    for (let date = moment(this.daterangepicker.startDate); date.isBefore(endDate); date.add(1, 'd')) {
+    for (let date = moment(this.daterangepicker.startDate); date.isBefore(endDate); date.add(1, 'day')) {
       if (localized) {
         dateHeadings.push(date.format(this.dateFormat));
       } else {
