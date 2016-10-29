@@ -325,11 +325,11 @@ const ChartHelpers = superclass => class extends superclass {
     /** @type {Object} everything we need to keep track of for the promises */
     let xhrData = {
       entities,
-      labels: new Array(totalRequestCount), // Labels (dates) for the x-axis.
-      datasets: new Array(totalRequestCount), // Data for each article timeseries
+      labels: [], // Labels (dates) for the x-axis.
+      datasets: [], // Data for each article timeseries
       errors: [], // Queue up errors to show after all requests have been made
       fatalErrors: [], // Unrecoverable JavaScript errors
-      promises: new Array(totalRequestCount)
+      promises: []
     };
 
     const makeRequest = (entity, index) => {
@@ -338,7 +338,7 @@ const ChartHelpers = superclass => class extends superclass {
         url = this.getApiUrl(entity, startDate, endDate),
         promise = $.ajax({ url, dataType: 'json' });
 
-      xhrData.promises[index] = promise;
+      xhrData.promises.push(promise);
 
       promise.done(successData => {
         try {

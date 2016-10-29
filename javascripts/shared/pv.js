@@ -1372,6 +1372,10 @@ class Pv extends PvConfig {
       );
     });
 
+    const throwToastError = bugUrl => this.toastError(`
+      <strong>${$.i18n('fatal-error')}</strong>: ${$.i18n('error-please-report', this.getBugReportURL(bugUrl))}
+    `, 0);
+
     if (this.debug) {
       throw errors[0];
     } else if (errors && errors[0] && errors[0].stack) {
@@ -1392,18 +1396,12 @@ class Pv extends PvConfig {
         }
       }).done(data => {
         if (data && data.result && data.result.objectName) {
-          this.toastError(
-            $.i18n('error-please-report', this.getBugReportURL(data.result.objectName))
-          );
+          throwToastError(data.result.objectName);
         } else {
-          this.toastError(
-            $.i18n('error-please-report', this.getBugReportURL())
-          );
+          throwToastError();
         }
       }).fail(() => {
-        this.toastError(
-          $.i18n('error-please-report', this.getBugReportURL())
-        );
+        throwToastError();
       });
     }
   }

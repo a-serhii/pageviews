@@ -567,6 +567,9 @@ footer {
 .loading .summary-column {
   visibility: hidden; }
 
+.message-container {
+  margin-bottom: 20px; }
+
 .error-message {
   color: #fe875e;
   margin-bottom: 12px; }
