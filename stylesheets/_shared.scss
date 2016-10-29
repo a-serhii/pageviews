@@ -378,6 +378,10 @@ footer {
   }
 }
 
+output {
+  clear: both;
+}
+
 @font-face {
   font-family: 'Glyphter';
   src: url('/pageviews/fonts/Glyphter.woff') format('woff');

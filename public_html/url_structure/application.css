@@ -685,6 +685,9 @@ footer {
   .sort-link:hover .glyphicon-sort {
     visibility: visible; }
 
+output {
+  clear: both; }
+
 @font-face {
   font-family: 'Glyphter';
   src: url("/pageviews/fonts/Glyphter.woff") format("woff");
