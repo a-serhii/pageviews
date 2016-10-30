@@ -696,3 +696,8 @@ output {
   src: url("/pageviews/fonts/Glyphter.woff") format("woff");
   font-weight: normal;
   font-style: normal; }
+
+@media (max-width: 1200px) {
+  .summary-column {
+    border: 0 !important;
+    margin-top: 20px; } }

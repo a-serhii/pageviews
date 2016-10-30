@@ -1365,7 +1365,7 @@ class Pv extends PvConfig {
    * @param  {Array} errors - list of error messages (strings)
    */
   showFatalErrors(errors) {
-    this.clearMessages();
+    this.resetView();
     errors.forEach(error => {
       this.writeMessage(
         `<strong>${$.i18n('fatal-error')}</strong>: <code>${error}</code>`

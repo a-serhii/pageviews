@@ -1,4 +1,6 @@
 @import 'mixins';
+@import 'bootstrap';
+
 $select2-selection: rgba(255, 255, 255, .8);
 $select2-dropdown: rgba(0, 0, 0, .075);
 $form-control-bg: rgba(255, 255, 255, .7);
@@ -391,4 +393,12 @@ output {
   src: url('/pageviews/fonts/Glyphter.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+}
+
+@media (max-width: $screen-lg) {
+  .summary-column {
+    // scss-lint:disable ImportantRule
+    border: 0 !important;
+    margin-top: 20px;
+  }
 }

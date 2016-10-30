@@ -294,8 +294,6 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
 
     $select2Input.select2(params);
     $select2Input.off('select2:select').on('select2:select', this.processInput.bind(this));
-    // FIXME: don't re-query everything when removing a page, just remove that page from the data
-    // FIXME: this is getting called twice for some reason
     $select2Input.off('select2:unselect').on('select2:unselect', e => {
       this.processInput(false, e.params.data.text);
       $select2Input.trigger('select2:close');
@@ -396,7 +394,7 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
     this.setInitialChartType(entities.length);
 
     // clear out old error messages unless the is the first time rendering the chart
-    this.clearMessages();
+    if (this.prevChartType) this.clearMessages();
 
     this.prevChartType = this.chartType;
     this.destroyChart();
@@ -456,7 +454,13 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
         </span>
         &middot;
         ${$.i18n('num-pageviews', this.formatNumber(page.sum))}
+        <span class='hidden-lg'>
+          (${this.formatNumber(page.average)}/${$.i18n('day')})
+        </span>
       `);
+      $('.single-page-legend').html(
+        this.config.templates.chartLegend(this)
+      );
     });
   }
 
@@ -561,6 +565,14 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
     const dfd = $.Deferred();
 
     this.getPageInfo(pages).done(data => {
+      // throw errors for missing pages and remove them from the list to be processed
+      for (let page in data) {
+        if (data[page].missing) {
+          this.writeMessage(`${this.getPageLink(page)}: ${$.i18n('api-error-no-data')}`);
+          delete data[page];
+        }
+      }
+
       this.entityInfo = data;
       // use Object.keys(data) to get normalized page names
       this.getEditData(Object.keys(data)).done(editData => {

@@ -326,7 +326,7 @@ const ChartHelpers = superclass => class extends superclass {
     let xhrData = {
       entities,
       labels: [], // Labels (dates) for the x-axis.
-      datasets: [], // Data for each article timeseries
+      datasets: new Array(totalRequestCount), // Data for each article timeseries
       errors: [], // Queue up errors to show after all requests have been made
       fatalErrors: [], // Unrecoverable JavaScript errors
       promises: []
@@ -342,7 +342,8 @@ const ChartHelpers = superclass => class extends superclass {
 
       promise.done(successData => {
         try {
-          xhrData.datasets[index] = successData.items;
+          const entityIndex = xhrData.entities.indexOf(entity);
+          xhrData.datasets[entityIndex] = successData.items;
 
           /** fetch the labels for the x-axis on success if we haven't already */
           if (successData.items && !xhrData.labels.length) {
@@ -372,7 +373,9 @@ const ChartHelpers = superclass => class extends superclass {
         }
 
         // remove this article from the list of entities to analyze
-        xhrData.entities = xhrData.entities.filter(el => el !== entity);
+        const entityIndex = xhrData.entities.indexOf(entity);
+        xhrData.entities.splice(entityIndex, 1);
+        xhrData.datasets.splice(entityIndex, 1);
 
         if (cassandraError) {
           failedEntities.push(entity);

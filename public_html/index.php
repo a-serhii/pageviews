@@ -94,7 +94,7 @@
       </div>
       <div class="message-container col-lg-12"></div>
     </main>
-    <aside class="col-lg-2 col-md-12 visible-lg-block summary-column">
+    <aside class="col-lg-2 visible-lg-block summary-column">
       <header class="text-center">
         <h4>Totals</h4>
       </header>
@@ -105,6 +105,7 @@
     <output class="col-lg-10 col-lg-offset-1">
       <h4 class="single-page-stats text-center"></h4>
       <h5 class="single-page-ranking text-center"></h5>
+      <div class="single-page-legend hidden-lg col-md-4 col-md-offset-4 tm"></div>
       <?php
         $columns = array(
           'title' => 'page-title',

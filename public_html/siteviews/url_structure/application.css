@@ -697,5 +697,10 @@ output {
   font-weight: normal;
   font-style: normal; }
 
+@media (max-width: 1200px) {
+  .summary-column {
+    border: 0 !important;
+    margin-top: 20px; } }
+
 .special-ranges {
   padding: 5px 20px 0; }
