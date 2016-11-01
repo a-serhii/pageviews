@@ -119,14 +119,14 @@ const templates = {
         <${tag} class='table-view--color-col'>
           <span class='table-view--color-block' style="background:${item.color}"></span>
         </${tag}>
-        <${tag}>${last ? item.label : scope.getPageLink(item.label)}</${tag}>
-        <${tag}>${scope.formatNumber(item.sum)}</${tag}>
-        <${tag}>${scope.formatNumber(item.average)}</${tag}>
-        <${tag} class='table-view--edit-data'>${historyRow}</${tag}>
-        <${tag} class='table-view--edit-data'>${numUsers}</${tag}>
-        <${tag}>${scope.formatNumber(item.length)}</${tag}>
-        <${tag}>${item.protection}</${tag}>
-        <${tag}>${item.watchers ? scope.formatNumber(item.watchers) : $.i18n('unknown')}</${tag}>
+        <${tag} class='table-view--title'>${last ? item.label : scope.getPageLink(item.label)}</${tag}>
+        <${tag} class='table-view--views'>${scope.formatNumber(item.sum)}</${tag}>
+        <${tag} class='table-view--average'>${scope.formatNumber(item.average)}</${tag}>
+        <${tag} class='table-view-edits table-view--edit-data'>${historyRow}</${tag}>
+        <${tag} class='table-view-editors table-view--edit-data'>${numUsers}</${tag}>
+        <${tag} class='table-view--size'>${scope.formatNumber(item.length)}</${tag}>
+        <${tag} class='table-view--protection'>${item.protection}</${tag}>
+        <${tag} class='table-view--watchers'>${item.watchers ? scope.formatNumber(item.watchers) : $.i18n('unknown')}</${tag}>
         <${tag}>${linksRow}</${tag}>
       </tr>
     `;

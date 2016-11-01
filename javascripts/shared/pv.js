@@ -1275,12 +1275,12 @@ class Pv extends PvConfig {
 
     // FIXME: Pageviews 2.0 BETA code
     if (location.pathname.includes('-test') && location.pathname.includes('pageviews')) {
-      ranges['All time'] = ranges['all-time'];
-      delete ranges['all-time'];
       ranges['This year'] = ranges['this-year'];
       delete ranges['this-year'];
       ranges['Last year'] = ranges['last-year'];
       delete ranges['last-year'];
+      ranges['All time'] = ranges['all-time'];
+      delete ranges['all-time'];
     }
 
     let datepickerOptions = {

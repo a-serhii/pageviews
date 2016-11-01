@@ -504,7 +504,7 @@ class PageViews extends mix(Pv).with(ChartHelpers) {
 
     let hasProtection = false;
     datasets.forEach((item, index) => {
-      if (item.protection !== $.i18n('none')) hasProtection = true;
+      if (item.protection !== $.i18n('none').toLowerCase()) hasProtection = true;
 
       $('.output-list').append(this.config.templates.tableRow(this, item));
     });
