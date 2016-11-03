@@ -6,7 +6,7 @@
       <?php echo $I18N->msg( 'siteviews-title' ) . ' – ' . $I18N->msg( 'url-structure' ); ?>
     </title>
   </head>
-  <body>
+  <body class="clearfix">
     <div class="container">
       <header class="col-lg-12 text-center">
         <h4>
@@ -74,9 +74,9 @@
             <?php echo $I18N->msg( 'faq-return-to', [ 'variables' => [ $I18N->msg( 'siteviews-title' ) ], 'parsemag' => true ] ); ?>
           </a>
         </div>
-        <?php $currentApp = "siteviews"; ?>
-        <?php include "../../_footer.php"; ?>
       </main>
+      <?php $currentApp = "siteviews"; ?>
+      <?php include "../../_footer.php"; ?>
     </div>
   </body>
 </html>

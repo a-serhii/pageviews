@@ -7,7 +7,7 @@
     <?php include '../_head.php'; ?>
     <title>Metaviews Analysis</title>
   </head>
-  <body class="<?php echo $rtl; ?> <?php echo $currentApp; ?>">
+  <body class="clearfix" class="<?php echo $rtl; ?> <?php echo $currentApp; ?>">
     <div class="container">
       <header class="col-lg-10 col-lg-offset-1 text-center">
         <h4>

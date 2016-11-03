@@ -6,7 +6,7 @@
       <?php echo $I18N->msg( 'title' ) . ' - ' . $I18N->msg( 'faq' ); ?>
     </title>
   </head>
-  <body>
+  <body class="clearfix">
     <div class="container">
       <header class="col-lg-12 text-center">
         <h4>
@@ -49,9 +49,9 @@
             <?php echo $I18N->msg( 'faq-return-to', array( 'variables' => array( $I18N->msg( 'title' ) ), 'parsemag' => true ) ); ?>
           </a>
         </div>
-        <?php $currentApp = "pageviews"; ?>
-        <?php include "../_footer.php"; ?>
       </main>
+      <?php $currentApp = "pageviews"; ?>
+      <?php include "../_footer.php"; ?>
     </div>
   </body>
 </html>

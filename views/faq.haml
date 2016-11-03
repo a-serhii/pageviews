@@ -4,7 +4,7 @@
     - include '../_head.php'
     %title
       = $I18N->msg( 'title' ) . ' - ' . $I18N->msg( 'faq' )
-  %body
+  %body.clearfix
     %div.container
       %header.col-lg-12.text-center
         %h4
@@ -37,5 +37,5 @@
           %a(href="/pageviews")
             = $I18N->msg( 'faq-return-to', array( 'variables' => array( $I18N->msg( 'title' ) ), 'parsemag' => true ) )
 
-        - $currentApp = "pageviews";
-        - include "../_footer.php"
+      - $currentApp = "pageviews";
+      - include "../_footer.php"

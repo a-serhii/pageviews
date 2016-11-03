@@ -7,35 +7,25 @@
     <?php include '../_head.php'; ?>
     <title><?php echo $I18N->msg( 'siteviews-title' ); ?></title>
   </head>
-  <body class="<?php echo $rtl; ?> <?php echo $currentApp; ?>">
-    <?php include '../_header.php'; ?>
-    <main class="col-lg-8 col-lg-offset-2">
-      <!-- Site notice -->
-      <div class="text-center site-notice-wrapper">
-        <div class="site-notice">
-          <?php include "../_browser_check.php"; ?>
-        </div>
+  <body class="clearfix" class="<?php echo $rtl; ?> <?php echo $currentApp; ?>">
+    <div class="text-center site-notice-wrapper">
+      <div class="site-notice">
+        <?php include "../_browser_check.php"; ?>
       </div>
-      <div class="row aqs-row options">
-        <!-- Date range selector -->
-        <div class="col-lg-5 col-sm-5">
+    </div>
+    <?php include '../_header.php'; ?>
+    <aside class="col-lg-2 col-md-2 page-selector">
+      <header class="text-center">
+        <h4>Options</h4>
+      </header>
+      <div class="page-selector--container">
+        <div>
           <label for="range-input">
             <?php echo $I18N->msg( 'dates' ); ?>
           </label>
-          <span class="date-latest">
-            <?php
-              $days = array(10, 20, 30, 60, 90);
-              $dayLinks = '';
-              foreach ( $days as $day ) {
-                $dayLinks .= " <a data-value='{$day}' href='#'>{$day}</a>";
-              }
-            ?>
-            <?php echo $I18N->msg( 'latest-days', array( 'variables' => array( $dayLinks ) ) ); ?>
-          </span>
           <input class="form-control aqs-date-range-selector" id="range-input">
         </div>
-        <!-- Advanced options -->
-        <div class="col-lg-3 col-sm-3">
+        <div>
           <label for="data-source-select">
             <?php echo $I18N->msg( 'metric' ); ?>
           </label>
@@ -48,7 +38,7 @@
             </option>
           </select>
         </div>
-        <div class="col-lg-2 col-sm-2">
+        <div>
           <label for="platform-select">
             <?php echo $I18N->msg( 'platform' ); ?>
           </label>
@@ -70,7 +60,7 @@
             </option>
           </select>
         </div>
-        <div class="col-lg-2 col-sm-2">
+        <div>
           <label for="agent-select">
             <?php echo $I18N->msg( 'agent' ); ?>
             <a class="help-link" href="/siteviews/faq#agents">
@@ -90,14 +80,20 @@
           </select>
         </div>
       </div>
+    </aside>
+    <main class="col-lg-8 col-md-10">
       <!-- Site selector -->
-      <div class="row aqs-row">
-        <div class="col-lg-12">
-          <label for="site-input">
-            <?php echo $I18N->msg( 'projects' ); ?>
-          </label>
-          <select class="aqs-select2-selector col-lg-12 invisible" id="site-input" multiple="multiple"></select>
-        </div>
+      <div>
+        <label for="site-input">
+          <?php echo $I18N->msg( 'projects' ); ?>
+        </label>
+        <small class="text-muted num-pages-info">
+          <?php echo $I18N->msg( 'num-pages-info', [ 'variables' => [ 10 ] ] ); ?>
+        </small>
+        <span class="clear-pages pull-right">
+          &#x2715; Clear
+        </span>
+        <select class="aqs-select2-selector col-lg-12 invisible" id="site-input" multiple="multiple"></select>
       </div>
       <?php include "../_data_links.php"; ?>
       <!-- Chart -->
@@ -105,9 +101,51 @@
         <canvas class="aqs-chart"></canvas>
       </div>
       <div class="message-container col-lg-12"></div>
-      <!-- Legend -->
-      <div class="col-lg-12 tm clearfix" id="chart-legend"></div>
     </main>
+    <aside class="col-lg-2 visible-lg-block summary-column">
+      <header class="text-center">
+        <h4>Totals</h4>
+      </header>
+      <div class="summary-column--container">
+        <div class="chart-legend col-lg-12 clearfix"></div>
+      </div>
+    </aside>
+    <output class="col-lg-10 col-lg-offset-1">
+      <h4 class="single-page-stats text-center"></h4>
+      <h5 class="single-page-ranking text-center"></h5>
+      <div class="single-page-legend hidden-lg col-md-4 col-md-offset-4 tm"></div>
+      <?php
+        $columns = array(
+          'title' => 'page-title',
+          'views' => 'views',
+          'average' => 'daily-views',
+          'edits' => 'edits',
+          'editors' => 'editors',
+          'size' => 'size',
+          'protection' => 'protection',
+          'watchers' => 'watchers'
+        );
+      ?>
+      <table class="table table-hover table-view">
+        <thead class="table-view--header">
+          <tr>
+            <th></th>
+            <?php foreach( $columns as $column => $translation ) { ?>
+              <th class="table-view--<?php echo $column; ?>">
+                <span class="sort-link sort-link--<?php echo $column; ?>" data-type="<?php echo $column; ?>">
+                  <?php echo $I18N->msg( $translation ); ?>
+                  <span class="glyphicon glyphicon-sort"></span>
+                </span>
+              </th>
+            <?php } ?>
+            <th>
+              <span>Links</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="output-list"></tbody>
+      </table>
+    </output>
     <?php include "../_footer.php"; ?>
     <?php include "../_modals.php"; ?>
   </body>

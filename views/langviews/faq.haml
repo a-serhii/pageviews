@@ -4,7 +4,7 @@
     - include '../../_head.php'
     %title
       = $I18N->msg( 'langviews-title' ) . ' - ' . $I18N->msg( 'faq' )
-  %body
+  %body.clearfix
     %div.container
       %header.col-lg-12.text-center
         %h4
@@ -24,5 +24,5 @@
           %a(href="/langviews")
             = $I18N->msg( 'faq-return-to', array( 'variables' => array( $I18N->msg( 'langviews-title' ) ), 'parsemag' => true ) )
 
-        - $currentApp = "langviews";
-        - include "../../_footer.php"
+      - $currentApp = "langviews";
+      - include "../../_footer.php"

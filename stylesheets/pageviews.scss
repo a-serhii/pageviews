@@ -4,73 +4,7 @@
 @import 'shared';
 @import 'chart_view';
 
-.page-selector {
-  border-right: solid 1px $light-gray;
-
-  .page-selector--container > div {
-    margin-bottom: 10px;
-  }
-}
-
-.summary-column {
-  border-left: solid 1px $light-gray;
-}
-
-.remove-page {
-  color: $link;
-  cursor: pointer;
-}
-
-.data-links {
-  margin-top: 15px;
-}
-
-.table-view {
-  display: none;
-}
-
-.table .table-view--header th {
-  vertical-align: top;
-}
-
-.table .output-list td {
-  vertical-align: middle;
-}
-
-.table-view--color-col {
-  padding-right: 0;
-}
-
-.table-view--color-block {
-  display: block;
-  height: 16px;
-  width: 16px;
-}
-
-.table-view--summary-row th {
-  // scss-lint:disable ImportantRule
-  border-top-width: 2px !important;
-}
-
 .num-pages-info {
   font-weight: normal;
   margin-left: 10px;
-}
-
-.single-page-stats {
-  margin-top: 5px;
-
-  .text-muted {
-    font-weight: normal;
-  }
-}
-
-.single-page-ranking {
-  font-weight: normal;
-  margin-top: 20px;
-}
-
-.clear-pages {
-  cursor: pointer;
-  display: none;
 }

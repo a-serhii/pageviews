@@ -4,8 +4,7 @@
     - include '../../_head.php'
     %title
       = $I18N->msg( 'siteviews-title' ) . ' – ' . $I18N->msg( 'url-structure' )
-
-  %body
+  %body.clearfix
     %div.container
       %header.col-lg-12.text-center
         %h4
@@ -59,5 +58,5 @@
           %a(href="/siteviews")
             = $I18N->msg( 'faq-return-to', [ 'variables' => [ $I18N->msg( 'siteviews-title' ) ], 'parsemag' => true ] )
 
-        - $currentApp = "siteviews";
-        -include "../../_footer.php";
+      - $currentApp = "siteviews";
+      -include "../../_footer.php";

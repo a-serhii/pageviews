@@ -4,7 +4,7 @@
     - include '../../_head.php'
     %title
       = $I18N->msg( 'redirectviews-title' ) . ' – ' . $I18N->msg( 'url-structure' )
-  %body
+  %body.clearfix
     %div.container
       %header.col-lg-12.text-center
         %h4
@@ -55,5 +55,5 @@
           %a(href="/redirectviews")
             = $I18N->msg( 'faq-return-to', array( 'variables' => array( $I18N->msg( 'redirectviews-title' ) ), 'parsemag' => true ) )
 
-        - $currentApp = "redirectviews";
-        -include "../../_footer.php";
+      - $currentApp = "redirectviews";
+      -include "../../_footer.php";

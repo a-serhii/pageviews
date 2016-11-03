@@ -6,32 +6,22 @@
   %head
     - include '../_head.php'
     %title= $I18N->msg( 'siteviews-title' )
-  %body(class="#{$rtl} #{$currentApp}")
+  %body.clearfix(class="#{$rtl} #{$currentApp}")
+    %div.text-center.site-notice-wrapper
+      %div.site-notice
+        - include "../_browser_check.php"
+
     - include '../_header.php'
 
-    %main.col-lg-8.col-lg-offset-2
-      / Site notice
-      %div.text-center.site-notice-wrapper
-        %div.site-notice
-          - include "../_browser_check.php"
-
-      %div.row.aqs-row.options
-        / Date range selector
-        %div.col-lg-5.col-sm-5
+    %aside.col-lg-2.col-md-2.page-selector
+      %header.text-center
+        %h4 Options
+      %div.page-selector--container
+        %div
           %label(for="range-input")
             = $I18N->msg( 'dates' )
-          %span.date-latest
-            :php
-              $days = array(10, 20, 30, 60, 90);
-              $dayLinks = '';
-              foreach ( $days as $day ) {
-                $dayLinks .= " <a data-value='{$day}' href='#'>{$day}</a>";
-              }
-            = $I18N->msg( 'latest-days', array( 'variables' => array( $dayLinks ) ) )
           %input.form-control.aqs-date-range-selector#range-input
-
-        / Advanced options
-        %div.col-lg-3.col-sm-3
+        %div
           %label(for="data-source-select")
             = $I18N->msg( 'metric' )
           %select.form-control#data-source-select
@@ -39,8 +29,7 @@
               = $I18N->msg( 'pageviews' )
             %option(value="unique-devices")
               = $I18N->msg( 'unique-devices' )
-
-        %div.col-lg-2.col-sm-2
+        %div
           %label(for="platform-select")
             = $I18N->msg( 'platform' )
           %select.form-control#platform-select
@@ -54,8 +43,7 @@
               = $I18N->msg( 'mobile-web' )
             %option.platform-select--mobile.none(data-ud-value="mobile-site")
               = $I18N->msg( 'mobile' )
-
-        %div.col-lg-2.col-sm-2
+        %div
           %label(for="agent-select")
             = $I18N->msg( 'agent' )
             %a.help-link(href="/siteviews/faq#agents")
@@ -68,12 +56,16 @@
             %option(value="spider")
               = $I18N->msg( 'spider' )
 
+    %main.col-lg-8.col-md-10
       / Site selector
-      %div.row.aqs-row
-        %div.col-lg-12
-          %label(for="site-input")
-            = $I18N->msg( 'projects' )
-          %select.aqs-select2-selector.col-lg-12.invisible#site-input(multiple="multiple")
+      %div
+        %label(for="site-input")
+          = $I18N->msg( 'projects' )
+        %small.text-muted.num-pages-info
+          = $I18N->msg( 'num-pages-info', [ 'variables' => [ 10 ] ] )
+        %span.clear-pages.pull-right
+          &#x2715; Clear
+        %select.aqs-select2-selector.col-lg-12.invisible#site-input(multiple="multiple")
 
       - include "../_data_links.php"
 
@@ -83,8 +75,39 @@
 
       %div.message-container.col-lg-12
 
-      / Legend
-      %div.col-lg-12.tm.clearfix#chart-legend
+    %aside.col-lg-2.visible-lg-block.summary-column
+      %header.text-center
+        %h4 Totals
+      %div.summary-column--container
+        %div.chart-legend.col-lg-12.clearfix
+
+    %output.col-lg-10.col-lg-offset-1
+      %h4.single-page-stats.text-center
+      %h5.single-page-ranking.text-center
+      %div.single-page-legend.hidden-lg.col-md-4.col-md-offset-4.tm
+      :php
+        $columns = array(
+          'title' => 'page-title',
+          'views' => 'views',
+          'average' => 'daily-views',
+          'edits' => 'edits',
+          'editors' => 'editors',
+          'size' => 'size',
+          'protection' => 'protection',
+          'watchers' => 'watchers'
+        );
+      %table.table.table-hover.table-view
+        %thead.table-view--header
+          %tr
+            %th
+            - foreach( $columns as $column => $translation )
+              %th(class="table-view--#{$column}")
+                %span(class="sort-link sort-link--#{$column}" data-type="#{$column}")
+                  = $I18N->msg( $translation )
+                  %span.glyphicon.glyphicon-sort
+            %th
+              %span Links
+        %tbody.output-list
 
     - include "../_footer.php"
 

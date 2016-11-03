@@ -24,6 +24,7 @@ class SiteViews extends mix(Pv).with(ChartHelpers) {
     super(config);
     this.app = 'siteviews';
     this.specialRange = null;
+    this.entityInfo = {};
 
     /**
      * Select2 library prints "Uncaught TypeError: XYZ is not a function" errors
@@ -51,7 +52,8 @@ class SiteViews extends mix(Pv).with(ChartHelpers) {
    * Should only be called on initial page load, until we decide to support pop states (probably never)
    */
   popParams() {
-    this.startSpinny();
+    /** show loading indicator and add error handling for timeouts */
+    setTimeout(this.startSpinny.bind(this)); // use setTimeout to force rendering threads to catch up
 
     let params = this.validateParams(
       this.parseQueryString('sites')
@@ -80,6 +82,35 @@ class SiteViews extends mix(Pv).with(ChartHelpers) {
 
     this.setInitialChartType(params.sites.length);
     this.setSelect2Defaults(params.sites);
+  }
+
+  getSiteStats(sites) {
+    let dfd = $.Deferred(), requestCount = 0;
+
+    sites.forEach(site => {
+      // don't re-query for the same stats
+      if (this.entityInfo[site]) return;
+
+      $.ajax({
+        url: `https://${site}/w/api.php`,
+        data: {
+          action: 'query',
+          meta: 'siteinfo',
+          siprop: 'statistics',
+          format: 'json'
+        },
+        dataType: 'jsonp'
+      }).done(data => {
+        this.entityInfo[site] = data.query.statistics;
+      }).always(() => {
+        requestCount++;
+        if (requestCount === sites.length) {
+          dfd.resolve(this.entityInfo);
+        }
+      });
+    });
+
+    return dfd;
   }
 
   /**
@@ -212,6 +243,17 @@ class SiteViews extends mix(Pv).with(ChartHelpers) {
   setupListeners() {
     super.setupListeners();
     $('#platform-select, #agent-select').on('change', this.processInput.bind(this));
+    $('.sort-link').on('click', e => {
+      const sortType = $(e.currentTarget).data('type');
+      this.direction = this.sort === sortType ? -this.direction : 1;
+      this.sort = sortType;
+      this.updateTable();
+    });
+    $('.clear-pages').on('click', () => {
+      $('.clear-pages').hide();
+      this.resetView(true);
+      this.focusSelect2();
+    });
   }
 
   /**
@@ -229,9 +271,9 @@ class SiteViews extends mix(Pv).with(ChartHelpers) {
 
     this.params = location.search;
 
-    const entities = $(config.select2Input).select2('val') || [];
+    const sites = $(config.select2Input).select2('val') || [];
 
-    if (!entities.length) {
+    if (!sites.length) {
       return this.resetView();
     }
 
@@ -240,7 +282,9 @@ class SiteViews extends mix(Pv).with(ChartHelpers) {
     this.destroyChart();
     this.startSpinny();
 
-    this.getPageViewsData(entities).done(xhrData => this.updateChart(xhrData));
+    this.getSiteStats(sites).then(data => {
+      this.getPageViewsData(sites).done(xhrData => this.updateChart(xhrData));
+    });
   }
 
   /**

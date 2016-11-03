@@ -7,7 +7,7 @@
     <?php include "../_head.php"; ?>
     <title><?php echo $I18N->msg( 'topviews-title' ); ?></title>
   </head>
-  <body class="<?php echo $rtl; ?> <?php echo $currentApp; ?>">
+  <body class="clearfix" class="<?php echo $rtl; ?> <?php echo $currentApp; ?>">
     <?php include '../_header.php'; ?>
     <main class="col-lg-8 col-lg-offset-2">
       <!-- Site notice -->

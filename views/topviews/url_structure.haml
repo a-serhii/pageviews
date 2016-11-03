@@ -4,7 +4,7 @@
     - include "../../_head.php"
     %title
       = $I18N->msg( 'topviews-title' ) . ' – ' . $I18N->msg( 'url-structure' )
-  %body
+  %body.clearfix
     %div.container
       %header.col-lg-12.text-center
         %h4
@@ -52,5 +52,5 @@
           %a(href="/topviews")
             = $I18N->msg( 'faq-return-to', array( 'variables' => array( $I18N->msg( 'topviews-title' ) ), 'parsemag' => true ) )
 
-        - $currentApp = "topviews";
-        - include "../../_footer.php";
+      - $currentApp = "topviews";
+      - include "../../_footer.php";
