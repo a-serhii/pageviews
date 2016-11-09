@@ -28,7 +28,7 @@ class PvConfig {
     this.config = {
       apiLimit: 5000,
       apiThrottle: 20,
-      apps: ['pageviews', 'topviews', 'langviews', 'siteviews', 'massviews', 'redirectviews'],
+      apps: ['pageviews', 'topviews', 'langviews', 'siteviews', 'massviews', 'redirectviews', 'mediaviews'],
       chartConfig: {
         line: {
           opts: {

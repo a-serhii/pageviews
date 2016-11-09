@@ -1,0 +1,36 @@
+/**
+ * @file Configuration for Mediaviews application
+ * @author MusikAnimal
+ * @copyright 2016 MusikAnimal
+ */
+
+const templates = require('./templates');
+
+/**
+ * Configuration for Mediaviews application.
+ * This includes selectors, defaults, and other constants specific to Mediaviews
+ * @type {Object}
+ */
+const config = {
+  agentSelector: '#agent-select',
+  chart: '.aqs-chart',
+  chartLegend: templates.chartLegend,
+  dataSourceSelector: '#data-source-select',
+  dateRangeSelector: '.aqs-date-range-selector',
+  defaults: {
+    dateRange: 'latest-20',
+    projects: ['fr.wikipedia.org', 'de.wikipedia.org'],
+    source: 'pageviews'
+  },
+  logarithmicCheckbox: '.logarithmic-scale-option',
+  platformSelector: '#platform-select',
+  projectInput: '.aqs-project-input',
+  select2Input: '.aqs-select2-selector',
+  validateParams: ['source', 'agent', 'platform'],
+  validParams: {
+    source: ['pageviews', 'unique-devices'],
+    agent: ['all-agents', 'user', 'spider']
+  }
+};
+
+module.exports = config;
