@@ -19,10 +19,24 @@
         <h4>Options</h4>
       </header>
       <div class="page-selector--container">
-        <div>
+        <div class="page-selector--label">
           <label for="range-input">
             <?php echo $I18N->msg( 'dates' ); ?>
           </label>
+          <span class="btn-group dropdown latest-group">
+            <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Latest
+              <span class="latest-num">30</span>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right date-latest">
+              <?php foreach ([10, 20, 30, 60, 90] as $offset) { ?>
+                <li>
+                  <a href="#" data-value="<?php echo $offset; ?>"><?php echo $offset; ?></a>
+                </li>
+              <?php } ?>
+            </ul>
+          </span>
           <input class="form-control aqs-date-range-selector" id="range-input">
         </div>
         <div>

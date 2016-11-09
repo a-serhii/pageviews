@@ -13,7 +13,7 @@
 const templates = {
   chartLegend(scope) {
     const dataList = (entity, multiEntity = false) => {
-      let editsLink;
+      // let editsLink;
 
       let infoHash = {
         'Pageviews': {

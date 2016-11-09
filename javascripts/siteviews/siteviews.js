@@ -84,6 +84,11 @@ class SiteViews extends mix(Pv).with(ChartHelpers) {
     this.setSelect2Defaults(params.sites);
   }
 
+  /**
+   * Get statistics for the given sites
+   * @param  {Array} sites - site names, ['en.wikipedia.org', 'fr.wikipedia.org', ...]
+   * @return {Deferred} Promise resolving with the stats for each site
+   */
   getSiteStats(sites) {
     let dfd = $.Deferred(), requestCount = 0;
 

@@ -689,7 +689,8 @@ footer {
     visibility: visible; }
 
 output {
-  clear: both; }
+  clear: both;
+  overflow-x: scroll; }
 
 @font-face {
   font-family: 'Glyphter';

@@ -156,3 +156,29 @@
   line-height: 30px;
   margin: 0 0 0 10px;
 }
+
+.latest-group {
+  position: absolute;
+  right: 0;
+  top: -2px;
+
+  .dropdown-menu {
+    min-width: auto;
+  }
+}
+
+.page-selector--label {
+  position: relative;
+}
+
+@media (max-width: $screen-sm) {
+  .chart-buttons {
+    float: left;
+  }
+
+  .chart-toggles {
+    clear: both;
+    float: left;
+    margin-top: 6px;
+  }
+}

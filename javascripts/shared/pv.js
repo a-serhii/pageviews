@@ -1177,10 +1177,10 @@ class Pv extends PvConfig {
    */
   setSpecialRange(type) {
     const rangeIndex = Object.keys(this.config.specialRanges).indexOf(type);
-    let startDate, endDate;
+    let startDate, endDate, offset;
 
     if (type.includes('latest-')) {
-      const offset = parseInt(type.replace('latest-', ''), 10) || 20; // fallback of 20
+      offset = parseInt(type.replace('latest-', ''), 10) || 20; // fallback of 20
       [startDate, endDate] = this.config.specialRanges.latest(offset);
     } else if (rangeIndex >= 0) {
       /** treat 'latest' as a function */
@@ -1198,6 +1198,8 @@ class Pv extends PvConfig {
     /** directly assign startDate then use setEndDate so that the events will be fired once */
     this.daterangepicker.startDate = startDate;
     this.daterangepicker.setEndDate(endDate);
+
+    $('.latest-num').text(offset);
 
     return this.specialRange;
   }

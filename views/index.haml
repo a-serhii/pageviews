@@ -17,9 +17,18 @@
       %header.text-center
         %h4 Options
       %div.page-selector--container
-        %div
+        %div.page-selector--label
           %label(for="range-input")
             = $I18N->msg( 'dates' )
+          %span.btn-group.dropdown.latest-group
+            %button.btn.btn-default.btn-xs.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+              Latest
+              %span.latest-num 30
+              %span.caret
+            %ul.dropdown-menu.dropdown-menu-right.date-latest
+              - foreach ([10, 20, 30, 60, 90] as $offset)
+                %li
+                  %a(href="#" data-value="#{$offset}")= $offset
           %input.form-control.aqs-date-range-selector#range-input
         %div
           %label(for="project-input")

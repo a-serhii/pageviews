@@ -552,12 +552,15 @@ const ChartHelpers = superclass => class extends superclass {
 
     /** the "Latest N days" links */
     $('.date-latest a').on('click', e => {
-      this.setSpecialRange(`latest-${$(e.target).data('value')}`);
+      const value = $(e.target).data('value');
+      this.setSpecialRange(`latest-${value}`);
+      $('.latest-num').text(value);
     });
 
     dateRangeSelector.on('change', e => {
       this.setChartPointDetectionRadius(); // FIXME: is this needed?
       this.processInput();
+      $('.latest-num').text('');
 
       /** clear out specialRange if it doesn't match our input */
       if (this.specialRange && this.specialRange.value !== e.target.value) {
