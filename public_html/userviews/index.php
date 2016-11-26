@@ -79,10 +79,10 @@
         <div class="row aqs-row article-input-row">
           <div class="col-lg-12">
             <label for="source_input">
-              <?php echo $I18N->msg( 'page' ); ?>
+              <?php echo $I18N->msg( 'user' ); ?>
             </label>
             <div class="input-group">
-              <input class="form-control input-control" id="source_input" placeholder="Star Wars" required="required" autocomplete="off">
+              <input class="form-control input-control" id="source_input" placeholder="Jimbo Wales" required="required" autocomplete="off">
               <span class="input-group-btn">
                 <button class="btn btn-primary btn-submit pull-right">
                   <?php echo $I18N->msg( 'submit' ); ?>

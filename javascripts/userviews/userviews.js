@@ -514,7 +514,7 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
    */
   popParams() {
     let params = this.validateParams(
-      this.parseQueryString('pages')
+      this.parseQueryString()
     );
 
     $(this.config.projectInput).val(params.project);
@@ -540,20 +540,8 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
     this.setupSourceInput();
 
     /** start up processing if page name is present */
-    if (params.page) {
-      this.getPageInfo([params.page]).done(data => {
-        // throw errors if page is missing
-        const normalizedPage = Object.keys(data)[0];
-        if (data[normalizedPage].missing) {
-          this.setState('initial');
-          return this.writeMessage(`${this.getPageLink(normalizedPage)}: ${$.i18n('api-error-no-data')}`);
-        }
-        // fill in value for the page
-        $(this.config.sourceInput).val(normalizedPage);
-        this.processInput();
-      }).fail(() => {
-        this.writeMessage($.i18n('api-error-unknown', 'Info'));
-      });
+    if (params.user) {
+      this.processInput();
     } else {
       $(this.config.sourceInput).focus();
     }
@@ -602,7 +590,7 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
    * @returns {null}
    */
   processInput() {
-    const page = $(this.config.sourceInput).val();
+    const user = $(this.config.sourceInput).val();
 
     this.setState('processing');
 
@@ -622,11 +610,9 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
       }, 500);
     }
 
-    const dbName = Object.keys(siteMap).find(key => siteMap[key] === $(this.config.projectInput).val());
-
-    $('.progress-counter').text($.i18n('fetching-data', 'Wikidata'));
-    this.getInterwikiData(dbName, page).done(interWikiData => {
-      this.getPageViewsData(interWikiData).done(pageViewsData => {
+    $('.progress-counter').text($.i18n('fetching-data', 'Page creation API'));
+    this.getPagesCreated(user).done(pagesCreated => {
+      this.getPageViewsData(pagesCreated).done(pageViewsData => {
         $('.progress-bar').css('width', '100%');
         $('.progress-counter').text($.i18n('building-dataset'));
         const pageLink = this.getPageLink(page, this.project);
@@ -642,7 +628,7 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
       if (typeof error === 'string') {
         this.writeMessage(error);
       } else {
-        this.writeMessage($.i18n('api-error-unknown', 'Wikidata'));
+        this.writeMessage($.i18n('api-error-unknown', 'Page creation'));
       }
     });
   }
@@ -664,11 +650,12 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
             action: 'query',
             list: 'prefixsearch',
             format: 'json',
-            pssearch: query
+            psnamespace: 2,
+            pssearch: `User:${query}`
           };
         },
         preProcess: data => {
-          const results = data.query.prefixsearch.map(elem => elem.title);
+          const results = data.query.prefixsearch.map(elem => elem.title.split('/')[0]).unique();
           return results;
         }
       }

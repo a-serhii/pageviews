@@ -4932,7 +4932,7 @@ var Pv = function (_PvConfig) {
   }, {
     key: 'isListApp',
     value: function isListApp() {
-      return ['langviews', 'massviews', 'redirectviews'].includes(this.app);
+      return ['langviews', 'massviews', 'redirectviews', 'userviews'].includes(this.app);
     }
 
     /**
@@ -7688,7 +7688,7 @@ var UserViews = function (_mix$with) {
     value: function popParams() {
       var _this8 = this;
 
-      var params = this.validateParams(this.parseQueryString('pages'));
+      var params = this.validateParams(this.parseQueryString());
 
       $(this.config.projectInput).val(params.project);
       this.validateDateRange(params);
@@ -7713,20 +7713,8 @@ var UserViews = function (_mix$with) {
       this.setupSourceInput();
 
       /** start up processing if page name is present */
-      if (params.page) {
-        this.getPageInfo([params.page]).done(function (data) {
-          // throw errors if page is missing
-          var normalizedPage = Object.keys(data)[0];
-          if (data[normalizedPage].missing) {
-            _this8.setState('initial');
-            return _this8.writeMessage(_this8.getPageLink(normalizedPage) + ': ' + $.i18n('api-error-no-data'));
-          }
-          // fill in value for the page
-          $(_this8.config.sourceInput).val(normalizedPage);
-          _this8.processInput();
-        }).fail(function () {
-          _this8.writeMessage($.i18n('api-error-unknown', 'Info'));
-        });
+      if (params.user) {
+        this.processInput();
       } else {
         $(this.config.sourceInput).focus();
       }
@@ -7783,7 +7771,7 @@ var UserViews = function (_mix$with) {
     value: function processInput() {
       var _this9 = this;
 
-      var page = $(this.config.sourceInput).val();
+      var user = $(this.config.sourceInput).val();
 
       this.setState('processing');
 
@@ -7803,13 +7791,9 @@ var UserViews = function (_mix$with) {
         }, 500);
       }
 
-      var dbName = Object.keys(siteMap).find(function (key) {
-        return siteMap[key] === $(_this9.config.projectInput).val();
-      });
-
-      $('.progress-counter').text($.i18n('fetching-data', 'Wikidata'));
-      this.getInterwikiData(dbName, page).done(function (interWikiData) {
-        _this9.getPageViewsData(interWikiData).done(function (pageViewsData) {
+      $('.progress-counter').text($.i18n('fetching-data', 'Page creation API'));
+      this.getPagesCreated(user).done(function (pagesCreated) {
+        _this9.getPageViewsData(pagesCreated).done(function (pageViewsData) {
           $('.progress-bar').css('width', '100%');
           $('.progress-counter').text($.i18n('building-dataset'));
           var pageLink = _this9.getPageLink(page, _this9.project);
@@ -7825,7 +7809,7 @@ var UserViews = function (_mix$with) {
         if (typeof error === 'string') {
           _this9.writeMessage(error);
         } else {
-          _this9.writeMessage($.i18n('api-error-unknown', 'Wikidata'));
+          _this9.writeMessage($.i18n('api-error-unknown', 'Page creation'));
         }
       });
     }
@@ -7850,13 +7834,14 @@ var UserViews = function (_mix$with) {
               action: 'query',
               list: 'prefixsearch',
               format: 'json',
-              pssearch: query
+              psnamespace: 2,
+              pssearch: 'User:' + query
             };
           },
           preProcess: function preProcess(data) {
             var results = data.query.prefixsearch.map(function (elem) {
-              return elem.title;
-            });
+              return elem.title.split('/')[0];
+            }).unique();
             return results;
           }
         }

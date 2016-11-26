@@ -843,7 +843,7 @@ class Pv extends PvConfig {
    * @return {Boolean} true or false
    */
   isListApp() {
-    return ['langviews', 'massviews', 'redirectviews'].includes(this.app);
+    return ['langviews', 'massviews', 'redirectviews', 'userviews'].includes(this.app);
   }
 
   /**
