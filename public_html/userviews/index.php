@@ -77,7 +77,17 @@
         </div>
         <!-- Article URL input -->
         <div class="row aqs-row article-input-row">
-          <div class="col-lg-12">
+          <div class="col-lg-2 col-sm-4">
+            <label for="namespace_input">
+              Namespace
+            </label>
+            <select class="form-control" id="namespace_input">
+              <option value="article">
+                Article
+              </option>
+            </select>
+          </div>
+          <div class="col-lg-10">
             <label for="source_input">
               <?php echo $I18N->msg( 'user' ); ?>
             </label>

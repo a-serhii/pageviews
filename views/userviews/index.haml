@@ -60,7 +60,14 @@
 
         / Article URL input
         %div.row.aqs-row.article-input-row
-          %div.col-lg-12
+          %div.col-lg-2.col-sm-4
+            %label(for="namespace_input")
+              Namespace
+            %select.form-control#namespace_input
+              %option(value="article")
+                Article
+
+          %div.col-lg-10
             %label(for="source_input")
               = $I18N->msg( 'user' )
             %div.input-group

@@ -3143,13 +3143,13 @@ var ChartHelpers = function ChartHelpers(superclass) {
         $('.date-latest a').on('click', function (e) {
           var value = $(e.target).data('value');
           _this7.setSpecialRange('latest-' + value);
-          $('.latest-num').text(value);
+          $('.latest-text').text($.i18n('latest-days', value));
         });
 
         dateRangeSelector.on('change', function (e) {
           _this7.setChartPointDetectionRadius(); // FIXME: is this needed?
           _this7.processInput();
-          $('.latest-num').text('');
+          $('.latest-text').text($.i18n('latest'));
 
           /** clear out specialRange if it doesn't match our input */
           if (_this7.specialRange && _this7.specialRange.value !== e.target.value) {
@@ -5379,7 +5379,7 @@ var Pv = function (_PvConfig) {
       this.daterangepicker.startDate = startDate;
       this.daterangepicker.setEndDate(endDate);
 
-      $('.latest-num').text(offset);
+      $('.latest-text').text($.i18n('latest-days', offset));
 
       return this.specialRange;
     }
@@ -7526,6 +7526,44 @@ var UserViews = function (_mix$with) {
         case 'views':
           return Number(item.sum);
       }
+    }
+
+    /**
+     * Get pages created by user via /musikanimal/api
+     * @returns {Deferred} promise resolving with data
+     */
+
+  }, {
+    key: 'getPagesCreated',
+    value: function getPagesCreated() {
+      var dfd = $.Deferred();
+
+      if (metaRoot) {
+        $.ajax({
+          url: '//' + metaRoot + '/user_analysis/pages',
+          data: {
+            username: $(this.config.sourceInput).val(),
+            project: this.project
+          },
+          timeout: 8000
+        }).done(function (data) {
+          return dfd.resolve(data);
+        }).fail(function () {
+          // stable flag will be used to handle lack of data, so just resolve with empty data
+          var data = {};
+          pages.forEach(function (page) {
+            return data[page] = {};
+          });
+          dfd.resolve({ pages: data });
+        });
+      } else {
+        dfd.resolve({
+          num_edits: 0,
+          num_users: 0
+        });
+      }
+
+      return dfd;
     }
 
     /**

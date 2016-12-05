@@ -365,6 +365,39 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
   }
 
   /**
+   * Get pages created by user via /musikanimal/api
+   * @returns {Deferred} promise resolving with data
+   */
+  getPagesCreated() {
+    const dfd = $.Deferred();
+
+    if (metaRoot) {
+      $.ajax({
+        url: `//${metaRoot}/user_analysis/pages`,
+        data: {
+          username: $(this.config.sourceInput).val(),
+          project: this.project
+        },
+        timeout: 8000
+      })
+      .done(data => dfd.resolve(data))
+      .fail(() => {
+        // stable flag will be used to handle lack of data, so just resolve with empty data
+        let data = {};
+        pages.forEach(page => data[page] = {});
+        dfd.resolve({ pages: data });
+      });
+    } else {
+      dfd.resolve({
+        num_edits: 0,
+        num_users: 0
+      });
+    }
+
+    return dfd;
+  }
+
+  /**
    * Loop through given interwiki data and query the pageviews API for each
    *   Also updates this.outputData with result
    * @param  {Object} interWikiData - as given by the getInterwikiData promise
