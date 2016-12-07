@@ -77,17 +77,17 @@
         </div>
         <!-- Article URL input -->
         <div class="row aqs-row article-input-row">
-          <div class="col-lg-2 col-sm-4">
+          <div class="col-lg-3 col-sm-4">
             <label for="namespace_input">
-              Namespace
+              <?php echo $I18N->msg( 'namespace' ); ?>
             </label>
             <select class="form-control" id="namespace_input">
-              <option value="article">
-                Article
+              <option value="all">
+                <?php echo $I18N->msg( 'all' ); ?>
               </option>
             </select>
           </div>
-          <div class="col-lg-10">
+          <div class="col-lg-9">
             <label for="source_input">
               <?php echo $I18N->msg( 'user' ); ?>
             </label>
@@ -103,9 +103,7 @@
         </div>
         <?php
           $columns = array(
-            'lang' => 'language',
             'title' => 'page-title',
-            'badges' => 'badges',
             'views' => 'pageviews'
           );
         ?>

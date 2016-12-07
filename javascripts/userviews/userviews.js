@@ -35,6 +35,7 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
     this.assignDefaults();
     this.setupDateRangeSelector();
     this.popParams();
+    this.setupNamespaceSelector();
     this.setupListeners();
     this.updateInterAppLinks();
 
@@ -71,6 +72,23 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
       this.view = e.currentTarget.dataset.value;
       this.toggleView(this.view);
     });
+  }
+
+  /**
+   * Fetch namespaces and populate the namespace selector
+   */
+  setupNamespaceSelector() {
+    this.fetchSiteInfo(this.project).then(data => {
+      const namespaces = data[this.project].namespaces;
+      for (let ns in namespaces) {
+        if (ns < 0) continue;
+        const nsTitle = namespaces[ns]['*'] || 'Main';
+        $('#namespace_input').append(
+          `<option value=${ns}>${nsTitle}</option>`
+        );
+      }
+    });
+    $('#namespace_input').val(0);
   }
 
   /**
@@ -150,21 +168,21 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
       const data = dataset.items.map(item => item.views),
         sum = data.reduce((a, b) => a + b);
 
-      dataset.badges.forEach(badge => {
-        if (totalBadges[badge] === undefined) {
-          totalBadges[badge] = 1;
-        } else {
-          totalBadges[badge] += 1;
-        }
-      });
+      // dataset.badges.forEach(badge => {
+      //   if (totalBadges[badge] === undefined) {
+      //     totalBadges[badge] = 1;
+      //   } else {
+      //     totalBadges[badge] += 1;
+      //   }
+      // });
 
       totalTitles.push(dataset.title);
 
       this.outputData.listData.push({
         data,
-        badges: dataset.badges,
-        lang: dataset.lang,
-        dbName: dataset.dbName,
+        // badges: dataset.badges,
+        // lang: dataset.lang,
+        // dbName: dataset.dbName,
         label: dataset.title,
         url: dataset.url,
         sum,
@@ -196,7 +214,7 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
       datesWithoutData,
       sum: grandSum, // nevermind the duplication
       average: grandSum / length,
-      badges: totalBadges,
+      // badges: totalBadges,
       titles: totalTitles.unique()
     });
 
@@ -311,33 +329,29 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
    */
   renderData() {
     super.renderData(sortedDatasets => {
-      const totalBadgesMarkup = Object.keys(this.outputData.badges).map(badge => {
-        return `<span class='nowrap'>${this.getBadgeMarkup(badge)} &times; ${this.outputData.badges[badge]}</span>`;
-      }).join(', ');
+      // const totalBadgesMarkup = Object.keys(this.outputData.badges).map(badge => {
+      //   return `<span class='nowrap'>${this.getBadgeMarkup(badge)} &times; ${this.outputData.badges[badge]}</span>`;
+      // }).join(', ');
 
       $('.output-totals').html(
         `<th scope='row'>${$.i18n('totals')}</th>
-         <th>${$.i18n('num-languages', sortedDatasets.length)}</th>
          <th>${$.i18n('unique-titles', this.outputData.titles.length)}</th>
-         <th>${totalBadgesMarkup}</th>
          <th>${this.formatNumber(this.outputData.sum)}</th>
          <th>${this.formatNumber(Math.round(this.outputData.average))} / ${$.i18n('day')}</th>`
       );
       $('#output_list').html('');
 
       sortedDatasets.forEach((item, index) => {
-        let badgeMarkup = '';
-        if (item.badges) {
-          badgeMarkup = item.badges.map(this.getBadgeMarkup.bind(this)).join();
-        }
+        // let badgeMarkup = '';
+        // if (item.badges) {
+        //   badgeMarkup = item.badges.map(this.getBadgeMarkup.bind(this)).join();
+        // }
 
         $('#output_list').append(
           `<tr>
            <th scope='row'>${index + 1}</th>
-           <td>${item.lang}</td>
            <td><a href="${item.url}" target="_blank">${item.label}</a></td>
-           <td>${badgeMarkup}</td>
-           <td><a target='_blank' href='${this.getPageviewsURL(`${item.lang}.${this.baseProject}.org`, item.label)}'>${this.formatNumber(item.sum)}</a></td>
+           <td><a target='_blank' href='${this.getPageviewsURL(`${this.project}.org`, item.label)}'>${this.formatNumber(item.sum)}</a></td>
            <td>${this.formatNumber(Math.round(item.average))} / ${$.i18n('day')}</td>
            </tr>`
         );
@@ -353,8 +367,6 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
    */
   getSortProperty(item, type) {
     switch (type) {
-    case 'lang':
-      return item.lang;
     case 'title':
       return item.label;
     case 'badges':
@@ -372,15 +384,19 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
     const dfd = $.Deferred();
 
     if (metaRoot) {
+      let params = {
+        username: $(this.config.sourceInput).val(),
+        project: this.project
+      };
+      if ($('#namespace_input').val() !== 'all') {
+        params.namespace = $('#namespace_input').val();
+      }
       $.ajax({
         url: `//${metaRoot}/user_analysis/pages`,
-        data: {
-          username: $(this.config.sourceInput).val(),
-          project: this.project
-        },
+        data: params,
         timeout: 8000
       })
-      .done(data => dfd.resolve(data))
+      .done(data => dfd.resolve(data.pages.map(page => page.title.descore())))
       .fail(() => {
         // stable flag will be used to handle lack of data, so just resolve with empty data
         let data = {};
@@ -398,25 +414,23 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
   }
 
   /**
-   * Loop through given interwiki data and query the pageviews API for each
+   * Loop through given pages and query the pageviews API for each
    *   Also updates this.outputData with result
-   * @param  {Object} interWikiData - as given by the getInterwikiData promise
+   * @param  {Array} pages - as given by the getPagesCreated promise
    * @return {Deferred} - Promise resolving with data ready to be rendered to view
    */
-  getPageViewsData(interWikiData) {
+  getPageViewsData(pages) {
     const startDate = this.daterangepicker.startDate.startOf('day'),
-      endDate = this.daterangepicker.endDate.startOf('day'),
-      interWikiKeys = Object.keys(interWikiData);
+      endDate = this.daterangepicker.endDate.startOf('day');
 
     let dfd = $.Deferred(), promises = [], count = 0, failureRetries = {},
-      totalRequestCount = interWikiKeys.length, failedPages = [], pageViewsData = [];
+      totalRequestCount = pages.length, failedPages = [], pageViewsData = [];
 
-    const makeRequest = dbName => {
-      const data = interWikiData[dbName],
-        uriEncodedPageName = encodeURIComponent(data.title);
+    const makeRequest = page => {
+      const uriEncodedPageName = encodeURIComponent(page);
 
       const url = (
-        `https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/${data.lang}.${this.baseProject}` +
+        `https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/${this.project}` +
         `/${$(this.config.platformSelector).val()}/${$(this.config.agentSelector).val()}/${uriEncodedPageName}/daily` +
         `/${startDate.format(this.config.timestampFormat)}/${endDate.format(this.config.timestampFormat)}`
       );
@@ -425,29 +439,25 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
 
       promise.done(pvData => {
         pageViewsData.push({
-          badges: data.badges,
-          dbName,
-          lang: data.lang,
-          title: data.title,
-          url: data.url,
+          title: page,
           items: pvData.items
         });
       }).fail(errorData => {
         /** first detect if this was a Cassandra backend error, and if so, schedule a re-try */
         const cassandraError = errorData.responseJSON.title === 'Error in Cassandra table storage backend',
-          failedPageLink = this.getPageLink(data.title, `${data.lang}.${this.baseProject}.org`);
+          failedPageLink = this.getPageLink(page, `${this.project}.org`);
 
         if (cassandraError) {
-          if (failureRetries[dbName]) {
-            failureRetries[dbName]++;
+          if (failureRetries[page]) {
+            failureRetries[page]++;
           } else {
-            failureRetries[dbName] = 1;
+            failureRetries[page] = 1;
           }
 
           /** maximum of 3 retries */
-          if (failureRetries[dbName] < 3) {
+          if (failureRetries[page] < 3) {
             totalRequestCount++;
-            return this.rateLimit(makeRequest, this.config.apiThrottle, this)(dbName);
+            return this.rateLimit(makeRequest, this.config.apiThrottle, this)(page);
           }
 
           /** retries exceeded */
@@ -480,8 +490,8 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
 
     const requestFn = this.rateLimit(makeRequest, this.config.apiThrottle, this);
 
-    interWikiKeys.forEach((dbName, index) => {
-      requestFn(dbName);
+    pages.forEach(page => {
+      requestFn(page);
     });
 
     return dfd;
@@ -643,14 +653,14 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
       }, 500);
     }
 
-    $('.progress-counter').text($.i18n('fetching-data', 'Page creation API'));
+    $('.progress-counter').text($.i18n('fetching-data', 'Page Creation API'));
     this.getPagesCreated(user).done(pagesCreated => {
       this.getPageViewsData(pagesCreated).done(pageViewsData => {
         $('.progress-bar').css('width', '100%');
         $('.progress-counter').text($.i18n('building-dataset'));
-        const pageLink = this.getPageLink(page, this.project);
+        const userLink = this.getPageLink(user, this.project);
         setTimeout(() => {
-          this.buildMotherDataset(page, pageLink, pageViewsData);
+          this.buildMotherDataset(user, userLink, pageViewsData);
           readyForRendering();
         }, 250);
       });
@@ -661,7 +671,7 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
       if (typeof error === 'string') {
         this.writeMessage(error);
       } else {
-        this.writeMessage($.i18n('api-error-unknown', 'Page creation'));
+        this.writeMessage($.i18n('api-error-unknown', 'Page Creation'));
       }
     });
   }
@@ -688,7 +698,9 @@ class UserViews extends mix(Pv).with(ChartHelpers, ListHelpers) {
           };
         },
         preProcess: data => {
-          const results = data.query.prefixsearch.map(elem => elem.title.split('/')[0]).unique();
+          const results = data.query.prefixsearch.map(elem => {
+            return elem.title.split('/')[0].replace(/^User:/, '');
+          }).unique();
           return results;
         }
       }

@@ -60,14 +60,14 @@
 
         / Article URL input
         %div.row.aqs-row.article-input-row
-          %div.col-lg-2.col-sm-4
+          %div.col-lg-3.col-sm-4
             %label(for="namespace_input")
-              Namespace
+              = $I18N->msg( 'namespace' )
             %select.form-control#namespace_input
-              %option(value="article")
-                Article
+              %option(value="all")
+                = $I18N->msg( 'all' )
 
-          %div.col-lg-10
+          %div.col-lg-9
             %label(for="source_input")
               = $I18N->msg( 'user' )
             %div.input-group
@@ -78,9 +78,7 @@
 
         :php
           $columns = array(
-            'lang' => 'language',
             'title' => 'page-title',
-            'badges' => 'badges',
             'views' => 'pageviews'
           );
       - include '../_output.php'

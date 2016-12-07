@@ -311,5 +311,8 @@
 	"admins": "Admins",
 	"data-unavailable": "Data unavailable",
 	"show-values": "Show values",
-	"userviews-title": "Userviews Analysis"
+	"userviews-title": "Userviews Analysis",
+	"main": "Main",
+	"namespace": "Namespace",
+	"all": "All"
 }

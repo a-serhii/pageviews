@@ -5227,10 +5227,12 @@ var Pv = function (_PvConfig) {
     key: 'resetSelect2',
     value: function resetSelect2() {
       var select2Input = $(this.config.select2Input);
-      select2Input.off('change');
-      select2Input.select2('val', null);
-      select2Input.select2('data', null);
-      select2Input.select2('destroy');
+      if (select2Input.data('select2')) {
+        select2Input.off('change');
+        select2Input.select2('val', null);
+        select2Input.select2('data', null);
+        select2Input.select2('destroy');
+      }
       this.setupSelect2();
     }
 
@@ -5435,8 +5437,8 @@ var Pv = function (_PvConfig) {
       $(this.config.projectInput).on('focusin', function () {
         this.dataset.value = this.value;
       });
-      $(this.config.projectInput).on('change', function (e) {
-        return _this7.validateProject(e);
+      $(this.config.projectInput).on('change', function () {
+        return _this7.validateProject();
       });
     }
 
@@ -5710,7 +5712,6 @@ var Pv = function (_PvConfig) {
         this.toastWarn($.i18n('invalid-lang-project', '<a href=\'//' + project.escape() + '\'>' + project.escape() + '</a>'));
         project = projectInput.dataset.value;
       } else if (siteDomains.includes(project)) {
-        this.clearMessages();
         this.updateInterAppLinks();
         valid = true;
       } else {
@@ -6934,97 +6935,45 @@ var siteMap = {
   'zuwiki': 'zu.wikipedia.org',
   'zuwiktionary': 'zu.wiktionary.org',
   'zuwikibooks': 'zu.wikibooks.org',
-  'advisorywiki': 'advisory.wikimedia.org',
   'arwikimedia': 'ar.wikimedia.org',
-  'arbcom_dewiki': 'arbcom-de.wikipedia.org',
-  'arbcom_enwiki': 'arbcom-en.wikipedia.org',
-  'arbcom_fiwiki': 'arbcom-fi.wikipedia.org',
-  'arbcom_nlwiki': 'arbcom-nl.wikipedia.org',
-  'auditcomwiki': 'auditcom.wikimedia.org',
   'bdwikimedia': 'bd.wikimedia.org',
   'bewikimedia': 'be.wikimedia.org',
   'betawikiversity': 'beta.wikiversity.org',
-  'boardwiki': 'board.wikimedia.org',
-  'boardgovcomwiki': 'boardgovcom.wikimedia.org',
   'brwikimedia': 'br.wikimedia.org',
   'cawikimedia': 'ca.wikimedia.org',
-  'chairwiki': 'chair.wikimedia.org',
-  'chapcomwiki': 'affcom.wikimedia.org',
-  'checkuserwiki': 'checkuser.wikimedia.org',
   'cnwikimedia': 'cn.wikimedia.org',
   'cowikimedia': 'co.wikimedia.org',
-  'collabwiki': 'collab.wikimedia.org',
   'commonswiki': 'commons.wikimedia.org',
   'dkwikimedia': 'dk.wikimedia.org',
-  'donatewiki': 'donate.wikimedia.org',
   'etwikimedia': 'ee.wikimedia.org',
-  'execwiki': 'exec.wikimedia.org',
-  'fdcwiki': 'fdc.wikimedia.org',
   'fiwikimedia': 'fi.wikimedia.org',
   'foundationwiki': 'wikimediafoundation.org',
-  'grantswiki': 'grants.wikimedia.org',
   'iegcomwiki': 'iegcom.wikimedia.org',
   'ilwikimedia': 'il.wikimedia.org',
   'incubatorwiki': 'incubator.wikimedia.org',
-  'internalwiki': 'internal.wikimedia.org',
   'labswiki': 'wikitech.wikimedia.org',
-  'labtestwiki': 'labtestwikitech.wikimedia.org',
-  'legalteamwiki': 'legalteam.wikimedia.org',
   'loginwiki': 'login.wikimedia.org',
   'mediawikiwiki': 'mediawiki.org',
   'metawiki': 'meta.wikimedia.org',
   'mkwikimedia': 'mk.wikimedia.org',
-  'movementroleswiki': 'movementroles.wikimedia.org',
   'mxwikimedia': 'mx.wikimedia.org',
   'nlwikimedia': 'nl.wikimedia.org',
   'nowikimedia': 'no.wikimedia.org',
-  'noboard_chapterswikimedia': 'noboard-chapters.wikimedia.org',
   'nostalgiawiki': 'nostalgia.wikipedia.org',
-  'nycwikimedia': 'nyc.wikimedia.org',
   'nzwikimedia': 'nz.wikimedia.org',
-  'officewiki': 'office.wikimedia.org',
-  'ombudsmenwiki': 'ombudsmen.wikimedia.org',
-  'otrs_wikiwiki': 'otrs-wiki.wikimedia.org',
   'outreachwiki': 'outreach.wikimedia.org',
   'pa_uswikimedia': 'pa-us.wikimedia.org',
   'plwikimedia': 'pl.wikimedia.org',
-  'qualitywiki': 'quality.wikimedia.org',
   'rswikimedia': 'rs.wikimedia.org',
   'ruwikimedia': 'ru.wikimedia.org',
   'sewikimedia': 'se.wikimedia.org',
-  'searchcomwiki': 'searchcom.wikimedia.org',
   'sourceswiki': 'wikisource.org',
-  'spcomwiki': 'spcom.wikimedia.org',
   'specieswiki': 'species.wikimedia.org',
-  'stewardwiki': 'steward.wikimedia.org',
-  'strategywiki': 'strategy.wikimedia.org',
-  'tenwiki': 'ten.wikipedia.org',
-  'testwiki': 'test.wikipedia.org',
-  'test2wiki': 'test2.wikipedia.org',
-  'testwikidatawiki': 'test.wikidata.org',
   'trwikimedia': 'tr.wikimedia.org',
-  'transitionteamwiki': 'transitionteam.wikimedia.org',
   'uawikimedia': 'ua.wikimedia.org',
   'ukwikimedia': 'uk.wikimedia.org',
-  'usabilitywiki': 'usability.wikimedia.org',
-  'votewiki': 'vote.wikimedia.org',
   'wg_enwiki': 'wg-en.wikipedia.org',
-  'wikidatawiki': 'wikidata.org',
-  'wikimania2005wiki': 'wikimania2005.wikimedia.org',
-  'wikimania2006wiki': 'wikimania2006.wikimedia.org',
-  'wikimania2007wiki': 'wikimania2007.wikimedia.org',
-  'wikimania2008wiki': 'wikimania2008.wikimedia.org',
-  'wikimania2009wiki': 'wikimania2009.wikimedia.org',
-  'wikimania2010wiki': 'wikimania2010.wikimedia.org',
-  'wikimania2011wiki': 'wikimania2011.wikimedia.org',
-  'wikimania2012wiki': 'wikimania2012.wikimedia.org',
-  'wikimania2013wiki': 'wikimania2013.wikimedia.org',
-  'wikimania2014wiki': 'wikimania2014.wikimedia.org',
-  'wikimania2015wiki': 'wikimania2015.wikimedia.org',
-  'wikimania2016wiki': 'wikimania2016.wikimedia.org',
-  'wikimania2017wiki': 'wikimania2017.wikimedia.org',
-  'wikimaniateamwiki': 'wikimaniateam.wikimedia.org',
-  'zerowiki': 'zero.wikimedia.org'
+  'wikidatawiki': 'wikidata.org'
 };
 
 module.exports = siteMap;
@@ -7099,7 +7048,7 @@ var config = {
   validateParams: ['project', 'platform', 'agent', 'direction', 'sort', 'view'],
   validParams: {
     direction: ['-1', '1'],
-    sort: ['title', 'views', 'badges', 'lang'],
+    sort: ['title', 'views', 'badges'],
     view: ['list', 'chart']
   }
 };
@@ -7172,6 +7121,7 @@ var UserViews = function (_mix$with) {
       this.assignDefaults();
       this.setupDateRangeSelector();
       this.popParams();
+      this.setupNamespaceSelector();
       this.setupListeners();
       this.updateInterAppLinks();
 
@@ -7216,6 +7166,26 @@ var UserViews = function (_mix$with) {
     }
 
     /**
+     * Fetch namespaces and populate the namespace selector
+     */
+
+  }, {
+    key: 'setupNamespaceSelector',
+    value: function setupNamespaceSelector() {
+      var _this3 = this;
+
+      this.fetchSiteInfo(this.project).then(function (data) {
+        var namespaces = data[_this3.project].namespaces;
+        for (var ns in namespaces) {
+          if (ns < 0) continue;
+          var nsTitle = namespaces[ns]['*'] || 'Main';
+          $('#namespace_input').append('<option value=' + ns + '>' + nsTitle + '</option>');
+        }
+      });
+      $('#namespace_input').val(0);
+    }
+
+    /**
      * Copy necessary default values to class instance.
      * Called when the view is reset.
      */
@@ -7223,10 +7193,10 @@ var UserViews = function (_mix$with) {
   }, {
     key: 'assignDefaults',
     value: function assignDefaults() {
-      var _this3 = this;
+      var _this4 = this;
 
       ['sort', 'direction', 'outputData', 'hadFailure', 'total', 'view'].forEach(function (defaultKey) {
-        _this3[defaultKey] = _this3.config.defaults[defaultKey];
+        _this4[defaultKey] = _this4.config.defaults[defaultKey];
       });
     }
 
@@ -7242,7 +7212,7 @@ var UserViews = function (_mix$with) {
   }, {
     key: 'buildMotherDataset',
     value: function buildMotherDataset(label, link, datasets) {
-      var _this4 = this;
+      var _this5 = this;
 
       /**
        * `datasets` structure:
@@ -7306,21 +7276,21 @@ var UserViews = function (_mix$with) {
           return a + b;
         });
 
-        dataset.badges.forEach(function (badge) {
-          if (totalBadges[badge] === undefined) {
-            totalBadges[badge] = 1;
-          } else {
-            totalBadges[badge] += 1;
-          }
-        });
+        // dataset.badges.forEach(badge => {
+        //   if (totalBadges[badge] === undefined) {
+        //     totalBadges[badge] = 1;
+        //   } else {
+        //     totalBadges[badge] += 1;
+        //   }
+        // });
 
         totalTitles.push(dataset.title);
 
-        _this4.outputData.listData.push({
+        _this5.outputData.listData.push({
           data: data,
-          badges: dataset.badges,
-          lang: dataset.lang,
-          dbName: dataset.dbName,
+          // badges: dataset.badges,
+          // lang: dataset.lang,
+          // dbName: dataset.dbName,
           label: dataset.title,
           url: dataset.url,
           sum: sum,
@@ -7333,7 +7303,7 @@ var UserViews = function (_mix$with) {
          * See fillInZeros() comments for more info.
          */
 
-        var _fillInZeros = _this4.fillInZeros(dataset.items, startDate, endDate);
+        var _fillInZeros = _this5.fillInZeros(dataset.items, startDate, endDate);
 
         var _fillInZeros2 = _slicedToArray(_fillInZeros, 2);
 
@@ -7363,13 +7333,13 @@ var UserViews = function (_mix$with) {
         datesWithoutData: datesWithoutData,
         sum: grandSum, // nevermind the duplication
         average: grandSum / length,
-        badges: totalBadges,
+        // badges: totalBadges,
         titles: totalTitles.unique()
       });
 
       if (datesWithoutData.length) {
         var dateList = datesWithoutData.map(function (date) {
-          return moment(date).format(_this4.dateFormat);
+          return moment(date).format(_this5.dateFormat);
         });
         this.writeMessage($.i18n('api-incomplete-data', dateList.sort().join(' &middot; '), dateList.length));
       }
@@ -7485,23 +7455,23 @@ var UserViews = function (_mix$with) {
   }, {
     key: 'renderData',
     value: function renderData() {
-      var _this5 = this;
+      var _this6 = this;
 
       _get(UserViews.prototype.__proto__ || Object.getPrototypeOf(UserViews.prototype), 'renderData', this).call(this, function (sortedDatasets) {
-        var totalBadgesMarkup = Object.keys(_this5.outputData.badges).map(function (badge) {
-          return '<span class=\'nowrap\'>' + _this5.getBadgeMarkup(badge) + ' &times; ' + _this5.outputData.badges[badge] + '</span>';
-        }).join(', ');
+        // const totalBadgesMarkup = Object.keys(this.outputData.badges).map(badge => {
+        //   return `<span class='nowrap'>${this.getBadgeMarkup(badge)} &times; ${this.outputData.badges[badge]}</span>`;
+        // }).join(', ');
 
-        $('.output-totals').html('<th scope=\'row\'>' + $.i18n('totals') + '</th>\n         <th>' + $.i18n('num-languages', sortedDatasets.length) + '</th>\n         <th>' + $.i18n('unique-titles', _this5.outputData.titles.length) + '</th>\n         <th>' + totalBadgesMarkup + '</th>\n         <th>' + _this5.formatNumber(_this5.outputData.sum) + '</th>\n         <th>' + _this5.formatNumber(Math.round(_this5.outputData.average)) + ' / ' + $.i18n('day') + '</th>');
+        $('.output-totals').html('<th scope=\'row\'>' + $.i18n('totals') + '</th>\n         <th>' + $.i18n('unique-titles', _this6.outputData.titles.length) + '</th>\n         <th>' + _this6.formatNumber(_this6.outputData.sum) + '</th>\n         <th>' + _this6.formatNumber(Math.round(_this6.outputData.average)) + ' / ' + $.i18n('day') + '</th>');
         $('#output_list').html('');
 
         sortedDatasets.forEach(function (item, index) {
-          var badgeMarkup = '';
-          if (item.badges) {
-            badgeMarkup = item.badges.map(_this5.getBadgeMarkup.bind(_this5)).join();
-          }
+          // let badgeMarkup = '';
+          // if (item.badges) {
+          //   badgeMarkup = item.badges.map(this.getBadgeMarkup.bind(this)).join();
+          // }
 
-          $('#output_list').append('<tr>\n           <th scope=\'row\'>' + (index + 1) + '</th>\n           <td>' + item.lang + '</td>\n           <td><a href="' + item.url + '" target="_blank">' + item.label + '</a></td>\n           <td>' + badgeMarkup + '</td>\n           <td><a target=\'_blank\' href=\'' + _this5.getPageviewsURL(item.lang + '.' + _this5.baseProject + '.org', item.label) + '\'>' + _this5.formatNumber(item.sum) + '</a></td>\n           <td>' + _this5.formatNumber(Math.round(item.average)) + ' / ' + $.i18n('day') + '</td>\n           </tr>');
+          $('#output_list').append('<tr>\n           <th scope=\'row\'>' + (index + 1) + '</th>\n           <td><a href="' + item.url + '" target="_blank">' + item.label + '</a></td>\n           <td><a target=\'_blank\' href=\'' + _this6.getPageviewsURL(_this6.project + '.org', item.label) + '\'>' + _this6.formatNumber(item.sum) + '</a></td>\n           <td>' + _this6.formatNumber(Math.round(item.average)) + ' / ' + $.i18n('day') + '</td>\n           </tr>');
         });
       });
     }
@@ -7517,8 +7487,6 @@ var UserViews = function (_mix$with) {
     key: 'getSortProperty',
     value: function getSortProperty(item, type) {
       switch (type) {
-        case 'lang':
-          return item.lang;
         case 'title':
           return item.label;
         case 'badges':
@@ -7539,15 +7507,21 @@ var UserViews = function (_mix$with) {
       var dfd = $.Deferred();
 
       if (metaRoot) {
+        var params = {
+          username: $(this.config.sourceInput).val(),
+          project: this.project
+        };
+        if ($('#namespace_input').val() !== 'all') {
+          params.namespace = $('#namespace_input').val();
+        }
         $.ajax({
           url: '//' + metaRoot + '/user_analysis/pages',
-          data: {
-            username: $(this.config.sourceInput).val(),
-            project: this.project
-          },
+          data: params,
           timeout: 8000
         }).done(function (data) {
-          return dfd.resolve(data);
+          return dfd.resolve(data.pages.map(function (page) {
+            return page.title.descore();
+          }));
         }).fail(function () {
           // stable flag will be used to handle lack of data, so just resolve with empty data
           var data = {};
@@ -7567,78 +7541,72 @@ var UserViews = function (_mix$with) {
     }
 
     /**
-     * Loop through given interwiki data and query the pageviews API for each
+     * Loop through given pages and query the pageviews API for each
      *   Also updates this.outputData with result
-     * @param  {Object} interWikiData - as given by the getInterwikiData promise
+     * @param  {Array} pages - as given by the getPagesCreated promise
      * @return {Deferred} - Promise resolving with data ready to be rendered to view
      */
 
   }, {
     key: 'getPageViewsData',
-    value: function getPageViewsData(interWikiData) {
-      var _this6 = this;
+    value: function getPageViewsData(pages) {
+      var _this7 = this;
 
       var startDate = this.daterangepicker.startDate.startOf('day'),
-          endDate = this.daterangepicker.endDate.startOf('day'),
-          interWikiKeys = Object.keys(interWikiData);
+          endDate = this.daterangepicker.endDate.startOf('day');
 
       var dfd = $.Deferred(),
           promises = [],
           count = 0,
           failureRetries = {},
-          totalRequestCount = interWikiKeys.length,
+          totalRequestCount = pages.length,
           failedPages = [],
           pageViewsData = [];
 
-      var makeRequest = function makeRequest(dbName) {
-        var data = interWikiData[dbName],
-            uriEncodedPageName = encodeURIComponent(data.title);
+      var makeRequest = function makeRequest(page) {
+        var uriEncodedPageName = encodeURIComponent(page);
 
-        var url = 'https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/' + data.lang + '.' + _this6.baseProject + ('/' + $(_this6.config.platformSelector).val() + '/' + $(_this6.config.agentSelector).val() + '/' + uriEncodedPageName + '/daily') + ('/' + startDate.format(_this6.config.timestampFormat) + '/' + endDate.format(_this6.config.timestampFormat));
+        var url = 'https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/' + _this7.project + ('/' + $(_this7.config.platformSelector).val() + '/' + $(_this7.config.agentSelector).val() + '/' + uriEncodedPageName + '/daily') + ('/' + startDate.format(_this7.config.timestampFormat) + '/' + endDate.format(_this7.config.timestampFormat));
         var promise = $.ajax({ url: url, dataType: 'json' });
         promises.push(promise);
 
         promise.done(function (pvData) {
           pageViewsData.push({
-            badges: data.badges,
-            dbName: dbName,
-            lang: data.lang,
-            title: data.title,
-            url: data.url,
+            title: page,
             items: pvData.items
           });
         }).fail(function (errorData) {
           /** first detect if this was a Cassandra backend error, and if so, schedule a re-try */
           var cassandraError = errorData.responseJSON.title === 'Error in Cassandra table storage backend',
-              failedPageLink = _this6.getPageLink(data.title, data.lang + '.' + _this6.baseProject + '.org');
+              failedPageLink = _this7.getPageLink(page, _this7.project + '.org');
 
           if (cassandraError) {
-            if (failureRetries[dbName]) {
-              failureRetries[dbName]++;
+            if (failureRetries[page]) {
+              failureRetries[page]++;
             } else {
-              failureRetries[dbName] = 1;
+              failureRetries[page] = 1;
             }
 
             /** maximum of 3 retries */
-            if (failureRetries[dbName] < 3) {
+            if (failureRetries[page] < 3) {
               totalRequestCount++;
-              return _this6.rateLimit(makeRequest, _this6.config.apiThrottle, _this6)(dbName);
+              return _this7.rateLimit(makeRequest, _this7.config.apiThrottle, _this7)(page);
             }
 
             /** retries exceeded */
             failedPages.push(failedPageLink);
           } else {
-            _this6.writeMessage(failedPageLink + ': ' + $.i18n('api-error', 'Pageviews API') + ' - ' + errorData.responseJSON.title);
+            _this7.writeMessage(failedPageLink + ': ' + $.i18n('api-error', 'Pageviews API') + ' - ' + errorData.responseJSON.title);
           }
 
           // unless it was a 404, don't cache this series of requests
           if (errorData.status !== 404) hadFailure = true;
         }).always(function () {
-          _this6.updateProgressBar(++count, totalRequestCount);
+          _this7.updateProgressBar(++count, totalRequestCount);
 
           if (count === totalRequestCount) {
             if (failedPages.length) {
-              _this6.writeMessage($.i18n('api-error-timeout', '<ul>' + failedPages.map(function (failedPage) {
+              _this7.writeMessage($.i18n('api-error-timeout', '<ul>' + failedPages.map(function (failedPage) {
                 return '<li>' + failedPage + '</li>';
               }).join('') + '</ul>'));
             }
@@ -7650,8 +7618,8 @@ var UserViews = function (_mix$with) {
 
       var requestFn = this.rateLimit(makeRequest, this.config.apiThrottle, this);
 
-      interWikiKeys.forEach(function (dbName, index) {
-        requestFn(dbName);
+      pages.forEach(function (page) {
+        requestFn(page);
       });
 
       return dfd;
@@ -7667,7 +7635,7 @@ var UserViews = function (_mix$with) {
   }, {
     key: 'getInterwikiData',
     value: function getInterwikiData(dbName, pageName) {
-      var _this7 = this;
+      var _this8 = this;
 
       var dfd = $.Deferred();
       var url = 'https://www.wikidata.org/w/api.php?action=wbgetentities&sites=' + dbName + ('&titles=' + encodeURIComponent(pageName) + '&props=sitelinks/urls|datatype&format=json&callback=?');
@@ -7676,13 +7644,13 @@ var UserViews = function (_mix$with) {
         if (data.error) {
           return dfd.reject($.i18n('api-error', 'Wikidata') + ': ' + data.error.info);
         } else if (data.entities['-1']) {
-          return dfd.reject('<a target=\'_blank\' href=\'' + _this7.getPageURL(pageName).escape() + '\'>' + pageName.descore().escape() + '</a> - ' + $.i18n('api-error-no-data'));
+          return dfd.reject('<a target=\'_blank\' href=\'' + _this8.getPageURL(pageName).escape() + '\'>' + pageName.descore().escape() + '</a> - ' + $.i18n('api-error-no-data'));
         }
 
         var key = Object.keys(data.entities)[0],
             sitelinks = data.entities[key].sitelinks,
             filteredLinks = {},
-            matchRegex = new RegExp('^https://[\\w-]+\\.' + _this7.baseProject + '\\.org');
+            matchRegex = new RegExp('^https://[\\w-]+\\.' + _this8.baseProject + '\\.org');
 
         /** restrict to selected base project (e.g. wikipedias, not wikipedias and wikivoyages) */
         Object.keys(sitelinks).forEach(function (key) {
@@ -7724,7 +7692,7 @@ var UserViews = function (_mix$with) {
   }, {
     key: 'popParams',
     value: function popParams() {
-      var _this8 = this;
+      var _this9 = this;
 
       var params = this.validateParams(this.parseQueryString());
 
@@ -7745,7 +7713,7 @@ var UserViews = function (_mix$with) {
 
       /** export necessary params to outer scope */
       ['sort', 'direction', 'view'].forEach(function (key) {
-        _this8[key] = params[key];
+        _this9[key] = params[key];
       });
 
       this.setupSourceInput();
@@ -7807,47 +7775,47 @@ var UserViews = function (_mix$with) {
   }, {
     key: 'processInput',
     value: function processInput() {
-      var _this9 = this;
+      var _this10 = this;
 
       var user = $(this.config.sourceInput).val();
 
       this.setState('processing');
 
       var readyForRendering = function readyForRendering() {
-        $('.output-title').html(_this9.outputData.link);
-        $('.output-params').html($(_this9.config.dateRangeSelector).val());
-        _this9.setInitialChartType();
-        _this9.renderData();
+        $('.output-title').html(_this10.outputData.link);
+        $('.output-params').html($(_this10.config.dateRangeSelector).val());
+        _this10.setInitialChartType();
+        _this10.renderData();
       };
 
       if (this.isRequestCached()) {
         $('.progress-bar').css('width', '100%');
         $('.progress-counter').text($.i18n('loading-cache'));
         return setTimeout(function () {
-          _this9.outputData = simpleStorage.get(_this9.getCacheKey());
+          _this10.outputData = simpleStorage.get(_this10.getCacheKey());
           readyForRendering();
         }, 500);
       }
 
-      $('.progress-counter').text($.i18n('fetching-data', 'Page creation API'));
+      $('.progress-counter').text($.i18n('fetching-data', 'Page Creation API'));
       this.getPagesCreated(user).done(function (pagesCreated) {
-        _this9.getPageViewsData(pagesCreated).done(function (pageViewsData) {
+        _this10.getPageViewsData(pagesCreated).done(function (pageViewsData) {
           $('.progress-bar').css('width', '100%');
           $('.progress-counter').text($.i18n('building-dataset'));
-          var pageLink = _this9.getPageLink(page, _this9.project);
+          var userLink = _this10.getPageLink(user, _this10.project);
           setTimeout(function () {
-            _this9.buildMotherDataset(page, pageLink, pageViewsData);
+            _this10.buildMotherDataset(user, userLink, pageViewsData);
             readyForRendering();
           }, 250);
         });
       }).fail(function (error) {
-        _this9.setState('initial');
+        _this10.setState('initial');
 
         /** structured error comes back as a string, otherwise we don't know what happened */
         if (typeof error === 'string') {
-          _this9.writeMessage(error);
+          _this10.writeMessage(error);
         } else {
-          _this9.writeMessage($.i18n('api-error-unknown', 'Page creation'));
+          _this10.writeMessage($.i18n('api-error-unknown', 'Page Creation'));
         }
       });
     }
@@ -7878,7 +7846,7 @@ var UserViews = function (_mix$with) {
           },
           preProcess: function preProcess(data) {
             var results = data.query.prefixsearch.map(function (elem) {
-              return elem.title.split('/')[0];
+              return elem.title.split('/')[0].replace(/^User:/, '');
             }).unique();
             return results;
           }
@@ -7913,7 +7881,7 @@ var UserViews = function (_mix$with) {
   }, {
     key: 'exportCSV',
     value: function exportCSV() {
-      var _this10 = this;
+      var _this11 = this;
 
       var csvContent = 'data:text/csv;charset=utf-8,Language,Title,Badges,' + this.getDateHeadings(false).join(',') + '\n';
 
@@ -7921,7 +7889,7 @@ var UserViews = function (_mix$with) {
       this.outputData.listData.forEach(function (page) {
         var pageName = '"' + page.label.descore().replace(/"/g, '""') + '"',
             badges = '"' + page.badges.map(function (badge) {
-          return _this10.config.badges[badge].name.replace(/"/g, '""');
+          return _this11.config.badges[badge].name.replace(/"/g, '""');
         }) + '"';
 
         csvContent += [page.lang, pageName, badges].concat(page.data).join(',') + '\n';

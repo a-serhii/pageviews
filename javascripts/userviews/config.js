@@ -66,7 +66,7 @@ const config = {
   validateParams: ['project', 'platform', 'agent', 'direction', 'sort', 'view'],
   validParams: {
     direction: ['-1', '1'],
-    sort: ['title', 'views', 'badges', 'lang'],
+    sort: ['title', 'views', 'badges'],
     view: ['list', 'chart']
   }
 };
