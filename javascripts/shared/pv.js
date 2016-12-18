@@ -1273,6 +1273,15 @@ class Pv extends PvConfig {
       this.dataset.value = this.value;
     });
     $(this.config.projectInput).on('change', () => this.validateProject());
+
+    /** universal language selector */
+    $('.btn-language').uls({
+      onSelect: language => {
+        const languageName = $.uls.data.getAutonym(language);
+        $('.btn-language').text(languageName);
+      },
+      quickList: i18nLangs
+    });
   }
 
   /**

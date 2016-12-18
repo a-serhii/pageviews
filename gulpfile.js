@@ -96,7 +96,11 @@ apps.forEach(app => {
   /** STYLES */
   const coreCSSDependencies = [
     'vendor/stylesheets/bootstrap.min.css',
-    'vendor/stylesheets/toastr.css'
+    'vendor/stylesheets/toastr.css',
+    'vendor/stylesheets/jquery.uls.css',
+    'vendor/stylesheets/jquery.uls.grid.css',
+    'vendor/stylesheets/jquery.uls.lcd.css',
+    'vendor/stylesheets/jquery.uls.mobile.css'
   ];
   gulp.task(`styles-${app}`, () => {
     runSequence(`css-sass-${app}`, `css-concat-${app}`);
@@ -147,7 +151,12 @@ apps.forEach(app => {
     'vendor/javascripts/moment.min.js',
     'vendor/javascripts/bootstrap.min.js',
     'vendor/javascripts/toastr.min.js',
-    'vendor/javascripts/simpleStorage.js'
+    'vendor/javascripts/simpleStorage.js',
+    'vendor/javascripts/jquery.uls.data.js',
+    'vendor/javascripts/jquery.uls.data.utils.js',
+    'vendor/javascripts/jquery.uls.lcd.js',
+    'vendor/javascripts/jquery.uls.languagefilter.js',
+    'vendor/javascripts/jquery.uls.core.js'
   ];
   gulp.task(`scripts-${app}`, () => {
     runSequence(`js-browserify-${app}`, `js-concat-${app}`);

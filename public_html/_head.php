@@ -45,10 +45,15 @@
      $rtl = '';
    }
   
+   $langCodes = implode(',', array_map( function($langCode) {
+     return "$langCode";
+   }, array_keys( $langs )));
+  
 ?>
 <script type="text/javascript">
 //<![CDATA[
    i18nLang = "<?php echo $I18N->getLang(); ?>";
+   i18nLangs = "<?php echo $langCodes; ?>".split(',');
    i18nRtl = "<?php echo $rtl; ?>";
    metaRoot = "<?php echo METAROOT; ?>";
   

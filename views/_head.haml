@@ -45,8 +45,13 @@
     $rtl = '';
   }
 
+  $langCodes = implode(',', array_map( function($langCode) {
+    return "$langCode";
+  }, array_keys( $langs )));
+
 :javascript
   i18nLang = "#{$I18N->getLang()}";
+  i18nLangs = "#{$langCodes}".split(',');
   i18nRtl = "#{$rtl}";
   metaRoot = "#{METAROOT}";
 
