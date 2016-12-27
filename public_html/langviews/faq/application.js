@@ -1914,3 +1914,1544 @@ d.trigger("activate.bs.scrollspy")},b.prototype.clear=function(){a(this.selector
     };
 
 }));
+
+// Please do not edit. This file is generated from data/langdb.yaml by ulsdata2json.php
+( function ( $ ) {
+	'use strict';
+	$.uls = $.uls || {};
+	//noinspection JSHint
+	$.uls.data = {"languages":{"aa":["Latn",["AF"],"Qafár af"],"ab":["Cyrl",["EU"],"Аҧсшәа"],"abs":["Latn",["AS"],"Bahasa Ambon"],"ace":["Latn",["AS","PA"],"Acèh"],"acf":["Latn",["AM"],"kwéyòl"],"ady":["Cyrl",["EU","ME"],"Адыгабзэ"],"ady-cyrl":["ady"],"ady-latn":["Latn",["EU","ME"],"Adygabze"],"aeb":["aeb-arab"],"aeb-arab":["Arab",["AF"],"تونسي"],"aeb-latn":["Latn",["AF"],"Tûnsî"],"af":["Latn",["AF"],"Afrikaans"],"ahr":["Deva",["AS"],"अहिराणी"],"ak":["Latn",["AF"],"Akan"],"akz":["Latn",["AM"],"Albaamo innaaɬiilka"],"aln":["Latn",["EU"],"Gegë"],"am":["Ethi",["AF"],"አማርኛ"],"an":["Latn",["EU"],"aragonés"],"ang":["Latn",["EU"],"Ænglisc"],"anp":["Deva",["AS"],"अङ्गिका"],"ar":["Arab",["ME"],"العربية"],"arc":["Syrc",["ME"],"ܐܪܡܝܐ"],"arn":["Latn",["AM"],"mapudungun"],"aro":["Latn",["AM"],"Araona"],"arq":["Arab",["AF"],"جازايرية"],"ary":["Latn",["ME"],"Maġribi"],"arz":["Arab",["ME"],"مصرى"],"as":["Beng",["AS"],"অসমীয়া"],"ase":["Sgnw",["AM"],"American sign language"],"ast":["Latn",["EU"],"asturianu"],"atj":["Latn",["AM"],"atikamekw"],"av":["Cyrl",["EU"],"авар"],"avk":["Latn",["WW"],"Kotava"],"ay":["Latn",["AM"],"Aymar aru"],"az":["az-latn"],"az-arab":["Arab",["AS","ME"],"تۆرکجه"],"az-latn":["Latn",["EU","ME"],"azərbaycanca"],"az-cyrl":["Cyrl",["EU","ME"],"азәрбајҹанҹа"],"azb":["az-arab"],"azj":["az-latn"],"ba":["Cyrl",["EU"],"башҡортса"],"ban":["Bali",["AS"],"ᬩᬲᬩᬮᬶ"],"bar":["Latn",["EU"],"Boarisch"],"bat-smg":["sgs"],"bbc-latn":["Latn",["AS"],"Batak Toba"],"bbc-batk":["Batk",["AS"],"Batak Toba"],"bbc":["Latn",["AS"],"Batak Toba"],"bcc":["Arab",["AS","ME"],"جهلسری بلوچی"],"bcl":["Latn",["AS"],"Bikol Central"],"be-tarask":["Cyrl",["EU"],"беларуская (тарашкевіца)"],"be-x-old":["be-tarask"],"be":["Cyrl",["EU"],"беларуская"],"bew":["Latn",["AS"],"Bahasa Betawi"],"bfa":["Latn",["AF"],"Bari"],"bft":["Arab",["AS"],"بلتی"],"bfq":["Taml",["AS"],"படகா"],"bg":["Cyrl",["EU"],"български"],"bgn":["Arab",["AS","ME"],"روچ کپتین بلوچی"],"bh":["bho"],"bho":["Deva",["AS"],"भोजपुरी"],"bi":["Latn",["PA"],"Bislama"],"bjn":["Latn",["AS"],"Bahasa Banjar"],"bm":["Latn",["AF"],"bamanankan"],"bn":["Beng",["AS"],"বাংলা"],"bo":["Tibt",["AS"],"བོད་ཡིག"],"bpy":["Beng",["AS"],"বিষ্ণুপ্রিয়া মণিপুরী"],"bqi":["Arab",["AS","ME"],"بختیاری"],"br":["Latn",["EU"],"brezhoneg"],"brh":["Latn",["ME","AS"],"Bráhuí"],"brx":["Deva",["AS"],"बड़ो"],"bs":["Latn",["EU"],"bosanski"],"bto":["Latn",["AS"],"Iriga Bicolano"],"bug":["Bugi",["AS"],"ᨅᨔ ᨕᨘᨁᨗ"],"bxr":["Cyrl",["AS"],"буряад"],"ca":["Latn",["EU"],"català"],"cbk-zam":["Latn",["AS"],"Chavacano de Zamboanga"],"cdo":["Latn",["AS"],"Mìng-dĕ̤ng-ngṳ̄"],"ce":["Cyrl",["EU"],"нохчийн"],"ceb":["Latn",["AS"],"Cebuano"],"ch":["Latn",["PA"],"Chamoru"],"chm":["mhr"],"cho":["Latn",["AM"],"Choctaw"],"chr":["Cher",["AM"],"ᏣᎳᎩ"],"chy":["Latn",["AM"],"Tsetsêhestâhese"],"ciw":["Latn",["AM"],"Ojibwemowin"],"cjy":["cjy-hant"],"cjy-hans":["Hans",["AS"],"晋语（简化字)"],"cjy-hant":["Hant",["AS"],"晉語"],"ckb":["Arab",["ME"],"کوردیی ناوەندی"],"cnh":["Latn",["AS"],"Lai holh"],"co":["Latn",["EU"],"corsu"],"cps":["Latn",["AS"],"Capiceño"],"cr":["Cans",["AM"],"ᓀᐦᐃᔭᐍᐏᐣ"],"cr-cans":["cr"],"cr-latn":["Latn",["AM"],"Nēhiyawēwin"],"crh":["Latn",["EU"],"qırımtatarca"],"crh-cyrl":["Cyrl",["EU"],"къырымтатарджа"],"crh-latn":["crh"],"cs":["Latn",["EU"],"čeština"],"csb":["Latn",["EU"],"kaszëbsczi"],"cu":["Cyrl",["EU"],"словѣньскъ \/ ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ"],"cv":["Cyrl",["EU"],"Чӑвашла"],"cy":["Latn",["EU"],"Cymraeg"],"da":["Latn",["EU"],"dansk"],"de-at":["Latn",["EU"],"Österreichisches Deutsch"],"de-ch":["Latn",["EU"],"Schweizer Hochdeutsch"],"de-formal":["Latn",["EU"],"Deutsch (Sie-Form)"],"de":["Latn",["EU"],"Deutsch"],"din":["Latn",["AF"],"Thuɔŋjäŋ"],"diq":["Latn",["EU","AS"],"Zazaki"],"dsb":["Latn",["EU"],"dolnoserbski"],"dtp":["Latn",["AS"],"Dusun Bundu-liwan"],"dty":["Deva",["AS"],"डोटेली"],"dv":["Thaa",["AS"],"ދިވެހިބަސް"],"dz":["Tibt",["AS"],"ཇོང་ཁ"],"ee":["Latn",["AF"],"eʋegbe"],"egl":["Latn",["EU"],"Emiliàn"],"el":["Grek",["EU"],"Ελληνικά"],"eml":["Latn",["EU"],"emiliàn e rumagnòl"],"en-ca":["Latn",["AM"],"Canadian English"],"en-gb":["Latn",["EU","AS","PA"],"British English"],"en":["Latn",["EU","AM","AF","ME","AS","PA","WW"],"English"],"eo":["Latn",["WW"],"Esperanto"],"es-419":["Latn",["AM"],"español de America Latina"],"es-formal":["Latn",["EU","AM","AF","WW"],"español (formal)"],"es":["Latn",["EU","AM","AF","WW"],"español"],"esu":["Latn",["AM"],"Yup'ik"],"et":["Latn",["EU"],"eesti"],"eu":["Latn",["EU"],"euskara"],"ext":["Latn",["EU"],"estremeñu"],"fa":["Arab",["AS","ME"],"فارسی"],"fax":["Latn",["EU"],"Fala"],"ff":["Latn",["AF"],"Fulfulde"],"fi":["Latn",["EU"],"suomi"],"fil":["tl"],"fit":["Latn",["EU"],"meänkieli"],"fiu-vro":["vro"],"fj":["Latn",["PA"],"Na Vosa Vakaviti"],"fo":["Latn",["EU"],"føroyskt"],"fr":["Latn",["EU","AM","WW"],"français"],"frc":["Latn",["AM"],"français cadien"],"frp":["Latn",["EU"],"arpetan"],"frr":["Latn",["EU"],"Nordfriisk"],"fur":["Latn",["EU"],"furlan"],"fy":["Latn",["EU"],"Frysk"],"ga":["Latn",["EU"],"Gaeilge"],"gag":["Latn",["EU"],"Gagauz"],"gah":["Latn",["AS"],"Alekano"],"gan-hans":["Hans",["AS"],"赣语（简体）"],"gan-hant":["gan"],"gan":["Hant",["AS"],"贛語"],"gbz":["Latn",["AS"],"Dari-e Mazdeyasnā"],"gcf":["Latn",["AM"],"Guadeloupean Creole French"],"gd":["Latn",["EU"],"Gàidhlig"],"gl":["Latn",["EU"],"galego"],"glk":["Arab",["AS","ME"],"گیلکی"],"gn":["Latn",["AM"],"Avañe'ẽ"],"gom":["gom-deva"],"gom-deva":["Deva",["AS"],"गोवा कोंकणी"],"gom-latn":["Latn",["AS"],"Gova Konknni"],"got":["Goth",["EU"],"𐌲𐌿𐍄𐌹𐍃𐌺"],"grc":["Grek",["EU"],"Ἀρχαία ἑλληνικὴ"],"gsw":["Latn",["EU"],"Alemannisch"],"gu":["Gujr",["AS"],"ગુજરાતી"],"guc":["Latn",["AM"],"Wayúu"],"gur":["Latn",["AF"],"Gurenɛ"],"gv":["Latn",["EU"],"Gaelg"],"ha-arab":["Arab",["AF"],"هَوُسَ"],"ha-latn":["Latn",["AF"],"Hausa"],"ha":["ha-latn"],"hak":["Latn",["AS"],"Hak-kâ-fa"],"haw":["Latn",["AM","PA"],"Hawai`i"],"he":["Hebr",["ME"],"עברית"],"hi":["Deva",["AS"],"हिन्दी"],"hif":["Latn",["PA","AS"],"Fiji Hindi"],"hif-deva":["Deva",["AS"],"फ़ीजी हिन्दी"],"hif-latn":["hif"],"hil":["Latn",["AS"],"Ilonggo"],"hne":["Deva",["AS"],"छत्तीसगढ़ी"],"ho":["Latn",["PA"],"Hiri Motu"],"hr":["Latn",["EU"],"hrvatski"],"hrx":["Latn",["AM"],"Hunsrik"],"hsb":["Latn",["EU"],"hornjoserbsce"],"hsn":["Hans",["AS"],"湘语"],"ht":["Latn",["AM"],"Kreyòl ayisyen"],"hu-formal":["Latn",["EU"],"Magyar (magázó)"],"hu":["Latn",["EU"],"magyar"],"hy":["Armn",["EU","ME"],"Հայերեն"],"hz":["Latn",["AF"],"Otsiherero"],"ia":["Latn",["WW"],"interlingua"],"id":["Latn",["AS"],"Bahasa Indonesia"],"ie":["Latn",["WW"],"Interlingue"],"ig":["Latn",["AF"],"Igbo"],"ii":["Yiii",["AS"],"ꆇꉙ"],"ik":["Latn",["AM"],"Iñupiak"],"ike-cans":["Cans",["AM"],"ᐃᓄᒃᑎᑐᑦ"],"ike-latn":["Latn",["AM"],"inuktitut"],"ilo":["Latn",["AS"],"Ilokano"],"inh":["Cyrl",["EU"],"ГӀалгӀай"],"io":["Latn",["WW"],"Ido"],"is":["Latn",["EU"],"íslenska"],"it":["Latn",["EU"],"italiano"],"iu":["Cans",["AM"],"ᐃᓄᒃᑎᑐᑦ"],"ja":["Jpan",["AS"],"日本語"],"jam":["Latn",["AM"],"Patois"],"jbo":["Latn",["WW"],"lojban"],"jdt":["jdt-cyrl"],"jdt-cyrl":["Cyrl",["EU","AS"],"жугьури"],"jut":["Latn",["EU"],"jysk"],"jv":["Latn",["AS","PA"],"Basa Jawa"],"jv-java":["Java",["AS","PA"],"ꦧꦱꦗꦮ"],"ka":["Geor",["EU"],"ქართული"],"kaa":["Latn",["AS"],"Qaraqalpaqsha"],"kab":["Latn",["AF","EU"],"Taqbaylit"],"kac":["Latn",["AS"],"Jinghpaw"],"kbd-cyrl":["kbd"],"kbd-latn":["Latn",["EU"],"Qabardjajəbza"],"kbd":["Cyrl",["EU","ME"],"Адыгэбзэ"],"kbp":["Latn",["AF"],"Kabɩyɛ"],"kea":["Latn",["AF"],"Kabuverdianu"],"kg":["Latn",["AF"],"Kongo"],"kgp":["Latn",["AM"],"Kaingáng"],"khw":["Arab",["ME","AS"],"کھوار"],"ki":["Latn",["AF"],"Gĩkũyũ"],"kiu":["Latn",["EU","ME"],"Kırmancki"],"kj":["Latn",["AF"],"Kwanyama"],"kjh":["Cyrl",["AS"],"хакас"],"kk":["kk-cyrl"],"kk-arab":["Arab",["EU","AS"],"قازاقشا (تٶتە)"],"kk-cn":["kk-arab"],"kk-cyrl":["Cyrl",["EU","AS"],"қазақша"],"kk-kz":["kk-cyrl"],"kk-latn":["Latn",["EU","AS","ME"],"qazaqşa"],"kk-tr":["kk-latn"],"kl":["Latn",["AM","EU"],"kalaallisut"],"km":["Khmr",["AS"],"ភាសាខ្មែរ"],"kn":["Knda",["AS"],"ಕನ್ನಡ"],"knn":["Deva",["AS"],"महाराष्ट्रीय कोंकणी"],"ko-kp":["Kore",["AS"],"한국어 (조선)"],"ko":["Kore",["AS"],"한국어"],"koi":["Cyrl",["EU"],"Перем Коми"],"kr":["Latn",["AF"],"Kanuri"],"krc":["Cyrl",["EU"],"къарачай-малкъар"],"kri":["Latn",["AF"],"Krio"],"krj":["Latn",["ME","EU"],"Kinaray-a"],"krl":["Latn",["EU"],"Karjala"],"ks-arab":["Arab",["AS"],"کٲشُر"],"ks-deva":["Deva",["AS"],"कॉशुर"],"ks":["Arab",["AS"],"کٲشُر"],"ksf":["Latn",["AF"],"Bafia"],"ksh":["Latn",["EU"],"Ripoarisch"],"ku":["ku-latn"],"ku-arab":["Arab",["EU","ME"],"كوردي"],"ku-latn":["Latn",["EU","ME"],"Kurdî"],"kv":["Cyrl",["EU"],"коми"],"kw":["Latn",["EU"],"kernowek"],"ky":["Cyrl",["AS"],"Кыргызча"],"la":["Latn",["EU"],"Latina"],"lad":["lad-latn"],"lad-latn":["Latn",["ME","EU","AM"],"Ladino"],"lad-hebr":["Hebr",["ME","EU","AM"],"לאדינו"],"lb":["Latn",["EU"],"Lëtzebuergesch"],"lbe":["Cyrl",["EU"],"лакку"],"lez":["Cyrl",["EU"],"лезги"],"lfn":["Latn",["WW"],"Lingua Franca Nova"],"lg":["Latn",["AF"],"Luganda"],"li":["Latn",["EU"],"Limburgs"],"lij":["Latn",["EU"],"Ligure"],"liv":["Latn",["EU"],"Līvõ kēļ"],"lki":["Arab",["AS","ME"],"لەکی"],"lkt":["Latn",["AM"],"Lakȟótiyapi"],"lld":["Latn",["EU"],"Ladin"],"lmo":["Latn",["EU"],"lumbaart"],"ln":["Latn",["AF"],"lingála"],"lo":["Laoo",["AS"],"ລາວ"],"loz":["Latn",["AF"],"Silozi"],"lt":["Latn",["EU"],"lietuvių"],"lrc":["Arab",["AS","ME"],"لۊری شومالی"],"ltg":["Latn",["EU"],"latgaļu"],"lud":["Latn",["EU"],"lüüdi"],"lus":["Latn",["AS"],"Mizo ţawng"],"lut":["Latn",["AM"],"dxʷləšucid"],"luz":["Arab",["ME"],"لئری دوٙمینی"],"lv":["Latn",["EU"],"latviešu"],"lzh":["Hant",["AS"],"文言"],"lzz":["Latn",["EU","ME"],"Lazuri"],"mai":["Deva",["AS"],"मैथिली"],"map-bms":["Latn",["AS"],"Basa Banyumasan"],"mdf":["Cyrl",["EU"],"мокшень"],"mfe":["Latn",["AM"],"Morisyen"],"mg":["Latn",["AF"],"Malagasy"],"mh":["Latn",["PA"],"Ebon"],"mhr":["Cyrl",["EU"],"олык марий"],"mi":["Latn",["PA"],"Māori"],"mic":["Latn",["AM"],"Mi'kmaq"],"min":["Latn",["AS"],"Baso Minangkabau"],"miq":["Latn",["AM"],"Mískitu"],"mk":["Cyrl",["EU"],"македонски"],"ml":["Mlym",["AS","ME"],"മലയാളം"],"mn":["Cyrl",["AS"],"монгол"],"mnc":["Mong",["AS"],"ᠮᠠᠨᠵᡠ ᡤᡳᠰᡠᠨ"],"mni":["Beng",["AS"],"মেইতেই লোন্"],"mnw":["Mymr",["AS"],"ဘာသာ မန်"],"mo":["Cyrl",["EU"],"молдовеняскэ"],"mr":["Deva",["AS","ME"],"मराठी"],"mrj":["Cyrl",["EU"],"кырык мары"],"ms":["Latn",["AS"],"Bahasa Melayu"],"mt":["Latn",["EU"],"Malti"],"mui":["Latn",["AS"],"Musi"],"mus":["Latn",["AM"],"Mvskoke"],"mwl":["Latn",["EU"],"Mirandés"],"mwv":["Latn",["AS"],"Behase Mentawei"],"mww":["mww-latn"],"mww-latn":["Latn",["AS"],"Hmoob Dawb"],"my":["Mymr",["AS"],"မြန်မာဘာသာ"],"myv":["Cyrl",["EU"],"эрзянь"],"mzn":["Arab",["ME","AS"],"مازِرونی"],"na":["Latn",["PA"],"Dorerin Naoero"],"nah":["Latn",["AM"],"Nāhuatl"],"nan":["Latn",["AS"],"Bân-lâm-gú"],"nap":["Latn",["EU"],"Napulitano"],"nb":["Latn",["EU"],"norsk (bokmål)"],"nds-nl":["Latn",["EU"],"Nedersaksisch"],"nds":["Latn",["EU"],"Plattdüütsch"],"ne":["Deva",["AS"],"नेपाली"],"new":["Deva",["AS"],"नेपाल भाषा"],"ng":["Latn",["AF"],"Oshiwambo"],"niu":["Latn",["PA"],"ko e vagahau Niuē"],"njo":["Latn",["AS"],"Ao"],"nl-informal":["Latn",["EU","AM"],"Nederlands (informeel)"],"nl":["Latn",["EU","AM"],"Nederlands"],"nn":["Latn",["EU"],"norsk (nynorsk)"],"no":["Latn",["EU"],"norsk"],"nov":["Latn",["WW"],"Novial"],"nqo":["Nkoo",["AF"],"ߒߞߏ"],"nrm":["Latn",["EU"],"Nouormand"],"nso":["Latn",["AF"],"Sesotho sa Leboa"],"nv":["Latn",["AM"],"Diné bizaad"],"ny":["Latn",["AF"],"Chi-Chewa"],"oc":["Latn",["EU"],"occitan"],"olo":["Latn",["AS","EU"],"Livvinkarjala"],"om":["Latn",["AF"],"Oromoo"],"or":["Orya",["AS"],"ଓଡ଼ିଆ"],"os":["Cyrl",["EU"],"Ирон"],"ota":["Arab",["AS","EU"],"لسان عثمانى"],"pa":["pa-guru"],"pa-guru":["Guru",["AS"],"ਪੰਜਾਬੀ"],"pag":["Latn",["AS"],"Pangasinan"],"pam":["Latn",["AS"],"Kapampangan"],"pap":["Latn",["AM"],"Papiamentu"],"pbb":["Latn",["AM"],"Nasa Yuwe"],"pcd":["Latn",["EU"],"Picard"],"pdc":["Latn",["EU","AM"],"Deitsch"],"pdt":["Latn",["EU","AM"],"Plautdietsch"],"pfl":["Latn",["EU"],"Pälzisch"],"pi":["Deva",["AS"],"पालि"],"pih":["Latn",["PA"],"Norfuk \/ Pitkern"],"pis":["Latn",["PA"],"Pijin"],"pko":["Latn",["AF"],"Pökoot"],"pl":["Latn",["EU"],"polski"],"pms":["Latn",["EU"],"Piemontèis"],"pnb":["Arab",["AS","ME"],"پنجابی"],"pnt":["Grek",["EU"],"Ποντιακά"],"ppl":["Latn",["AM"],"Nawat"],"prg":["Latn",["EU"],"Prūsiskan"],"prs":["Arab",["AS","ME"],"دری"],"ps":["Arab",["AS","ME"],"پښتو"],"pt-br":["Latn",["AM"],"português do Brasil"],"pt":["Latn",["EU","AM","AS","PA","AF","WW"],"português"],"qu":["Latn",["AM"],"Runa Simi"],"qug":["Latn",["AM"],"Runa shimi"],"rap":["Latn",["AM"],"arero rapa nui"],"rcf":["Latn",["AF"],"Kreol Réyoné"],"rgn":["Latn",["EU"],"Rumagnôl"],"rif":["Latn",["AF"],"Tarifit"],"rki":["Mymr",["AS"],"ရခိုင်"],"rm":["Latn",["EU"],"rumantsch"],"rmf":["Latn",["EU"],"kaalengo tšimb"],"rmy":["Latn",["EU"],"Romani"],"rn":["Latn",["AF"],"Kirundi"],"ro":["Latn",["EU"],"română"],"roa-rup":["rup"],"roa-tara":["Latn",["EU"],"tarandíne"],"rtm":["Latn",["PA"],"Faeag Rotuma"],"ru":["Cyrl",["EU","AS","ME"],"русский"],"rue":["Cyrl",["EU"],"русиньскый"],"rup":["Latn",["EU"],"armãneashti"],"ruq":["Cyrl",["EU"],"Влахесте"],"ruq-cyrl":["ruq"],"ruq-grek":["Grek",["EU"],"Megleno-Romanian (Greek script)"],"ruq-latn":["Latn",["EU"],"Vlăheşte"],"rut":["Cyrl",["EU"],"мыхаӀбишды"],"rw":["Latn",["AF"],"Kinyarwanda"],"rwr":["Deva",["AS"],"मारवाड़ी"],"ryu":["Kana",["AS"],"ʔucināguci"],"sa":["Deva",["AS"],"संस्कृतम्"],"sah":["Cyrl",["EU","AS"],"саха тыла"],"sat":["Latn",["AS"],"Santali"],"saz":["Saur",["AS"],"ꢱꣃꢬꢵꢯ꣄ꢡ꣄ꢬꢵ"],"sc":["Latn",["EU"],"sardu"],"scn":["Latn",["EU"],"sicilianu"],"sco":["Latn",["EU"],"Scots"],"sd":["Arab",["AS"],"سنڌي"],"sdc":["Latn",["EU"],"Sassaresu"],"sdh":["Arab",["ME"],"کوردی خوارگ"],"se":["Latn",["EU"],"sámegiella"],"ses":["Latn",["AF"],"Koyraboro Senni"],"sei":["Latn",["AM"],"Cmique Itom"],"sg":["Latn",["AF"],"Sängö"],"sgs":["Latn",["EU"],"žemaitėška"],"sh":["Latn",["EU"],"srpskohrvatski"],"shi-latn":["Latn",["AF"],"Tašlḥiyt"],"shi-tfng":["Tfng",["AF"],"ⵜⴰⵛⵍⵃⵉⵜ"],"shi":["shi-latn"],"shn":["Mymr",["AS"],"လိၵ်ႈတႆး"],"si":["Sinh",["AS"],"සිංහල"],"simple":["Latn",["WW"],"Simple English"],"sk":["Latn",["EU"],"slovenčina"],"sl":["Latn",["EU"],"slovenščina"],"sli":["Latn",["EU"],"Schläsch"],"slr":["Latn",["AS"],"Salırça"],"sly":["Latn",["AS"],"Bahasa Selayar"],"syc":["Syrc",["ME"],"ܣܘܪܝܝܐ"],"sm":["Latn",["PA"],"Gagana Samoa"],"sma":["Latn",["EU"],"åarjelsaemien"],"smj":["Latn",["EU"],"julevsámegiella"],"smn":["Latn",["EU"],"anarâškielâ"],"sms":["Latn",["EU"],"sää´mǩiõll"],"sn":["Latn",["AF"],"chiShona"],"so":["Latn",["AF"],"Soomaaliga"],"son":["Latn",["AF"],"soŋay"],"sq":["Latn",["EU"],"shqip"],"sr":["sr-cyrl"],"sr-ec":["sr-cyrl"],"sr-cyrl":["Cyrl",["EU"],"српски"],"sr-el":["sr-latn"],"sr-latn":["Latn",["EU"],"srpski"],"srn":["Latn",["AM","EU"],"Sranantongo"],"ss":["Latn",["AF"],"SiSwati"],"st":["Latn",["AF"],"Sesotho"],"stq":["Latn",["EU"],"Seeltersk"],"sty":["Cyrl",["EU","AS"],"себертатар"],"su":["Latn",["AS"],"Basa Sunda"],"sv":["Latn",["EU"],"svenska"],"sw":["Latn",["AF"],"Kiswahili"],"swb":["Latn",["AF"],"Shikomoro"],"sxu":["Latn",["EU"],"Säggssch"],"szl":["Latn",["EU"],"ślůnski"],"ta":["Taml",["AS"],"தமிழ்"],"tcy":["Knda",["AS"],"ತುಳು"],"te":["Telu",["AS"],"తెలుగు"],"tet":["Latn",["AS","PA"],"tetun"],"tg-cyrl":["Cyrl",["AS"],"тоҷикӣ"],"tg-latn":["Latn",["AS"],"tojikī"],"tg":["Cyrl",["AS"],"тоҷикӣ"],"th":["Thai",["AS"],"ไทย"],"ti":["Ethi",["AF"],"ትግርኛ"],"tk":["Latn",["AS"],"Türkmençe"],"tkr":["Cyrl",["AS"],"ЦӀаьхна миз"],"tl":["Latn",["AS"],"Tagalog"],"tly":["Cyrl",["EU","AS","ME"],"толышә зывон"],"tn":["Latn",["AF"],"Setswana"],"to":["Latn",["PA"],"lea faka-Tonga"],"tokipona":["Latn",["WW"],"Toki Pona"],"tpi":["Latn",["PA","AS"],"Tok Pisin"],"tr":["Latn",["EU","ME"],"Türkçe"],"trp":["Latn",["AS"],"Kokborok (Tripuri)"],"tru":["Latn",["AS"],"Ṫuroyo"],"ts":["Latn",["AF"],"Xitsonga"],"tsd":["Grek",["EU"],"Τσακωνικά"],"tt":["Cyrl",["EU"],"татарча"],"tt-cyrl":["tt"],"tt-latn":["Latn",["EU"],"tatarça"],"ttt":["Cyrl",["AS"],"Tati"],"tum":["Latn",["AF"],"chiTumbuka"],"tw":["Latn",["AF"],"Twi"],"twd":["Latn",["EU"],"Tweants"],"ty":["Latn",["PA"],"reo tahiti"],"tyv":["Cyrl",["AS"],"тыва дыл"],"tzl":["Latn",["WW"],"Talossan"],"tzm":["Tfng",["AF"],"ⵜⴰⵎⴰⵣⵉⵖⵜ"],"udm":["Cyrl",["EU"],"удмурт"],"ug":["ug-arab"],"ug-arab":["Arab",["AS"],"ئۇيغۇرچە"],"ug-latn":["Latn",["AS"],"uyghurche"],"ug-cyrl":["Cyrl",["AS"],"уйғурчә"],"uk":["Cyrl",["EU"],"українська"],"ur":["Arab",["AS","ME"],"اردو"],"uz":["Latn",["AS"],"oʻzbekcha"],"ve":["Latn",["AF"],"Tshivenda"],"vec":["Latn",["EU"],"vèneto"],"vep":["Latn",["EU"],"vepsän kel’"],"vi":["Latn",["AS"],"Tiếng Việt"],"vls":["Latn",["EU"],"West-Vlams"],"vmf":["Latn",["EU"],"Mainfränkisch"],"vo":["Latn",["WW"],"Volapük"],"vot":["Latn",["EU"],"Vaďďa"],"vro":["Latn",["EU"],"Võro"],"wa":["Latn",["EU"],"walon"],"war":["Latn",["AS"],"Winaray"],"wls":["Latn",["PA"],"Faka'uvea"],"wo":["Latn",["AF"],"Wolof"],"wuu":["Hans",["AS"],"吴语"],"xal":["Cyrl",["EU"],"хальмг"],"xh":["Latn",["AF"],"isiXhosa"],"xmf":["Geor",["EU"],"მარგალური"],"ydd":["Hebr",["AS","EU"],"Eastern Yiddish"],"yi":["Hebr",["ME","EU","AM"],"ייִדיש"],"yo":["Latn",["AF"],"Yorùbá"],"yrk":["Cyrl",["AS"],"Ненэцяʼ вада"],"yrl":["Latn",["AM"],"ñe'engatú"],"yua":["Latn",["AM"],"Maaya T'aan"],"yue":["Hant",["AS"],"粵語"],"za":["Latn",["AS"],"Vahcuengh"],"zea":["Latn",["EU"],"Zeêuws"],"zgh":["Tfng",["AF"],"ⵜⴰⵎⴰⵣⵉⵖⵜ"],"zh":["Hans",["AS"],"中文"],"zh-classical":["Hant",["AS"],"文言"],"zh-cn":["Hans",["AS"],"中文（中国大陆）"],"zh-hans":["Hans",["AS"],"中文（简体）"],"zh-hant":["Hant",["AS"],"中文（繁體）"],"zh-hk":["Hant",["AS"],"中文（香港）"],"zh-min-nan":["nan"],"zh-mo":["Hant",["AS"],"中文（澳門）"],"zh-my":["Hans",["AS"],"中文（马来西亚）"],"zh-sg":["Hans",["AS"],"中文（新加坡）"],"zh-tw":["Hant",["AS"],"中文（台灣）"],"zh-yue":["yue"],"zu":["Latn",["AF"],"isiZulu"]},"scriptgroups":{"Latin":["Latn","Goth"],"Greek":["Grek"],"WestCaucasian":["Armn","Geor"],"Arabic":["Arab"],"MiddleEastern":["Hebr","Syrc"],"African":["Ethi","Nkoo","Tfng"],"SouthAsian":["Beng","Deva","Gujr","Guru","Knda","Mlym","Orya","Saur","Sinh","Taml","Telu","Tibt","Thaa"],"Cyrillic":["Cyrl"],"CJK":["Hans","Hant","Kana","Kore","Jpan","Yiii"],"SouthEastAsian":["Bali","Batk","Bugi","Java","Khmr","Laoo","Mymr","Thai"],"Mongolian":["Mong"],"SignWriting":["Sgnw"],"NativeAmerican":["Cher","Cans"],"Special":["Zyyy"]},"rtlscripts":["Arab","Hebr","Syrc","Nkoo","Thaa"],"regiongroups":{"WW":1,"SP":1,"AM":2,"EU":3,"ME":3,"AF":3,"AS":4,"PA":4},"territories":{"AC":["en"],"AD":["ca","es","fr"],"AE":["ar","ml","ps","fa"],"AF":["fa","ps","uz","tk","bgn","ug-arab","kk-arab","kk-cyrl"],"AG":["en","pt"],"AI":["en"],"AL":["sq","el","mk"],"AM":["hy","ku-latn","az-latn"],"AO":["pt","ln"],"AR":["es","en","cy","gn"],"AS":["sm","en"],"AT":["de","bar","en","hr","sl","hu"],"AU":["en","zh-hant","zh","it"],"AW":["nl","pap","en"],"AX":["sv"],"AZ":["az-latn","az-cyrl","tly","ku-latn","ttt","tkr"],"BA":["bs","en","hr","sr-cyrl","sr-latn"],"BB":["en"],"BD":["bn","en","my","mni"],"BE":["en","nl","fr","vls","wa","de"],"BF":["fr"],"BG":["bg","en","tr"],"BH":["ar","ml"],"BI":["rn","fr","sw","en"],"BJ":["fr","yo"],"BL":["fr"],"BM":["en"],"BN":["ms","zh-hant","zh","en"],"BO":["es","qu","ay","gn","aro"],"BQ":["pap","nl"],"BR":["pt","en","de","it","ja","es","ko","kgp","yrl"],"BS":["en"],"BT":["dz","ne","en"],"BW":["en","tn","af"],"BY":["be","ru"],"BZ":["en","es"],"CA":["en","fr","it","de","pdt","cr","yi","iu","atj"],"CC":["ms","en"],"CD":["sw","fr","ln","kg","rw"],"CF":["fr","sg","ln"],"CG":["fr","ln"],"CH":["de","gsw","en","fr","it","lmo","pt","rm"],"CI":["fr"],"CK":["en"],"CL":["es","en","arn"],"CM":["fr","en","ff","ar","ksf","ha-arab","ha-latn"],"CN":["yue","zh-hans","zh","wuu","hsn","hak","nan","gan","ii","ug-arab","za","mn","bo","ko","kk-arab","kk-cyrl","ky","en","ru","vi","uz","lzh"],"CO":["es","guc"],"CR":["es"],"CU":["es"],"CV":["kea","pt"],"CW":["pap","nl","es"],"CX":["en"],"CY":["el","en","tr","hy","ar"],"CZ":["cs","en","de","pl"],"DE":["de","en","fr","bar","nds","nl","it","es","ru","vmf","tr","da","hr","ku-latn","el","ksh","pl","hsb","frr","dsb","stq","pfl"],"DG":["en"],"DJ":["aa","so","ar","fr"],"DK":["da","en","de","fo","kl","jut"],"DM":["en"],"DO":["es","en"],"DZ":["arq","ar","fr","kab","en"],"EA":["es"],"EC":["es","qu","qug"],"EE":["et","ru","vro"],"EG":["ar","arz","en","el"],"EH":["ar"],"ER":["ti","en","ar","aa"],"ES":["es","en","ca","gl","eu","ast","ext"],"ET":["en","am","om","so","ti","aa"],"FI":["fi","en","sv","ru","et","rmf","se","smn","sms"],"FJ":["en","hi","hif","fj","rtm"],"FK":["en"],"FM":["en"],"FO":["fo"],"FR":["fr","en","oc","it","pt","pcd","gsw","br","co","ca","nl","eu","frp","ia"],"GA":["fr"],"GB":["en","sco","pa-guru","cy","bn","zh-hant","zh","el","it","ks-arab","ks","gd","yi","ml","ga","fr","kw"],"GD":["en"],"GE":["ka","xmf","ru","hy","ab","os","ku-latn"],"GF":["fr","zh-hant","zh"],"GG":["en"],"GH":["ak","en","ee","gur","ha-latn"],"GI":["en","es"],"GL":["kl","da"],"GM":["en"],"GN":["fr","ff","nqo"],"GP":["fr"],"GQ":["es","fr","pt"],"GR":["el","en","pnt","mk","tr","bg","sq","tsd"],"GT":["es"],"GU":["en","ch"],"GW":["pt"],"GY":["en"],"HK":["zh-hant","zh","yue","en","zh-hans"],"HN":["es","en"],"HR":["hr","en","it"],"HT":["ht","fr"],"HU":["hu","en","de","ro","hr","sk","sl"],"IC":["es"],"ID":["id","jv","su","ms","min","bew","ban","bug","bjn","ace","bbc","zh-hant","zh","sly","mwv"],"IE":["en","ga"],"IL":["he","en","ar","ru","ro","yi","pl","lad-latn","hu","am","ti","ml"],"IM":["en","gv"],"IN":["hi","en","bn","te","mr","ta","ur","gu","kn","ml","or","pa-guru","bho","as","mai","hne","ne","sat","ks-arab","ks","gom-deva","sd","tcy","brx","mni","saz","bfq","njo","bo","bpy","bft","sa","dv","dz"],"IO":["en"],"IQ":["ar","en","ckb","az-arab","az-latn","fa","lrc"],"IR":["fa","az-arab","az-latn","mzn","glk","ckb","sdh","tk","lrc","ar","bqi","luz","lki","bgn","hy","ps","ka","gbz","kk-arab","kk-cyrl"],"IS":["is","da"],"IT":["it","en","fr","sc","de","vec","nap","lij","scn","sl","sdc","fur","egl","ca","el","lmo","pms","hr","rgn"],"JE":["en"],"JM":["en","jam"],"JO":["ar","en"],"JP":["ja","ryu","ko"],"KE":["sw","en","ki","so","pko","om","ar","pa-guru","gu"],"KG":["ky","ru"],"KH":["km"],"KI":["en"],"KM":["ar","fr"],"KN":["en"],"KP":["ko"],"KR":["ko"],"KW":["ar"],"KY":["en"],"KZ":["ru","kk-cyrl","en","de","ug-cyrl","ug-arab"],"LA":["lo"],"LB":["ar","en","hy","ku-arab","ku-latn","fr"],"LC":["en"],"LI":["de","gsw"],"LK":["si","ta","en"],"LR":["en"],"LS":["st","en","zu","ss","xh"],"LT":["lt","en","ru","sgs"],"LU":["fr","lb","de","pt"],"LV":["lv","ru","ltg"],"LY":["ar"],"MA":["ary","ar","zgh","fr","en","tzm","shi-latn","shi-tfng","rif","es"],"MC":["fr"],"MD":["ro","uk","bg","gag","ru"],"ME":["sr-latn","sr-cyrl","sq"],"MF":["fr"],"MG":["mg","fr","en"],"MH":["en","mh"],"MK":["mk","sq","tr"],"ML":["bm","fr","ses","ar"],"MM":["my","shn","kac","mnw"],"MN":["mn","kk-arab","kk-cyrl","zh-hans","zh","ru","ug-cyrl","ug-arab"],"MO":["zh-hant","zh","pt","zh-hans","en"],"MP":["en","ch"],"MQ":["fr"],"MR":["ar","fr","ff","wo"],"MS":["en"],"MT":["mt","en"],"MU":["mfe","en","bho","ur","fr","ta"],"MV":["dv"],"MW":["en","ny","tum","zu"],"MX":["es","en","yua","sei"],"MY":["ms","en","zh-hant","zh","ta","jv","dtp","ml","bug","bjn"],"MZ":["pt","ts","ny","sw","zu"],"NA":["af","kj","ng","hz","en","de","tn"],"NC":["fr"],"NE":["ha-latn","fr","ar"],"NF":["en"],"NG":["en","ha-latn","ig","yo","ha-arab","ar"],"NI":["es"],"NL":["nl","en","de","fr","nds","li","fy","id","zea","rif","tr"],"NO":["nb","nn","se"],"NP":["ne","mai","bho","new","en","dty","hi","bo","bn"],"NR":["en","na"],"NU":["en","niu"],"NZ":["en","mi"],"OM":["ar","fa"],"PA":["es","en","zh-hant","zh"],"PE":["es","qu","ay"],"PF":["fr","ty","zh-hant","zh"],"PG":["tpi","en","ho"],"PH":["en","tl","es","ceb","ilo","hil","war","pam","pag","zh-hant","zh","cps","krj","bto"],"PK":["ur","pa-guru","en","ps","sd","brh","fa","bgn","tg","bft","khw","ks-arab","ks"],"PL":["pl","en","szl","be","uk","csb","de","sli","lt"],"PM":["fr","en"],"PN":["en"],"PR":["es","en"],"PS":["ar"],"PT":["pt","en","gl","es"],"PW":["en"],"PY":["gn","es","de"],"QA":["ar","fa","ml"],"RE":["fr","rcf","ta"],"RO":["ro","en","hu","de","tr","sr-latn","sr-cyrl","bg","el","pl"],"RS":["sr-cyrl","sr-latn","sq","hu","ro","hr","sk","uk"],"RU":["ru","tt","ba","cv","hy","ce","av","udm","mhr","sah","os","kbd","myv","mdf","kv","lez","krc","inh","tyv","az-cyrl","az-latn","ady","krl","lbe","koi","mrj","fi","sr-latn","sr-cyrl","vep","mn","vot","cu"],"RW":["rw","en","fr"],"SA":["ar"],"SB":["en"],"SC":["fr","en"],"SD":["ar","en","ha-arab","ha-latn"],"SE":["sv","en","fi","fit","se","yi","smj","sma","ia"],"SG":["en","zh-hans","zh","ms","ta","ml","pa-guru"],"SH":["en"],"SI":["sl","en","hu","it"],"SJ":["nb","ru"],"SK":["sk","en","hu","uk","pl","de"],"SL":["kri","en"],"SM":["it","eo"],"SN":["wo","fr","ff"],"SO":["so","ar","sw","om"],"SR":["nl","srn","zh-hant","zh"],"SS":["ar","en"],"ST":["pt"],"SV":["es"],"SX":["en","es","nl"],"SY":["ar","ku-latn","fr","hy"],"SZ":["en","ss","zu","ts"],"TA":["en"],"TC":["en"],"TD":["fr","ar"],"TF":["fr"],"TG":["fr","ee"],"TH":["th","en","zh-hant","zh","mnw","shn"],"TJ":["tg-cyrl","tg","ru","fa","ar"],"TK":["en"],"TL":["pt","tet"],"TM":["tk","ru","uz","ku-latn"],"TN":["aeb-arab","ar","fr"],"TO":["to","en"],"TR":["tr","en","ku-latn","kbd","az-latn","az-arab","ar","bg","ady","kiu","hy","ka","sr-latn","sr-cyrl","lzz","sq","ab","el","tru","uz","ky","kk-cyrl"],"TT":["en","es"],"TV":["en"],"TW":["zh-hant","zh"],"TZ":["sw","en"],"UA":["uk","ru","pl","yi","rue","be","ro","bg","tr","hu","el"],"UG":["sw","lg","en","rw","hi"],"UM":["en"],"US":["en","es","zh-hant","zh","fr","de","tl","it","vi","ko","ru","nv","yi","pdc","haw","frc","chr","esu","cho","lkt","ik","mus"],"UY":["es"],"UZ":["uz","ru","kaa","tr"],"VA":["it","la"],"VC":["en"],"VE":["es"],"VG":["en"],"VI":["en"],"VN":["vi","zh-hant","zh"],"VU":["bi","en","fr"],"WF":["wls","fr"],"WS":["sm","en"],"XK":["sq","aln","sr-cyrl","sr-latn"],"YE":["ar","en"],"YT":["swb","fr","sw"],"ZA":["en","zu","xh","af","nso","tn","st","ts","ss","ve","hi","sw"],"ZM":["en","ny","loz"],"ZW":["sn","en","ny","ve","tn"]}};
+} ( jQuery ) );
+
+/**
+ * Utility functions for querying language data.
+ *
+ * Copyright (C) 2012 Alolita Sharma, Amir Aharoni, Arun Ganesh, Brandon Harris,
+ * Niklas Laxström, Pau Giner, Santhosh Thottingal, Siebrand Mazeland and other
+ * contributors. See CREDITS for a list.
+ *
+ * UniversalLanguageSelector is dual licensed GPLv2 or later and MIT. You don't
+ * have to do anything special to choose one license or the other and you don't
+ * have to notify anyone which license you are using. You are free to use
+ * UniversalLanguageSelector in commercial projects as long as the copyright
+ * header is left intact. See files GPL-LICENSE and MIT-LICENSE for details.
+ *
+ * @file
+ * @ingroup Extensions
+ * @licence GNU General Public Licence 2.0 or later
+ * @licence MIT License
+ */
+
+( function ( $ ) {
+	'use strict';
+
+	/**
+	 * Is this language a redirect to another language?
+	 * @param language string Language code
+	 * @return Target language code if it's a redirect or false if it's not
+	 */
+	$.uls.data.isRedirect = function ( language ) {
+		return ( $.uls.data.languages[language] !== undefined &&
+			$.uls.data.languages[language].length === 1 ) ? $.uls.data.languages[language][0] : false;
+	};
+
+	/**
+	 * Returns the script of the language.
+	 * @param language string Language code
+	 * @return string
+	 */
+	$.uls.data.getScript = function ( language ) {
+		var target = $.uls.data.isRedirect( language );
+
+		if ( target ) {
+			return $.uls.data.getScript( target );
+		}
+
+		if ( !$.uls.data.languages[language] ) {
+			// Undetermined
+			return 'Zyyy';
+		}
+
+		return $.uls.data.languages[language][0];
+	};
+
+	/**
+	 * Returns the regions in which a language is spoken.
+	 * @param language string Language code
+	 * @return array|string 'UNKNOWN'
+	 */
+	$.uls.data.getRegions = function ( language ) {
+		var target = $.uls.data.isRedirect( language );
+
+		if ( target ) {
+			return $.uls.data.getRegions( target );
+		}
+
+		return ( $.uls.data.languages[language] && $.uls.data.languages[language][1] ) || 'UNKNOWN';
+	};
+
+	/**
+	 * Returns the autonym of the language.
+	 * @param language string Language code
+	 * @return string
+	 */
+	$.uls.data.getAutonym = function ( language ) {
+		var target = $.uls.data.isRedirect( language );
+
+		if ( target ) {
+			return $.uls.data.getAutonym( target );
+		}
+
+		return ( $.uls.data.languages[language] && $.uls.data.languages[language][2] ) || language;
+	};
+
+	/**
+	 * Returns all language codes and corresponding autonyms
+	 * @return array
+	 */
+	$.uls.data.getAutonyms = function () {
+		var language,
+			autonymsByCode = {};
+
+		for ( language in $.uls.data.languages ) {
+			if ( $.uls.data.isRedirect( language ) ) {
+				continue;
+			}
+
+			autonymsByCode[language] = $.uls.data.getAutonym( language );
+		}
+
+		return autonymsByCode;
+	};
+
+	/**
+	 * Returns all languages written in script.
+	 * @param script string
+	 * @return array of strings (languages codes)
+	 */
+	$.uls.data.getLanguagesInScript = function ( script ) {
+		return $.uls.data.getLanguagesInScripts( [ script ] );
+	};
+
+	/**
+	 * Returns all languages written in the given scripts.
+	 * @param scripts array of strings
+	 * @return array of strings (languages codes)
+	 */
+	$.uls.data.getLanguagesInScripts = function ( scripts ) {
+		var language, i,
+			languagesInScripts = [];
+
+		for ( language in $.uls.data.languages ) {
+			if ( $.uls.data.isRedirect( language ) ) {
+				continue;
+			}
+
+			for ( i = 0; i < scripts.length; i++ ) {
+				if ( scripts[i] === $.uls.data.getScript( language ) ) {
+					languagesInScripts.push( language );
+					break;
+				}
+			}
+		}
+
+		return languagesInScripts;
+	};
+
+	/**
+	 * Returns an associative array of languages in a region,
+	 * grouped by script group.
+	 * @param region string Region code
+	 * @return associative array
+	 */
+	$.uls.data.getLanguagesByScriptGroupInRegion = function ( region ) {
+		return $.uls.data.getLanguagesByScriptGroupInRegions( [ region ] );
+	};
+
+	/**
+	 * Get the given list of languages grouped by script.
+	 * @param languages Array of language codes
+	 * @return {Object} Array of languages indexed by script codes
+	 */
+	$.uls.data.getLanguagesByScriptGroup = function ( languages ) {
+		var languagesByScriptGroup = {},
+			language, resolvedRedirect, langScriptGroup;
+
+		for ( language in languages ) {
+			resolvedRedirect = $.uls.data.isRedirect( language ) || language;
+
+			langScriptGroup = $.uls.data.getScriptGroupOfLanguage( resolvedRedirect );
+
+			if ( !languagesByScriptGroup[langScriptGroup] ) {
+				languagesByScriptGroup[langScriptGroup] = [];
+			}
+
+			languagesByScriptGroup[langScriptGroup].push( language );
+		}
+
+		return languagesByScriptGroup;
+	};
+
+	/**
+	 * Returns an associative array of languages in several regions,
+	 * grouped by script group.
+	 * @param regions array of strings - region codes
+	 * @return associative array
+	 */
+	$.uls.data.getLanguagesByScriptGroupInRegions = function ( regions ) {
+		var language, i, scriptGroup,
+			languagesByScriptGroupInRegions = {};
+
+		for ( language in $.uls.data.languages ) {
+			if ( $.uls.data.isRedirect( language ) ) {
+				continue;
+			}
+
+			for ( i = 0; i < regions.length; i++ ) {
+				if ( $.inArray( regions[i], $.uls.data.getRegions( language ) ) !== -1 ) {
+					scriptGroup = $.uls.data.getScriptGroupOfLanguage( language );
+
+					if ( languagesByScriptGroupInRegions[scriptGroup] === undefined ) {
+						languagesByScriptGroupInRegions[scriptGroup] = [];
+					}
+
+					languagesByScriptGroupInRegions[scriptGroup].push( language );
+					break;
+				}
+			}
+		}
+
+		return languagesByScriptGroupInRegions;
+	};
+
+	/**
+	 * Returns the script group of a script or 'Other' if it doesn't
+	 * belong to any group.
+	 * @param script string Script code
+	 * @return string script group name
+	 */
+	$.uls.data.getGroupOfScript = function ( script ) {
+		var scriptGroup;
+
+		for ( scriptGroup in $.uls.data.scriptgroups ) {
+			if ( $.inArray( script, $.uls.data.scriptgroups[scriptGroup] ) !== -1 ) {
+				return scriptGroup;
+			}
+		}
+
+		return 'Other';
+	};
+
+	/**
+	 * Returns the script group of a language.
+	 * @param language string Language code
+	 * @return string script group name
+	 */
+	$.uls.data.getScriptGroupOfLanguage = function ( language ) {
+		return $.uls.data.getGroupOfScript( $.uls.data.getScript( language ) );
+	};
+
+	/**
+	 * A callback for sorting languages by autonym.
+	 * Can be used as an argument to a sort function.
+	 * @param a string Language code
+	 * @param b string Language code
+	 */
+	$.uls.data.sortByAutonym = function ( a, b ) {
+		var autonymA = $.uls.data.getAutonym( a ) || a,
+			autonymB = $.uls.data.getAutonym( b ) || b;
+
+		return ( autonymA.toLowerCase() < autonymB.toLowerCase() ) ? -1 : 1;
+	};
+
+	/**
+	 * Check if a language is right-to-left.
+	 * @param language string Language code
+	 * @return boolean
+	 */
+	$.uls.data.isRtl = function ( language ) {
+		return $.inArray( $.uls.data.getScript( language ), $.uls.data.rtlscripts ) !== -1;
+	};
+
+	/**
+	 * Return the direction of the language
+	 * @param language string Language code
+	 * @return string
+	 */
+	$.uls.data.getDir = function ( language ) {
+		return $.uls.data.isRtl( language ) ? 'rtl' : 'ltr';
+	};
+
+	/**
+	 * Returns the languages spoken in a territory.
+	 * @param territory string Territory code
+	 * @return list of language codes
+	 */
+	$.uls.data.getLanguagesInTerritory = function ( territory ) {
+		return $.uls.data.territories[territory];
+	};
+
+	/**
+	 * Adds a language in run time and sets its options as provided.
+	 * If the target option is provided, the language is defined as a redirect.
+	 * Other possible options are script, regions and autonym.
+	 *
+	 * @param code string New language code.
+	 * @param options Object Language properties.
+	 */
+	$.uls.data.addLanguage = function( code, options ) {
+		if ( options.target ) {
+			$.uls.data.languages[code] = [options.target];
+		} else {
+			$.uls.data.languages[code] = [options.script, options.regions, options.autonym];
+		}
+	};
+
+	/**
+	 * Removes a language from the langdb in run time.
+	 *
+	 * @param code string Language code to delete.
+	 * @return true if the language was removed, false otherwise.
+	 */
+	$.uls.data.deleteLanguage = function( code ) {
+		if ( $.uls.data.languages[code] ) {
+			delete $.uls.data.languages[code];
+
+			return true;
+		}
+
+		return false;
+	};
+} ( jQuery ) );
+
+/**
+ * Universal Language Selector
+ * Language category display component - Used for showing the search results,
+ * grouped by regions, scripts
+ *
+ * Copyright (C) 2012 Alolita Sharma, Amir Aharoni, Arun Ganesh, Brandon Harris,
+ * Niklas Laxström, Pau Giner, Santhosh Thottingal, Siebrand Mazeland and other
+ * contributors. See CREDITS for a list.
+ *
+ * UniversalLanguageSelector is dual licensed GPLv2 or later and MIT. You don't
+ * have to do anything special to choose one license or the other and you don't
+ * have to notify anyone which license you are using. You are free to use
+ * UniversalLanguageSelector in commercial projects as long as the copyright
+ * header is left intact. See files GPL-LICENSE and MIT-LICENSE for details.
+ *
+ * @file
+ * @ingroup Extensions
+ * @licence GNU General Public Licence 2.0 or later
+ * @licence MIT License
+ */
+
+( function ( $ ) {
+	'use strict';
+
+	var noResultsTemplate, LanguageCategoryDisplay;
+
+	noResultsTemplate = $( '<div>' ).addClass( 'uls-no-results-view hide' );
+	noResultsTemplate.append(
+		$( '<h2>' )
+			.attr( 'data-i18n', 'uls-no-results-found' )
+			.addClass( 'uls-no-results-found-title' )
+			.text( 'No results found' ),
+		$( '<div>' )
+			.attr( 'id', 'uls-no-found-more' )
+			.addClass( 'uls-no-found-more' )
+			.append(
+				$( '<div>' )
+					.addClass( '' )
+					.append(
+						$( '<p>' ).append(
+							$( '<span>' )
+								.attr( 'data-i18n', 'uls-search-help' )
+								.text( 'You can search by language name, script name, ISO code of language or you can browse by region.' )
+						)
+					)
+			)
+	);
+
+	LanguageCategoryDisplay = function ( element, options ) {
+		this.$element = $( element );
+		this.options = $.extend( {}, $.fn.lcd.defaults, options );
+		this.$element.addClass( 'uls-lcd' );
+		this.regionLanguages = {};
+		this.renderTimeout = null;
+		this.cachedQuicklist = null;
+
+		this.$element.append( $( noResultsTemplate ) );
+		this.$noResults = this.$element.children( '.uls-no-results-view' );
+
+		this.render();
+		this.listen();
+	};
+
+	LanguageCategoryDisplay.prototype = {
+		constructor: LanguageCategoryDisplay,
+
+		/**
+		 * Adds language to the language list.
+		 * @param {string} langCode
+		 * @param {string} [regionCode]
+		 * @return {boolean} Whether the language was added.
+		 */
+		append: function ( langCode, regionCode ) {
+			var lcd = this,
+				i, regions;
+
+			if ( !$.uls.data.languages[ langCode ] ) {
+				// Language is unknown or not in the list of languages for this context.
+				return false;
+			}
+
+			// Show everything in one region when there is only one column
+			if ( lcd.options.columns === 1 ) {
+				regions = [ 'WW' ];
+
+				// Languages are expected to be repeated in this case,
+				// and we only want to show them once
+				if ( $.inArray( langCode, this.regionLanguages.WW ) > -1 ) {
+					return true;
+				}
+			} else {
+				if ( regionCode ) {
+					regions = [ regionCode ];
+				} else {
+					regions = $.uls.data.getRegions( langCode );
+				}
+			}
+
+			for ( i = 0; i < regions.length; i++ ) {
+				this.regionLanguages[ regions[ i ] ].push( langCode );
+			}
+
+			// Work around the bad interface, delay rendering until we have got
+			// all the languages to speed up performance.
+			window.clearTimeout( this.renderTimeout );
+			this.renderTimeout = window.setTimeout( function () {
+				lcd.renderRegions();
+			}, 50 );
+
+			return true;
+		},
+
+		render: function () {
+			var $section, $quicklist,
+				lcd = this,
+				narrowMode = this.options.columns === 1,
+				regions = [],
+				regionNames = {
+					// These are fallback text when i18n library not present
+					WW: 'Worldwide',
+					SP: 'Special',
+					AM: 'America',
+					EU: 'Europe',
+					ME: 'Middle East',
+					AS: 'Asia',
+					AF: 'Africa',
+					PA: 'Pacific'
+				};
+
+			$quicklist = this.buildQuicklist();
+			regions.push( $quicklist );
+
+			if ( narrowMode && $quicklist.length ) {
+				regions.push( $( '<h3>' )
+					.attr( 'data-i18n', 'uls-region-all' )
+					.addClass( 'uls-lcd-region-title' )
+					.text( 'All languages' )
+				);
+			}
+
+			$.each( $.uls.data.regiongroups, function ( regionCode ) {
+				lcd.regionLanguages[ regionCode ] = [];
+
+				// Don't show the region unless it was enabled
+				if ( $.inArray( regionCode, lcd.options.showRegions ) === -1 ) {
+					return;
+				}
+
+				$section = $( '<div>' )
+					.addClass( 'uls-lcd-region-section hide' )
+					.attr( 'id', regionCode );
+
+				// Show a region heading, unless we are using a narrow ULS
+				if ( !narrowMode ) {
+					$section.append( $( '<h3>' )
+						.attr( 'data-i18n', 'uls-region-' + regionCode )
+						.addClass( 'uls-lcd-region-title' )
+						.text( regionNames[ regionCode ] )
+					);
+				}
+
+				regions.push( $section );
+			} );
+
+			lcd.$element.append( regions );
+
+			this.i18n();
+		},
+
+		/**
+		 * Renders a region and displays it if it has content.
+		 */
+		renderRegions: function () {
+			var languages,
+				lcd = this;
+
+			this.$noResults.addClass( 'hide' );
+			this.$element.find( '.uls-lcd-region-section' ).each( function () {
+				var $region = $( this ),
+					regionCode = $region.attr( 'id' );
+
+				if ( $region.is( '#uls-lcd-quicklist' ) ) {
+					return;
+				}
+
+				$region.children( '.uls-language-block' ).remove();
+
+				languages = lcd.regionLanguages[ regionCode ];
+				if ( !languages || languages.length === 0 ) {
+					$region.addClass( 'hide' );
+					return;
+				}
+
+				lcd.renderRegion(
+					$region,
+					languages,
+					lcd.options.itemsPerColumn,
+					lcd.options.columns
+				);
+				$region.removeClass( 'hide' );
+
+				lcd.regionLanguages[ regionCode ] = [];
+			} );
+
+		},
+
+		/**
+		 * Adds given languages sorted into rows and columns into given element.
+		 * @param {jQuery} $region Element to add language list.
+		 * @param {array} languages List of language codes.
+		 * @param {number} itemsPerColumn How many languages fit in a column.
+		 * @param {number} columnsPerRow How many columns fit in a row.
+		 */
+		renderRegion: function ( $region, languages, itemsPerColumn, columnsPerRow ) {
+			var columnsClasses, i, lastItem, currentScript, nextScript, force,
+				languagesCount = languages.length,
+				items = [],
+				columns = [],
+				rows = [];
+
+			if ( columnsPerRow === 1 ) {
+				columnsClasses = 'twelve columns';
+			} else if ( columnsPerRow === 2 ) {
+				columnsClasses = 'six columns';
+			} else {
+				columnsClasses = 'three columns';
+			}
+
+			if ( this.options.columns === 1 ) {
+				// For one-column narrow ULS, just render all the languages
+				// in one simple list without separators or script groups
+				for ( i = 0; i < languagesCount; i++ ) {
+					items.push( this.renderItem( languages[ i ] ) );
+				}
+
+				columns.push( $( '<ul>' ).addClass( columnsClasses ).append( items ) );
+				rows.push( $( '<div>' ).addClass( 'row uls-language-block' ).append( columns ) );
+			} else {
+				// For medium and wide ULS, clever column placement
+				for ( i = 0; i < languagesCount; i++ ) {
+					force = false;
+					nextScript = $.uls.data.getScriptGroupOfLanguage( languages[ i + 1 ] );
+
+					lastItem = languagesCount - i === 1;
+					// Force column break if script changes and column has more than one row already
+					if ( i === 0 ) {
+						currentScript = $.uls.data.getScriptGroupOfLanguage( languages[ i ] );
+					} else if ( currentScript !== nextScript && items.length > 1 ) {
+						force = true;
+					}
+					currentScript = nextScript;
+
+					items.push( this.renderItem( languages[ i ] ) );
+
+					if ( items.length >= itemsPerColumn || lastItem || force ) {
+						columns.push( $( '<ul>' ).addClass( columnsClasses ).append( items ) );
+						items = [];
+						if ( columns.length >= columnsPerRow || lastItem ) {
+							rows.push( $( '<div>' ).addClass( 'row uls-language-block' ).append( columns ) );
+							columns = [];
+						}
+					}
+				}
+			}
+
+			$region.append( rows );
+		},
+
+		/**
+		 * Creates dom node representing one item in language list.
+		 * @param {string} code Language code
+		 * @return {Element}
+		 */
+		renderItem: function ( code ) {
+			var a, name, autonym, li;
+
+			name = this.options.languages[ code ];
+			autonym = $.uls.data.getAutonym( code ) || name || code;
+
+			// Not using jQuery as this is performance hotspot
+			li = document.createElement( 'li' );
+			li.title = name;
+			li.setAttribute( 'data-code', code );
+
+			a = document.createElement( 'a' );
+			a.appendChild( document.createTextNode( autonym ) );
+			a.className = 'autonym';
+			a.lang = code;
+			a.dir = $.uls.data.getDir( code );
+
+
+			li.appendChild( a );
+			if ( this.options.languageDecorator ) {
+				this.options.languageDecorator( $( a ), code );
+			}
+			return li;
+		},
+
+		i18n: function () {
+			this.$element.find( '[data-i18n]' ).i18n();
+		},
+
+		/**
+		 * Adds quicklist as a region.
+		 */
+		quicklist: function () {
+			this.$element.find( '#uls-lcd-quicklist' ).removeClass( 'hide' );
+		},
+
+		buildQuicklist: function () {
+			var quickList, $quickListSection, $quickListSectionTitle;
+
+			if ( this.cachedQuicklist !== null ) {
+				return this.cachedQuicklist;
+			}
+
+			if ( $.isFunction( this.options.quickList ) ) {
+				this.options.quickList = this.options.quickList();
+			}
+
+			if ( !this.options.quickList.length ) {
+				this.cachedQuicklist = $( [] );
+				return this.cachedQuicklist;
+			}
+
+			// Pick only the first elements, because we don't have room for more
+			quickList = this.options.quickList;
+			quickList = quickList.slice( 0, 16 );
+			quickList.sort( $.uls.data.sortByAutonym );
+
+			$quickListSection = $( '<div>' )
+				.addClass( 'uls-lcd-region-section' )
+				.attr( 'id', 'uls-lcd-quicklist' );
+
+			$quickListSectionTitle = $( '<h3>' )
+				.attr( 'data-i18n', 'uls-common-languages' )
+				.addClass( 'uls-lcd-region-title' )
+				.text( 'Suggested languages' ); // This is placeholder text if jquery.i18n not present
+			$quickListSection.append( $quickListSectionTitle );
+
+			this.renderRegion(
+				$quickListSection,
+				quickList,
+				this.options.itemsPerColumn,
+				this.options.columns
+			);
+
+			$quickListSectionTitle.i18n();
+
+			this.cachedQuicklist = $quickListSection;
+			return this.cachedQuicklist;
+		},
+
+		show: function () {
+			if ( !this.regionDivs ) {
+				this.render();
+			}
+		},
+
+		empty: function () {
+			this.$element.find( '#uls-lcd-quicklist' ).addClass( 'hide' );
+		},
+
+		focus: function () {
+			this.$element.focus();
+		},
+
+		noResults: function () {
+			this.$noResults.removeClass( 'hide' );
+			if ( this.$noResults.find( '.uls-lcd-region-title' ).length ) {
+				return;
+			}
+
+			var $suggestions = this.buildQuicklist().clone();
+			$suggestions.find( 'h3' )
+				.data( 'i18n', 'uls-no-results-suggestion-title' )
+				.text( 'You may be interested in:' )
+				.i18n();
+			this.$noResults.find( 'h2' ).after( $suggestions.show() );
+		},
+
+		listen: function () {
+			var lcd = this;
+
+			if ( this.options.clickhandler ) {
+				this.$element.on( 'click', '.row li', function () {
+					lcd.options.clickhandler.call( this, $( this ).data( 'code' ) );
+				} );
+			}
+		}
+	};
+
+	$.fn.lcd = function ( option ) {
+		return this.each( function () {
+			var $this = $( this ),
+				data = $this.data( 'lcd' ),
+				options = typeof option === 'object' && option;
+
+			if ( !data ) {
+				$this.data( 'lcd', ( data = new LanguageCategoryDisplay( this, options ) ) );
+			}
+
+			if ( typeof option === 'string' ) {
+				data[ option ]();
+			}
+		} );
+	};
+
+	$.fn.lcd.defaults = {
+		languages: null,
+		showRegions: [ 'WW', 'AM', 'EU', 'ME', 'AF', 'AS', 'PA' ],
+		itemsPerColumn: 8,
+		// Other supported values are 1 and 2.
+		// Other values will have rendering issues.
+		columns: 4,
+		languageDecorator: null,
+		quickList: []
+	};
+
+	$.fn.lcd.Constructor = LanguageCategoryDisplay;
+}( jQuery ) );
+
+/**
+ * jQuery language filter plugin.
+ *
+ * Copyright (C) 2012 Alolita Sharma, Amir Aharoni, Arun Ganesh, Brandon Harris,
+ * Niklas Laxström, Pau Giner, Santhosh Thottingal, Siebrand Mazeland and other
+ * contributors. See CREDITS for a list.
+ *
+ * UniversalLanguageSelector is dual licensed GPLv2 or later and MIT. You don't
+ * have to do anything special to choose one license or the other and you don't
+ * have to notify anyone which license you are using. You are free to use
+ * UniversalLanguageSelector in commercial projects as long as the copyright
+ * header is left intact. See files GPL-LICENSE and MIT-LICENSE for details.
+ *
+ * @file
+ * @ingroup Extensions
+ * @licence GNU General Public Licence 2.0 or later
+ * @licence MIT License
+ */
+
+/**
+ * Usage: $( 'inputbox' ).languagefilter();
+ * The values for autocompletion is from the options.languages.
+ * The data is in the format of languagecode:languagename.
+ */
+( function ( $ ) {
+	'use strict';
+
+	var LanguageFilter, delay;
+
+	LanguageFilter = function ( element, options ) {
+		this.$element = $( element );
+		this.options = $.extend( {}, $.fn.languagefilter.defaults, options );
+		this.$element.addClass( 'languagefilter' );
+		this.resultCount = 0;
+		this.$suggestion = this.$element.parents().find( '#' + this.$element.data( 'suggestion' ) );
+		this.$clear = this.$element.parents().find( '#' + this.$element.data( 'clear' ) );
+		this.selectedLanguage = null;
+		this.init();
+		this.listen();
+	};
+
+	delay = ( function () {
+		var timer = 0;
+
+		return function ( callback, milliseconds ) {
+			clearTimeout( timer );
+			timer = setTimeout( callback, milliseconds );
+		};
+	}() );
+
+	LanguageFilter.prototype = {
+		init: function () {
+			this.search();
+		},
+
+		listen: function () {
+			this.$element.on( 'keypress', $.proxy( this.keyup, this ) )
+				.on( 'keyup', $.proxy( this.keyup, this ) );
+
+			if ( this.eventSupported( 'keydown' ) ) {
+				this.$element.on( 'keydown', $.proxy( this.keyup, this ) );
+			}
+
+			if ( this.$clear.length ) {
+				this.$clear.on( 'click', $.proxy( this.clear, this ) );
+			}
+
+			this.toggleClear();
+		},
+
+		keyup: function ( e ) {
+			var suggestion, query, languageFilter;
+
+			switch ( e.keyCode ) {
+			case 9: // Tab -> Autocomplete
+				suggestion = this.$suggestion.val();
+
+				if ( suggestion && suggestion !== this.$element.val() ) {
+					this.$element.val( suggestion );
+					e.preventDefault();
+					e.stopPropagation();
+				}
+				break;
+			case 13: // Enter
+				if ( !this.options.onSelect ) {
+					break;
+				}
+
+				// Avoid bubbling this 'enter' to background page elements
+				e.preventDefault();
+				e.stopPropagation();
+
+				query = $.trim( this.$element.val() ).toLowerCase();
+
+				if ( this.selectedLanguage ) {
+					// this.selectLanguage will be populated from a matching search
+					this.options.onSelect( this.selectedLanguage );
+				} else if ( this.options.languages[ query ] ) {
+					// Search is yet to happen (in timeout delay),
+					// but we have a matching language code.
+					this.options.onSelect( query );
+				}
+
+				break;
+			default:
+				languageFilter = this;
+
+				if ( e.which < 32 &&
+					e.which !== 8 // Backspace
+				) {
+					// ignore any ASCII control characters
+					break;
+				}
+
+				this.selectedLanguage = null;
+
+				delay( function () {
+					if ( !languageFilter.$element.val() ) {
+						languageFilter.clear();
+					} else {
+						languageFilter.options.$target.empty();
+						languageFilter.search();
+					}
+				}, 300 );
+
+				this.toggleClear();
+			}
+		},
+
+		/**
+		 * Clears the current search removing
+		 * clear buttons and suggestions.
+		 */
+		deactivate: function () {
+			this.$element.val( '' );
+
+			if ( !$.fn.uls.Constructor.prototype.isMobile() ) {
+				this.$element.focus();
+			}
+
+			this.toggleClear();
+			this.autofill();
+		},
+
+		/**
+		 * Clears the search and shows all languages
+		 */
+		clear: function () {
+			this.deactivate();
+			this.search();
+		},
+
+		/**
+		 * Toggles the visibility of clear icon depending
+		 * on whether there is anything to clear.
+		 */
+		toggleClear: function () {
+			if ( !this.$clear.length ) {
+				return;
+			}
+
+			if ( this.$element.val() ) {
+				this.$clear.show();
+			} else {
+				this.$clear.hide();
+			}
+		},
+
+		search: function () {
+			var langCode, scriptGroup, langNum, languagesInScript,
+				languages = $.uls.data.getLanguagesByScriptGroup( this.options.languages ),
+				query = $.trim( this.$element.val() );
+
+			this.resultCount = 0;
+			for ( scriptGroup in languages ) {
+				languagesInScript = languages[ scriptGroup ];
+				languagesInScript.sort( $.uls.data.sortByAutonym );
+				for ( langNum = 0; langNum < languagesInScript.length; langNum++ ) {
+					langCode = languagesInScript[ langNum ];
+					if ( query === '' || this.filter( langCode, query ) ) {
+						if ( this.resultCount === 0 ) {
+							// Autofill the first result.
+							this.autofill( langCode );
+						}
+
+						if ( query.toLowerCase() === langCode ) {
+							this.selectedLanguage = langCode;
+						}
+
+						if ( this.render( langCode ) ) {
+							this.resultCount++;
+						}
+					}
+				}
+			}
+
+			// Also do a search by search API
+			if ( !this.resultCount && this.options.searchAPI && query ) {
+				this.searchAPI( query );
+			} else {
+				this.resultHandler( query );
+			}
+		},
+
+		searchAPI: function ( query ) {
+			var languageFilter = this;
+
+			$.get( languageFilter.options.searchAPI, {
+				search: query
+			}, function ( result ) {
+				$.each( result.languagesearch, function ( code, name ) {
+					if ( languageFilter.resultCount === 0 ) {
+						// Autofill the first result.
+						languageFilter.autofill( code, name );
+					}
+
+					if ( languageFilter.options.languages[ code ] &&
+						languageFilter.render( code )
+					) {
+						languageFilter.resultCount++;
+					}
+				} );
+
+				languageFilter.resultHandler( query );
+			} );
+		},
+
+		/**
+		 * Handler method to be called once search is over.
+		 * Based on search result triggers resultsfound or noresults events
+		 * @param query string
+		 */
+		resultHandler: function ( query ) {
+			if ( this.resultCount === 0 ) {
+				this.$suggestion.val( '' );
+				this.$element.trigger( 'noresults.uls', query );
+			} else {
+				this.$element.trigger( 'resultsfound.uls', [ query, this.resultCount ] );
+			}
+		},
+
+		autofill: function ( langCode, languageName ) {
+			var autonym, userInput, suggestion;
+
+			if ( !this.$suggestion.length ) {
+				return;
+			}
+
+			if ( !this.$element.val() ) {
+				this.$suggestion.val( '' );
+				return;
+			}
+
+			this.selectedLanguage = langCode;
+			languageName = languageName || this.options.languages[ langCode ];
+
+			if ( !languageName ) {
+				return;
+			}
+
+			userInput = this.$element.val();
+			suggestion = userInput + languageName.substring( userInput.length, languageName.length );
+
+			if ( suggestion.toLowerCase() !== languageName.toLowerCase() ) {
+				// see if it was autonym match
+				autonym = $.uls.data.getAutonym( langCode ) || '';
+				suggestion = userInput + autonym.substring( userInput.length, autonym.length );
+
+				if ( suggestion !== autonym ) {
+					// Give up. It may be an ISO/script code match.
+					suggestion = '';
+				}
+			}
+
+			// Make sure that it is a visual prefix.
+			if ( !isVisualPrefix( userInput, suggestion ) ) {
+				suggestion = '';
+			}
+
+			this.$suggestion.val( suggestion );
+		},
+
+		render: function ( langCode ) {
+			var $target = this.options.$target;
+
+			if ( !$target ) {
+				return false;
+			}
+
+			return $target.append( langCode );
+		},
+
+		escapeRegex: function ( value ) {
+			return value.replace( /[\-\[\]{}()*+?.,\\\^$\|#\s]/g, '\\$&' );
+		},
+
+		/**
+		 * A search match happens if any of the following passes:
+		 * a) Language name in current user interface language
+		 * 'starts with' search string.
+		 * b) Language autonym 'starts with' search string.
+		 * c) ISO 639 code match with search string.
+		 * d) ISO 15924 code for the script match the search string.
+		 */
+		filter: function ( langCode, searchTerm ) {
+			// FIXME script is ISO 15924 code. We might need actual name of script.
+			var matcher = new RegExp( '^' + this.escapeRegex( searchTerm ), 'i' ),
+				languageName = this.options.languages[ langCode ];
+
+			return matcher.test( languageName ) ||
+				matcher.test( $.uls.data.getAutonym( langCode ) ) ||
+				matcher.test( langCode ) ||
+				matcher.test( $.uls.data.getScript( langCode ) );
+		},
+
+		eventSupported: function ( eventName ) {
+			var isSupported = eventName in this.$element;
+
+			if ( !isSupported ) {
+				this.$element.setAttribute( eventName, 'return;' );
+				isSupported = typeof this.$element[ eventName ] === 'function';
+			}
+
+			return isSupported;
+		}
+	};
+
+	$.fn.languagefilter = function ( option ) {
+		return this.each( function () {
+			var $this = $( this ),
+				data = $this.data( 'languagefilter' ),
+				options = typeof option === 'object' && option;
+
+			if ( !data ) {
+				$this.data( 'languagefilter', ( data = new LanguageFilter( this, options ) ) );
+			}
+
+			if ( typeof option === 'string' ) {
+				data[ option ]();
+			}
+		} );
+	};
+
+	$.fn.languagefilter.defaults = {
+		$target: null, // Where to append the results
+		searchAPI: null,
+		languages: null, // Languages as code:name format.
+		onSelect: null // Language select handler - like enter in filter textbox.
+	};
+
+	$.fn.languagefilter.Constructor = LanguageFilter;
+
+	/**
+	 * Check if a prefix is visually prefix of a string
+	 *
+	 * @param {string} prefix
+	 * @param {string} string
+	 */
+	function isVisualPrefix( prefix, string ) {
+		// Pre-base vowel signs of Indic languages. A vowel sign is called pre-base if
+		// consonant + vowel becomes [vowel][consonant] when rendered. Eg: ക + െ => കെ
+		var prebases = 'െേൈൊോൌெேைொோௌେୈୋୌિਿिিেৈোৌෙේෛොෝෞ';
+		return prebases.indexOf( string[ prefix.length ] ) <= 0;
+	}
+}( jQuery ) );
+
+/**
+ * Universal Language Selector
+ * ULS core component.
+ *
+ * Copyright (C) 2012 Alolita Sharma, Amir Aharoni, Arun Ganesh, Brandon Harris,
+ * Niklas Laxström, Pau Giner, Santhosh Thottingal, Siebrand Mazeland and other
+ * contributors. See CREDITS for a list.
+ *
+ * UniversalLanguageSelector is dual licensed GPLv2 or later and MIT. You don't
+ * have to do anything special to choose one license or the other and you don't
+ * have to notify anyone which license you are using. You are free to use
+ * UniversalLanguageSelector in commercial projects as long as the copyright
+ * header is left intact. See files GPL-LICENSE and MIT-LICENSE for details.
+ *
+ * @file
+ * @ingroup Extensions
+ * @licence GNU General Public Licence 2.0 or later
+ * @licence MIT License
+ */
+
+( function ( $ ) {
+	'use strict';
+
+	var template, ULS;
+
+	// Region numbers in id attributes also appear in the langdb.
+	/*jshint multistr:true */
+	template = '<div class="grid uls-menu"> \
+			<div id="search" class="row uls-search"> \
+				<div class="uls-search-wrapper"> \
+					<label class="uls-search-label" for="uls-languagefilter"></label>\
+					<div class="uls-search-input-wrapper">\
+						<span id="uls-languagefilter-clear" class="uls-languagefilter-clear"></span>\
+						<input type="text" class="uls-filterinput uls-filtersuggestion"\
+							id="uls-filtersuggestion" disabled="true" autocomplete="off">\
+						<input type="text" class="uls-filterinput uls-languagefilter"\
+							id="uls-languagefilter" data-clear="uls-languagefilter-clear"\
+							data-suggestion="uls-filtersuggestion"\
+							placeholder="Search for a language" autocomplete="off">\
+					</div>\
+				</div>\
+			</div>\
+			<div class="row uls-language-list"></div>\
+			<div class="row" id="uls-settings-block"></div>\
+		</div>';
+	/*jshint multistr:false */
+
+	/**
+	 * Count the number of keys in an object.
+	 * Works in a cross-browser way.
+	 * @param {Object} The object.
+	 */
+	function objectLength ( obj ) {
+		var count, key;
+
+		// Some old browsers don't support Object.keys
+		if ( Object.keys ) {
+			return Object.keys( obj ).length;
+		}
+
+		count = 0;
+
+		for ( key in obj ) {
+			if ( Object.prototype.hasOwnProperty.call( obj, key ) ) {
+				count++;
+			}
+		}
+
+		return count;
+	}
+
+	/**
+	 * ULS Public class definition
+	 */
+	ULS = function ( element, options ) {
+		this.$element = $( element );
+		this.options = $.extend( {}, $.fn.uls.defaults, options );
+		this.$menu = $( template );
+		this.languages = this.options.languages;
+
+		for ( var code in this.languages ) {
+			if ( $.uls.data.languages[ code ] === undefined ) {
+				// Language is unknown to ULS.
+				delete this.languages[ code ];
+			}
+		}
+
+		this.left = this.options.left;
+		this.top = this.options.top;
+		this.shown = false;
+		this.initialized = false;
+
+		this.$languageFilter = this.$menu.find( '#uls-languagefilter' );
+		this.$resultsView = this.$menu.find( '.uls-language-list' );
+
+		this.render();
+		this.listen();
+		this.ready();
+	};
+
+	ULS.prototype = {
+		constructor: ULS,
+
+		/**
+		 * A "hook" that runs after the ULS constructor.
+		 * At this point it is not guaranteed that the ULS has its dimensions
+		 * and that the languages lists are initialized.
+		 *
+		 * To use it, pass a function as the onReady parameter
+		 * in the options when initializing ULS.
+		 */
+		ready: function () {
+			if ( this.options.onReady ) {
+				this.options.onReady.call( this );
+			}
+		},
+
+		/**
+		 * A "hook" that runs after the ULS panel becomes visible
+		 * by using the show method.
+		 *
+		 * To use it, pass a function as the onVisible parameter
+		 * in the options when initializing ULS.
+		 */
+		visible: function () {
+			if ( this.options.onVisible ) {
+				this.options.onVisible.call( this );
+			}
+		},
+
+		/**
+		 * Calculate the position of ULS
+		 * Returns an object with top and left properties.
+		 * @returns {Object}
+		 */
+		position: function () {
+			var pos,
+				top = this.top,
+				left = this.left;
+
+			if ( top === undefined ) {
+				pos = $.extend( {}, this.$element.offset(), {
+					height: this.$element[ 0 ].offsetHeight
+				} );
+				top =  pos.top + pos.height;
+			}
+
+			if ( left === undefined ) {
+				left = $( window ).width() / 2 - this.$menu.outerWidth() / 2;
+			}
+
+
+			return {
+				top: top,
+				left: left
+			};
+		},
+
+		/**
+		 * Show the ULS window
+		 */
+		show: function () {
+			var widthClasses = {
+				wide: 'uls-wide',
+				medium: 'uls-medium',
+				narrow: 'uls-narrow'
+			};
+
+			this.$menu.addClass( widthClasses[this.getMenuWidth()] );
+
+			if ( !this.initialized ) {
+				$( 'body' ).prepend( this.$menu );
+				this.i18n();
+				this.initialized = true;
+			}
+
+			this.$menu.css( this.position() );
+			this.$menu.show();
+			this.$menu.scrollIntoView();
+			this.shown = true;
+
+			if ( !this.isMobile() ) {
+				this.$languageFilter.focus();
+			}
+
+			this.visible();
+		},
+
+		i18n: function () {
+			if ( $.i18n ) {
+				this.$menu.find( '[data-i18n]' ).i18n();
+				this.$languageFilter.prop( 'placeholder', $.i18n( 'uls-search-placeholder' ) );
+			}
+		},
+
+		/**
+		 * Hide the ULS window
+		 */
+		hide: function () {
+			this.$menu.hide();
+			this.shown = false;
+
+			if ( this.options.onCancel ) {
+				this.options.onCancel.call( this );
+			}
+		},
+
+		/**
+		 * Render the UI elements.
+		 * Does nothing by default. Can be used for customization.
+		 */
+		render: function () {
+			// Rendering stuff here
+		},
+
+		/**
+		 * Callback for no results found context.
+		 */
+		noresults: function () {
+			this.$resultsView.lcd( 'noResults' );
+		},
+
+		/**
+		 * callback for results found context.
+		 */
+		success: function () {
+			this.$resultsView.show();
+		},
+
+		/**
+		 * Bind the UI elements with their event listeners
+		 */
+		listen: function () {
+			var lcd, columnsOptions, languagesCount;
+
+			columnsOptions = {
+				wide: 4,
+				medium: 2,
+				narrow: 1
+			};
+
+			// Register all event listeners to the ULS here.
+			this.$element.on( 'click', $.proxy( this.click, this ) );
+
+			// Don't do anything if pressing on empty space in the ULS
+			this.$menu.on( 'click', function ( e ) {
+				e.stopPropagation();
+			} );
+
+			// Handle key press events on the menu
+			this.$menu.on( 'keypress', $.proxy( this.keypress, this ) )
+				.on( 'keyup', $.proxy( this.keyup, this ) );
+
+			if ( this.eventSupported( 'keydown' ) ) {
+				this.$menu.on( 'keydown', $.proxy( this.keypress, this ) );
+			}
+
+			languagesCount = objectLength( this.options.languages );
+			lcd = this.$resultsView.lcd( {
+				languages: this.languages,
+				columns: columnsOptions[ this.getMenuWidth() ],
+
+				quickList: languagesCount > 12 ? this.options.quickList : [],
+				clickhandler: $.proxy( this.select, this ),
+				source: this.$languageFilter,
+				showRegions: this.options.showRegions,
+				languageDecorator: this.options.languageDecorator
+			} ).data( 'lcd' );
+
+			this.$languageFilter.languagefilter( {
+				$target: lcd,
+				languages: this.languages,
+				searchAPI: this.options.searchAPI,
+				onSelect: $.proxy( this.select, this )
+			} );
+
+			this.$languageFilter.on( 'noresults.uls', $.proxy( this.noresults, this ) );
+			this.$languageFilter.on( 'resultsfound.uls', $.proxy( this.success, this ) );
+
+			$( 'html' ).click( $.proxy( this.cancel, this ) );
+		},
+
+		/**
+		 * On select handler for search results
+		 * @param langCode
+		 */
+		select: function ( langCode ) {
+			this.hide();
+			if ( this.options.onSelect ) {
+				this.options.onSelect.call( this, langCode );
+			}
+		},
+
+		/**
+		 * On cancel handler for the uls menu
+		 */
+		cancel: function ( e ) {
+			if ( e && ( this.$element.is( e.target ) || $.contains( this.$element[0], e.target ) ) ) {
+				return;
+			}
+
+			this.hide();
+		},
+
+		keyup: function ( e ) {
+			if ( !this.shown ) {
+				return;
+			}
+
+			if ( e.keyCode === 27 ) { // escape
+				this.cancel();
+				e.preventDefault();
+				e.stopPropagation();
+			}
+		},
+
+		keypress: function ( e ) {
+			if ( !this.shown ) {
+				return;
+			}
+
+			if ( e.keyCode === 27 ) { // escape
+				this.cancel();
+				e.preventDefault();
+				e.stopPropagation();
+			}
+		},
+
+		click: function () {
+			if ( this.shown ) {
+				this.hide();
+			} else {
+				this.show();
+			}
+		},
+
+		eventSupported: function ( eventName ) {
+			var isSupported = eventName in this.$menu;
+
+			if ( !isSupported ) {
+				this.$element.setAttribute( eventName, 'return;' );
+				isSupported = typeof this.$element[ eventName ] === 'function';
+			}
+
+			return isSupported;
+		},
+
+		/**
+		 * Get the panel menu width parameter
+		 * @return string
+		 */
+		getMenuWidth: function () {
+			var languagesCount;
+
+			if ( this.options.menuWidth ) {
+				return this.options.menuWidth;
+			}
+
+			languagesCount = objectLength( this.options.languages );
+
+			if ( languagesCount < 25 ) {
+				return 'narrow';
+			}
+
+			if ( languagesCount < 100 ) {
+				return 'medium';
+			}
+
+			return 'wide';
+		},
+
+		isMobile: function () {
+			return navigator.userAgent.match( /(iPhone|iPod|iPad|Android|BlackBerry)/ );
+		}
+	};
+
+	/* ULS PLUGIN DEFINITION
+	 * =========================== */
+
+	$.fn.uls = function ( option ) {
+		return this.each( function () {
+			var $this = $( this ),
+				data = $this.data( 'uls' ),
+				options = typeof option === 'object' && option;
+
+			if ( !data ) {
+				$this.data( 'uls', ( data = new ULS( this, options ) ) );
+			}
+
+			if ( typeof option === 'string' ) {
+				data[ option ]();
+			}
+		} );
+	};
+
+	$.fn.uls.defaults = {
+		onSelect: null, // Callback function to be called when a language is selected
+		searchAPI: null, // Language search API
+		languages: $.uls.data.getAutonyms(), // Languages to be used for ULS, default is all languages
+		quickList: [], // Array of language codes or function that returns such
+		// The options are wide (4 columns), medium (2 columns), and narrow (1 column).
+		// If not specified, it will be set automatically.
+		menuWidth: null,
+		showRegions: [ 'WW', 'AM', 'EU', 'ME', 'AF', 'AS', 'PA' ],
+		languageDecorator: null // Callback function to be called when a language link is prepared - for custom decoration.
+	};
+
+	// Define a dummy i18n function, if jquery.i18n not integrated.
+	if ( !$.fn.i18n ) {
+		$.fn.i18n = function () {};
+	}
+
+	/*
+	 * Simple scrollIntoView plugin.
+	 * Scrolls the element to the viewport smoothly if it is not already.
+	 */
+	$.fn.scrollIntoView = function () {
+		return this.each( function () {
+			var scrollPosition,
+				$window = $( window ),
+				windowHeight = $window.height(),
+				windowTop = $window.scrollTop(),
+				windowBottom = windowTop + windowHeight,
+				$element = $( this ),
+				panelHeight = $element.height(),
+				panelTop = $element.offset().top,
+				panelBottom = panelTop + panelHeight;
+
+			if ( ( panelTop < windowTop ) || ( panelBottom > windowBottom ) ) {
+				if ( windowTop > panelTop ) {
+					scrollPosition = panelTop;
+				} else {
+					scrollPosition = panelBottom - windowHeight;
+				}
+				$( 'html, body' ).stop().animate( {
+					scrollTop: scrollPosition
+				}, 500 );
+			}
+		} );
+	};
+
+	$.fn.uls.Constructor = ULS;
+}( jQuery ) );

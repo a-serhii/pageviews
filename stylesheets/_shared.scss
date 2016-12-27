@@ -268,19 +268,10 @@ footer {
   position: relative;
 }
 
-.lang-group {
+.btn-language {
   float: none !important;
+  padding-left: 26px;
   position: relative;
-
-  .dropdown-menu {
-    background: $white;
-    max-height: 194px;
-    overflow-y: scroll;
-  }
-
-  .btn {
-    padding-left: 26px;
-  }
 
   svg {
     height: 15px;
@@ -289,6 +280,18 @@ footer {
     top: 9px;
     width: 15px;
   }
+}
+
+.uls-language-block > ul > li {
+  padding: 3px 8px;
+}
+
+.grid .uls-language-block > ul {
+  margin: 0;
+}
+
+.uls-lcd-region-section:last-child {
+  margin-bottom: 30px;
 }
 
 .bm {
@@ -418,6 +421,21 @@ output {
   overflow-x: scroll;
 }
 
+.uls-search-label {
+  background: transparent url('/pageviews/images/search.png') no-repeat scroll right center !important;
+  background-image: -webkit-linear-gradient(transparent, transparent), url('/pageviews/images/search.svg') !important;
+  background-image: linear-gradient(transparent, transparent), url('/pageviews/images/search.svg') !important;
+  background-position: center center !important;
+  background-size: 20px !important;
+}
+
+.uls-languagefilter-clear {
+  background: transparent url('/pageviews/images/clear.png') no-repeat scroll left center !important;
+  background-image: -webkit-linear-gradient(transparent, transparent), url('/pageviews/images/clear.svg') !important;
+  background-image: linear-gradient(transparent, transparent), url('/pageviews/images/clear.svg') !important;
+  background-size: 15px !important;
+}
+
 @font-face {
   font-family: 'Glyphter';
   src: url('/pageviews/fonts/Glyphter.woff') format('woff');
@@ -444,5 +462,19 @@ output {
 
   .home-link {
     display: none;
+  }
+
+  .uls-menu {
+    left: 0 !important;
+    min-width: auto;
+    width: 100%;
+
+    .row {
+      min-width: auto;
+    }
+
+    .uls-lcd {
+      padding: 0;
+    }
   }
 }

@@ -83,21 +83,6 @@ class Pv extends PvConfig {
       this.splash();
     }
 
-    /**
-     * Load translations then initialize the app.
-     * Each app has it's own initialize method.
-     * Make sure we load 'en.json' as a fallback
-     */
-    let messagesToLoad = {
-      [i18nLang]: `/pageviews/messages/${i18nLang}.json`
-    };
-    if (i18nLang !== 'en') {
-      messagesToLoad.en = '/pageviews/messages/en.json';
-    }
-    $.i18n({
-      locale: i18nLang
-    }).load(messagesToLoad).then(this.initialize.bind(this));
-
     /** set up toastr config. The duration may be overriden later */
     toastr.options = {
       closeButton: true,
@@ -123,6 +108,26 @@ class Pv extends PvConfig {
         warning: 'alert-warning'
       }
     };
+
+    /**
+     * Load translations then initialize the app.
+     * Each app has it's own initialize method.
+     * Make sure we load 'en.json' as a fallback
+     */
+    // first load ULS messages
+    $.i18n().load({
+      [i18nLang]: `/pageviews/uls-messages/${i18nLang}.json`
+    });
+    // load app's messages, then initialize
+    let messagesToLoad = {
+      [i18nLang]: `/pageviews/messages/${i18nLang}.json`
+    };
+    if (i18nLang !== 'en') {
+      messagesToLoad.en = '/pageviews/messages/en.json';
+    }
+    $.i18n({
+      locale: i18nLang
+    }).load(messagesToLoad).then(this.initialize.bind(this));
   }
 
   /**
@@ -1273,15 +1278,6 @@ class Pv extends PvConfig {
       this.dataset.value = this.value;
     });
     $(this.config.projectInput).on('change', () => this.validateProject());
-
-    /** universal language selector */
-    $('.btn-language').uls({
-      onSelect: language => {
-        const languageName = $.uls.data.getAutonym(language);
-        $('.btn-language').text(languageName);
-      },
-      quickList: i18nLangs
-    });
   }
 
   /**

@@ -71,14 +71,19 @@
 //<![CDATA[
    // language selector
    $(document).ready(function() {
-     $('.lang-link').on('click', function(e) {
-       e.preventDefault();
-       var expiryGMT = moment().add(30, 'days').toDate().toGMTString();
-       document.cookie = 'TsIntuition_userlang=' + $(e.target).data('lang') + '; expires=' + expiryGMT + '; path=/';
+     $('.btn-language').uls({
+       onSelect: function(language) {
+         var languageName = $.uls.data.getAutonym(language);
+         $('.btn-language-text').text(languageName);
   
-       var expiryUnix = Math.floor(Date.now() / 1000) + (30 * 24 * 60 * 60);
-       document.cookie = 'TsIntuition_expiry=' + expiryUnix + '; expires=' + expiryGMT + '; path=/';
-       location.reload();
+         var expiryGMT = moment().add(30, 'days').toDate().toGMTString();
+         document.cookie = 'TsIntuition_userlang=' + language + '; expires=' + expiryGMT + '; path=/';
+  
+         var expiryUnix = Math.floor(Date.now() / 1000) + (30 * 24 * 60 * 60);
+         document.cookie = 'TsIntuition_expiry=' + expiryUnix + '; expires=' + expiryGMT + '; path=/';
+         location.reload();
+       },
+       quickList: i18nLangs
      });
    });
   

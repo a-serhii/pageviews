@@ -243,6 +243,593 @@ button.toast-close-button {
   }
 }
 
+.uls-trigger {
+	/* @embed */
+	background: transparent url('../images/icon-language.png') no-repeat scroll left center;
+	/* @embed */
+	background-image: -webkit-linear-gradient(transparent, transparent), url('../images/icon-language.svg');
+	/* @embed */
+	background-image: linear-gradient(transparent, transparent), url('../images/icon-language.svg');
+	padding-left: 30px;
+}
+
+.uls-menu {
+	position: absolute;
+	z-index: 1000;
+	display: none;
+	margin-top: 1px;
+	/* Styling */
+	background-color: #ffffff;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding;
+	background-clip: padding-box;
+}
+
+.uls-wide {
+	min-width: 715px;
+	width: 45%;
+}
+
+.uls-medium {
+	min-width: 360px;
+	width: 30%;
+}
+
+/* Override the grid */
+.uls-medium.grid .row {
+	min-width: 300px;
+}
+
+.uls-narrow {
+	min-width: 180px;
+	width: 20%;
+}
+
+/* Override the grid */
+.uls-narrow.grid .row {
+	min-width: 150px;
+}
+
+.uls-search {
+	background-color: white;
+	padding: 5px 16px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #DDD;
+}
+
+.grid .uls-search {
+	padding-left: 0;
+}
+
+/* Make space for magnifying class on the front */
+.uls-search-wrapper {
+	position: relative;
+	padding-left: 44px;
+	margin-right: 5px;
+	height: 32px;
+}
+
+.uls-search-label {
+	background: transparent url('../images/search.png') no-repeat scroll right center;
+	background-image: -webkit-linear-gradient(transparent, transparent), url('../images/search.svg');
+	/* @embed */
+	background-image: linear-gradient(transparent, transparent), url('../images/search.svg');
+	background-size: 20px;
+	background-position: center center;
+	height: 32px;
+	width: 44px;
+	display: block;
+	position: absolute;
+	left: 0;
+	opacity: 0.8;
+}
+
+.uls-search-input-wrapper {
+	position: relative;
+}
+
+/* There are two input boxes. This class applies to both of them */
+.uls-filterinput {
+	font-size: 16px;
+	height: 32px;
+	width: 100%;
+	/* For the custom clear (X) icon */
+	padding: 6px 25px 6px 0;
+
+	outline: none;
+	border: none;
+
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* This is the actual input */
+.uls-languagefilter {
+	background-color: transparent;
+	border: none;
+	color: #333;
+}
+
+/* This is the shadow input box showing completion suggestions */
+.uls-filtersuggestion {
+	background-color: white;
+	color: #888;
+}
+
+.uls-languagefilter-clear {
+	background: transparent url('../images/clear.png') no-repeat scroll left center;
+	background-image: -webkit-linear-gradient(transparent, transparent), url('../images/clear.svg');
+	/* @embed */
+	background-image: linear-gradient(transparent, transparent), url('../images/clear.svg');
+	background-size: 15px;
+	cursor: pointer;
+	height: 15px;
+	width: 15px;
+
+	/* Vertical margins: (32 - 15) / 2 */
+	margin: 8.5px 5px;
+	position: absolute;
+	right: 0;
+	/* Make it appear above the input boxes */
+	z-index: 1;
+}
+
+/* Generated using Foundation http://foundation.zurb.com/docs/grid.php */
+/* Global Reset & Standards ---------------------- */
+.grid * {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* Misc ---------------------- */
+.grid .left {
+	float: left;
+}
+
+.grid .right {
+	float: right;
+}
+
+.grid .text-left {
+	text-align: left;
+}
+
+.grid .text-right {
+	text-align: right;
+}
+
+.grid .text-center {
+	text-align: center;
+}
+
+.grid .hide {
+	display: none;
+}
+
+.grid .highlight {
+	background: #ffff99;
+}
+
+/* The Grid ---------------------- */
+.grid .row {
+	width: 100%;
+	max-width: none;
+	min-width: 600px;
+	margin: 0 auto;
+}
+
+.grid .row .row {
+	width: auto;
+	max-width: none;
+	min-width: 0;
+	margin: 0 -5px;
+}
+
+.grid .row.collapse .column,
+.grid .row.collapse .columns {
+	padding: 0;
+}
+
+.grid .row .row {
+	width: auto;
+	max-width: none;
+	min-width: 0;
+	margin: 0 -5px;
+}
+
+.grid .row .row.collapse {
+	margin: 0;
+}
+
+.grid .column, .grid .columns {
+	float: left;
+	min-height: 1px;
+	padding: 0 5px;
+	position: relative;
+}
+
+.grid .column.centered, .grid .columns.centered {
+	float: none;
+	margin: 0 auto;
+}
+
+.grid .row .one {
+	width: 8.333%;
+}
+
+.grid .row .two {
+	width: 16.667%;
+}
+
+.grid .row .three {
+	width: 25%;
+}
+
+.grid .row .four {
+	width: 33.333%;
+}
+
+.grid .row .five {
+	width: 41.667%;
+}
+
+.grid .row .six {
+	width: 50%;
+}
+
+.grid .row .seven {
+	width: 58.333%;
+}
+
+.grid .row .eight {
+	width: 66.667%;
+}
+
+.grid .row .nine {
+	width: 75%;
+}
+
+.grid .row .ten {
+	width: 83.333%;
+}
+
+.grid .row .eleven {
+	width: 91.667%;
+}
+
+.grid .row .twelve {
+	width: 100%;
+}
+
+.grid .row .offset-by-one {
+	margin-left: 8.333%;
+}
+
+.grid .row .offset-by-two {
+	margin-left: 16.667%;
+}
+
+.grid .row .offset-by-three {
+	margin-left: 25%;
+}
+
+.grid .row .offset-by-four {
+	margin-left: 33.333%;
+}
+
+.grid .row .offset-by-five {
+	margin-left: 41.667%;
+}
+
+.grid .row .offset-by-six {
+	margin-left: 50%;
+}
+
+.grid .row .offset-by-seven {
+	margin-left: 58.333%;
+}
+
+.grid .row .offset-by-eight {
+	margin-left: 66.667%;
+}
+
+.grid .row .offset-by-nine {
+	margin-left: 75%;
+}
+
+.grid .row .offset-by-ten {
+	margin-left: 83.333%;
+}
+
+.grid .push-two {
+	left: 16.667%;
+}
+
+.grid .pull-two {
+	right: 16.667%;
+}
+
+.grid .push-three {
+	left: 25%;
+}
+
+.grid .pull-three {
+	right: 25%;
+}
+
+.grid .push-four {
+	left: 33.333%;
+}
+
+.grid .pull-four {
+	right: 33.333%;
+}
+
+.grid .push-five {
+	left: 41.667%;
+}
+
+.grid .pull-five {
+	right: 41.667%;
+}
+
+.grid .push-six {
+	left: 50%;
+}
+
+.grid .pull-six {
+	right: 50%;
+}
+
+.grid .push-seven {
+	left: 58.333%;
+}
+
+.grid .pull-seven {
+	right: 58.333%;
+}
+
+.grid .push-eight {
+	left: 66.667%;
+}
+
+.grid .pull-eight {
+	right: 66.667%;
+}
+
+.grid .push-nine {
+	left: 75%;
+}
+
+.grid .pull-nine {
+	right: 75%;
+}
+
+.grid .push-ten {
+	left: 83.333%;
+}
+
+.grid .pull-ten {
+	right: 83.333%;
+}
+
+/* Nicolas Gallagher's micro clearfix */
+.grid .row {
+	*zoom: 1;
+}
+
+.grid .row:before, .grid .row:after {
+	content: "";
+	display: table;
+}
+
+.grid .row:after {
+	clear: both;
+}
+
+/* Block Grids ---------------------- */
+/* These are 2-up, 3-up, 4-up and 5-up ULs, suited
+ for repeating blocks of content. Add 'mobile' to
+ them to switch them just like the layout grid
+ (one item per line) on phones
+
+ For IE7/8 compatibility block-grid items need to be
+ the same height. You can optionally uncomment the
+ lines below to support arbitrary height, but know
+ that IE7/8 do not support :nth-child.
+ -------------------------------------------------- */
+.grid .block-grid {
+	display: block;
+	overflow: hidden;
+	padding: 0;
+}
+
+.grid .block-grid > li {
+	display: block;
+	height: auto;
+	float: left;
+}
+
+.grid .block-grid.two-up {
+	margin: 0 -15px;
+}
+
+.grid .block-grid.two-up > li {
+	width: 50%;
+	padding: 0 15px 15px;
+}
+
+/* .block-grid.two-up>li:nth-child(2n+1) {clear: left;} */
+.grid .block-grid.three-up {
+	margin: 0 -12px;
+}
+
+.grid .block-grid.three-up > li {
+	width: 33.33%;
+	padding: 0 12px 12px;
+}
+
+/* .block-grid.three-up>li:nth-child(3n+1) {clear: left;} */
+.grid .block-grid.four-up {
+	margin: 0 -10px;
+}
+
+.grid .block-grid.four-up > li {
+	width: 25%;
+	padding: 0 10px 10px;
+}
+
+/* .block-grid.four-up>li:nth-child(4n+1) {clear: left;} */
+.grid .block-grid.five-up {
+	margin: 0 -8px;
+}
+
+.grid .block-grid.five-up > li {
+	width: 20%;
+	padding: 0 8px 8px;
+}
+
+/*
+ * Language Category Display (LCD) consists of multiple sections:
+ * - one to display when there are no search results (which might display suggested languages)
+ * - one for each region of the world, plus regions for world languages and suggested languages
+ * The regions consist of one or more rows (blocks) which consist of one-to-four columns. Each
+ * column is an ul element, and contains up to 8 li elements, each containing a link.
+ */
+
+.uls-lcd {
+	height: 20em;
+	/* Work around Chrome bug where it places scrollbar on the left in
+	 * in RTL mode but actually reserves the place on the right side */
+	overflow-x: hidden;
+	overflow-y: auto;
+	width: auto;
+	background: #FCFCFC;
+	padding: 0 16px;
+}
+
+.uls-lcd-region-section {
+	margin-top: 10px;
+}
+
+.uls-lcd-region-title {
+	color: #777;
+	font-size: 14px;
+	padding-left: 28px;
+}
+
+/*
+ * We need to have this as a grid row to push rest of the content below it, but resetting
+ * padding and margin so that calculating them for children is easier.
+ */
+.grid .uls-language-block.row {
+	padding: 0;
+	margin: 0;
+}
+
+/*
+ * Each block should have 16px padding on both sides. But because we already gave
+ * 16px for the whole menu, we need to remove it for first and last items the blocks.
+ */
+.grid .uls-language-block > ul {
+	margin: 0 0 20px 0;
+	padding: 0 16px;
+}
+
+.grid .uls-language-block > ul:first-child {
+	padding-left: 0;
+}
+
+.grid .uls-language-block > ul:last-child {
+	padding-right: 0;
+}
+
+
+.uls-language-block > ul {
+	/*
+	 * We don't want any visible bullets in this list. Not by default anyway.
+	 * Using very unspecific selector here to allow other classes to override.
+	 * Bug because overflow: hidden is incompatible with bullets, also render
+	 * the bullets inside the list in case there should be any.
+	 */
+	list-style-image: none;
+	list-style-type: none;
+}
+
+.uls-language-block > ul > li {
+	cursor: pointer;
+	margin-left: 20px;
+	padding: 8px;
+	/*
+	 * The directionality (ltr/rtl) for each list item is set dynamically
+	 * as HTML attributes in JavaScript. Setting directionality also applies
+	 * alignment, but a list with mixed alignment is hard to read.
+	 * All items are therefore explicitly aligned to the left, including names
+	 * of right-to-left languages in left-to-right environment and vice versa.
+	 * As long as the directionality of the item is set correctly, the text
+	 * is readable.
+	 */
+	text-align: left;
+}
+
+.uls-language-block > ul > li:hover {
+	background-color: #eaeff7;
+}
+
+.uls-language-block a {
+	cursor: pointer;
+	text-decoration: none;
+	color: #3366bb;
+	font-size: 14px;
+	display: inline-block;
+	width: 100%;
+	overflow: hidden;
+	/*
+	 * Some languages have long names for various reasons and we still want
+	 * them to appear on one line.
+	 * To make it work correctly, the directionality must be set correctly
+	 * on the item level.
+	 */
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+/* TODO: ugly hack that forces last matching search results to shift down.
+ * They should be hidden properly.
+ */
+.uls-no-results-view {
+	height: 100%;
+}
+
+.uls-no-results-found-title {
+	font-size: 16px;
+	padding: 0 16px 0 28px;
+	border-bottom: none;
+	color: #555;
+}
+
+.uls-no-found-more {
+	padding: 0 16px 0 44px;
+	font-size: 0.9em;
+	background: #F8F8F8;
+	width: 100%;
+	margin-top: 1.6em;
+	line-height: 1.6em;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg); }
@@ -584,21 +1171,25 @@ footer {
 .footer-nav {
   position: relative; }
 
-.lang-group {
+.btn-language {
   float: none !important;
+  padding-left: 26px;
   position: relative; }
-  .lang-group .dropdown-menu {
-    background: #fff;
-    max-height: 194px;
-    overflow-y: scroll; }
-  .lang-group .btn {
-    padding-left: 26px; }
-  .lang-group svg {
+  .btn-language svg {
     height: 15px;
     left: 8px;
     position: absolute;
     top: 9px;
     width: 15px; }
+
+.uls-language-block > ul > li {
+  padding: 3px 8px; }
+
+.grid .uls-language-block > ul {
+  margin: 0; }
+
+.uls-lcd-region-section:last-child {
+  margin-bottom: 30px; }
 
 .bm {
   margin-bottom: 15px; }
@@ -695,6 +1286,17 @@ output {
   clear: both;
   overflow-x: scroll; }
 
+.uls-search-label {
+  background: transparent url("/pageviews/images/search.png") no-repeat scroll right center !important;
+  background-image: linear-gradient(transparent, transparent), url("/pageviews/images/search.svg") !important;
+  background-position: center center !important;
+  background-size: 20px !important; }
+
+.uls-languagefilter-clear {
+  background: transparent url("/pageviews/images/clear.png") no-repeat scroll left center !important;
+  background-image: linear-gradient(transparent, transparent), url("/pageviews/images/clear.svg") !important;
+  background-size: 15px !important; }
+
 @font-face {
   font-family: 'Glyphter';
   src: url("/pageviews/fonts/Glyphter.woff") format("woff");
@@ -712,7 +1314,15 @@ output {
   .interapp-link:hover::after {
     display: none; }
   .home-link {
-    display: none; } }
+    display: none; }
+  .uls-menu {
+    left: 0 !important;
+    min-width: auto;
+    width: 100%; }
+    .uls-menu .row {
+      min-width: auto; }
+    .uls-menu .uls-lcd {
+      padding: 0; } }
 
 .special-ranges {
   padding: 5px 20px 0; }
